@@ -40,6 +40,43 @@ public class PropertiesInfo implements Serializable {
 	private String chatBackgroundName = "";
 	private String chatBackgroundPath = "";
 
+	
+	/** 환경설정 인스턴스 */
+	private static PropertiesInfo properties = null;
+    
+	/**	
+	 * 환경설정 PropertiesInfo 생성자 <br>
+	 * 최초 환경설정 로드
+	 */
+	private PropertiesInfo() {
+		loadPropertiesFile();
+	}
+
+	/**
+	 * PropertiesInfo 인스턴스 생성 및 반환
+	 * 
+	 * @return 기존 혹은 생성된 메일 화면 인스턴스
+	 */
+	public static PropertiesInfo getInstance() {
+		if (properties == null) {
+			synchronized (PropertiesInfo.class) {
+				if (properties == null) {
+					properties = new PropertiesInfo();
+				}
+			}
+		}
+
+		return properties;
+	}
+	
+	public int loadPropertiesFile() {
+		return 0;
+	}
+	
+	public int savePropertiesFile() {
+		return 0;
+	}
+	
 	public boolean isMsgAutoPopUpFlag() {
 		return msgAutoPopUpFlag;
 	}

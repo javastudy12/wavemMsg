@@ -16,9 +16,22 @@ import java.util.List;
 import com.wavem.msgp.dto.FileInfo;
 import com.wavem.msgp.main.AbstractFrame;
 
+/**
+ * 파일 다운로드 화면
+ * @author
+ *
+ */
 public class FileDownloadFrame extends AbstractFrame {
+	
 	private static final long serialVersionUID = -1993710934142869249L;
+	
+	/** 파일 다운로드 리스트 */
 	private List<FileInfo> fileList = null;
+	
+	/**
+	 * 파일 다운로드 화면 생성자 <br>
+	 * 파일 리스트 생성 
+	 */
 	public FileDownloadFrame() {
 		fileList = new ArrayList<FileInfo>();
 	}
@@ -33,10 +46,16 @@ public class FileDownloadFrame extends AbstractFrame {
 
 	}
 
+	/**
+	 * 파일 다운로드 경로 설정
+	 */
 	public void savePath() {
 
 	}
 
+	/**
+	 * 파일 다운로드
+	 */
 	public void downloadFile() {
 
 	}

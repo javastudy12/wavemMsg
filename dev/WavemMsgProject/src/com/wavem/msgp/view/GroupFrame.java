@@ -13,43 +13,71 @@ package com.wavem.msgp.view;
 
 import com.wavem.msgp.main.AbstractFrame;
 
-
+/**
+ * 그룹 화면 
+ * @author 
+ *
+ */
 public class GroupFrame extends AbstractFrame{
 	private static final long serialVersionUID = -3827633116266407657L;
-
+	
+	@Override
 	public void makeInitFrame() {
 	
 	}
 	
+	@Override
+	public void close() {
+	
+	}
+	
+	/**
+	 * 전체 사용자 리스트 호출
+	 */
 	public void invokeUserList() {
 	
 	}
 	
+	/**
+	 * 그룹 사용자 리스트 호출
+	 */
 	public void invokeGroupList() {
 	
 	}
 	
+	/**
+	 * 그룹 생성
+	 */
 	public void makeGroup() {
 	
 	}
 	
+	/**
+	 * 그룹 삭제
+	 */
 	public void deleteGroup() {
 	
 	}
 	
+	/**
+	 * 그룹에 사용자 추가
+	 */
 	public void addUserToGroup() {
 	
 	}
 	
+	/**
+	 * 그룹의 사용자 삭제
+	 */
 	public void deleteUserToGroup() {
 	
 	}
 	
+	/**
+	 * 현재 설정된 그룹 사용자 저장
+	 */
 	public void saveGroup() {
 	
 	}
 	
-	public void close() {
-	
-	}
 }
