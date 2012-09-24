@@ -10,7 +10,7 @@
 
 package com.wavem.msgp.view;
 
-import com.wavem.msgp.main.WaveMsgFrame;
+import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
  * 프로필 설정 화면

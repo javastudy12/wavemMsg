@@ -12,7 +12,7 @@
 package com.wavem.msgp.view;
 
 import com.wavem.msgp.comm.PropertiesInfo;
-import com.wavem.msgp.main.WaveMsgFrame;
+import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
  * 파일 폰트 및 색상 설정 화면

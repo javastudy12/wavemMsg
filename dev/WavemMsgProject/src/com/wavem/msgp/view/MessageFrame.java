@@ -11,7 +11,7 @@
 
 package com.wavem.msgp.view;
 
-import com.wavem.msgp.main.WaveMsgFrame;
+import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
  * 쪽지 화면

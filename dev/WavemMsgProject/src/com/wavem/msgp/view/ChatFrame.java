@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.UserInfo;
-import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 채팅 화면

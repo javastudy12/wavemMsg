@@ -8,7 +8,7 @@
  * 
  * ********************************************************************************************************/
 
-package com.wavem.msgp.main;
+package com.wavem.msgp.component;
 
 import javax.swing.JFrame;
 

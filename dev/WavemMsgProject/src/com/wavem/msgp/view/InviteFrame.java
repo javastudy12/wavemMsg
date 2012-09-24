@@ -12,8 +12,8 @@
 package com.wavem.msgp.view;
 import java.util.List;
 
+import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.UserInfo;
-import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 초대 화면

@@ -11,7 +11,8 @@
 package com.wavem.msgp.view;
 
 import java.io.File;
-import com.wavem.msgp.main.WaveMsgFrame;
+
+import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
  * 대화내역 화면

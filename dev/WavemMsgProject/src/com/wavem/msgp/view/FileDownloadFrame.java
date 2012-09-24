@@ -13,8 +13,8 @@ package com.wavem.msgp.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.FileInfo;
-import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 파일 다운로드 화면
