@@ -11,14 +11,21 @@
 
 package com.wavem.msgp.view;
 
-import com.wavem.msgp.main.AbstractFrame;
+import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 그룹 화면 
+ * 
+ * <pre>
+ * 	GroupFrame groupFrame = new GroupFrame();
+ *  GroupFrame.makeInitFrame(); // 실제 데이터를 호출하고 화면을 그리는 메서드
+ * </pre>
+ * 
  * @author 
  *
  */
-public class GroupFrame extends AbstractFrame{
+public class GroupFrame extends WaveMsgFrame{
+	
 	private static final long serialVersionUID = -3827633116266407657L;
 	
 	@Override

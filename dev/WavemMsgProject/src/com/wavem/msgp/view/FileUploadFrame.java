@@ -14,14 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wavem.msgp.dto.FileInfo;
-import com.wavem.msgp.main.AbstractFrame;
+import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 파일 업로드 화면
+ * 
+ * <pre>
+ * 	FileDownloadFrame fileDownloadFrame = new FileDownloadFrame();
+ *  FileDownloadFrame.makeInitFrame(); // 실제 데이터를 호출하고 화면을 그리는 메서드
+ * </pre>
+ * 
  * @author 
  *
  */
-public class FileUploadFrame extends AbstractFrame {
+public class FileUploadFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = 1783253655922461926L;
 	

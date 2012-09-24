@@ -12,7 +12,7 @@ package com.wavem.msgp.controller;
 
 /**
  * 서버와 데이터 통신을 위한 컨트롤러 <br>
- * 기본적인 CRUD 인터페이스를 가지고 있음 <br>
+ * 기본적인 CRUD 인터페이스를 가지고 있다. <br>
  * 
  * @author HG01362
  *

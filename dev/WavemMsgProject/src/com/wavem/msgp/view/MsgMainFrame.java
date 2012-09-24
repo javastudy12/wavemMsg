@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wavem.msgp.dto.UserInfo;
-import com.wavem.msgp.main.AbstractFrame;
+import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 메신저 메인 화면 <br>
@@ -26,7 +26,7 @@ import com.wavem.msgp.main.AbstractFrame;
  * @author
  * 
  */
-public class MsgMainFrame extends AbstractFrame {
+public class MsgMainFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -4042584463931283068L;
 	

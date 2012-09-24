@@ -15,14 +15,20 @@ import java.util.Collections;
 import java.util.List;
 
 import com.wavem.msgp.dto.UserInfo;
-import com.wavem.msgp.main.AbstractFrame;
+import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 채팅 화면
+ * 
+ * <pre>
+ * 	ChatFrame chatFrame = new ChatFrame("USERID201209241623");
+ *  ChatFrame.makeInitFrame(); // 실제 데이터를 호출하고 화면을 그리는 메서드
+ * </pre>
+ * 
  * @author 
  *
  */
-public class ChatFrame extends AbstractFrame {
+public class ChatFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = 7546904889590160105L;
 	

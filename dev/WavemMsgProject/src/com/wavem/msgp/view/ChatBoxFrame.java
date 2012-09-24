@@ -11,15 +11,20 @@
 package com.wavem.msgp.view;
 
 import java.io.File;
-import com.wavem.msgp.main.AbstractFrame;
+import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
- * 대화함 화면
+ * 대화내역 화면
+ *
+ * <pre>
+ * 	ChatBoxFrame chatBoxFrame = new ChatBoxFrame();
+ *  ChatBoxFrame.makeInitFrame(); // 실제 데이터를 호출하고 화면을 그리는 메서드
+ * </pre>
  * 
  * @author 
  *
  */
-public class ChatBoxFrame extends AbstractFrame {
+public class ChatBoxFrame extends WaveMsgFrame {
 	private static final long serialVersionUID = 3447984774238008875L;
 	private File chatFile;
 

@@ -15,16 +15,16 @@ import javax.swing.JFrame;
 /**
  * 프레임(화면) 구성 추상클래스
  * 
- * @author 
- *
+ * @author
+ * 
  */
-public abstract class AbstractFrame extends JFrame {
-	
+public abstract class WaveMsgFrame extends JFrame {
+
 	/**
 	 * 화면 로딩
 	 */
 	public abstract void makeInitFrame();
-	
+
 	/**
 	 * 화면 종료
 	 */

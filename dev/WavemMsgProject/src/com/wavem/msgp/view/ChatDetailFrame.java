@@ -10,14 +10,20 @@
 
 package com.wavem.msgp.view;
 
-import com.wavem.msgp.main.AbstractFrame;
+import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
- * 대화함 상세보기 화면
+ * 대화내역 상세보기 화면
+ * 
+ * <pre>
+ * 	ChatDetailFrame chatDetailFrame = new ChatDetailFrame();
+ *  ChatDetailFrame.makeInitFrame(); // 실제 데이터를 호출하고 화면을 그리는 메서드
+ * </pre>
+ * 
  * @author 
  *
  */
-public class ChatDetailFrame extends AbstractFrame {
+public class ChatDetailFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = -1320842590690967600L;
 

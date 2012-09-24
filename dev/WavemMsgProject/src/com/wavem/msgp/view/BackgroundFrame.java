@@ -11,15 +11,20 @@
 package com.wavem.msgp.view;
 
 import com.wavem.msgp.comm.PropertiesInfo;
-import com.wavem.msgp.main.AbstractFrame;
+import com.wavem.msgp.main.WaveMsgFrame;
 
 /**
  * 배경설정을 위한 화면
  * 
+ * <pre>
+ * 	BackgroundFrame backgroundFrame = new BackgroundFrame();
+ *  backgroundFrame.makeInitFrame(); // 실제 데이터를 호출하고 화면을 그리는 메서드
+ * </pre>
+ * 
  * @author 
  *
  */
-public class BackgroundFrame extends AbstractFrame {
+public class BackgroundFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -2400000915834485391L;
 	
