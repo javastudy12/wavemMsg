@@ -11,8 +11,9 @@
 package com.wavem.msgp.comm;
 
 /**
- * ΌÒΔΟ Ελ½Ε Ώ¬°α °όΈ®
- * 
+ * μ†μΌ“ ν†µμ‹  μ—°κ²° κ΄€λ¦¬
+ * connection, disconnection
+ * μ—°κ²°μ‹κ°„μ΄κ³Ό, μ—°κ²°μ‹λ„ νμ μ²΄ν¬
  * @author 
  *
  */

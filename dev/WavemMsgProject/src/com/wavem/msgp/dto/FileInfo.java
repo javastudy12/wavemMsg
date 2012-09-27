@@ -13,7 +13,7 @@ package com.wavem.msgp.dto;
 import java.io.Serializable;
 
 /**
- * ÆÄÀÏ Á¤º¸ Å¬·¡½º
+ * íŒŒì¼ ì •ë³´ í´ë˜ìŠ¤
  * 
  * @author
  * 
@@ -22,52 +22,52 @@ public class FileInfo implements Serializable {
 
 	private static final long serialVersionUID = 6747870772102035017L;
 
-	/** ÆÄÀÏ »çÀÌÁî */
+	/** íŒŒì¼ ì‚¬ì´ì¦ˆ */
 	private long fileSize = 0;
 
-	/** ÆÄÀÏ ÀÌ¸§ */
+	/** íŒŒì¼ ì´ë¦„ */
 	private String fileName = "";
 
-	/** ÆÄÀÏ À§Ä¡ (°æ·Î) */
+	/** íŒŒì¼ ìœ„ì¹˜ (ê²½ë¡œ) */
 	private String filePath = "";
 
-	/** ÆÄÀÏ È®ÀåÀÚ */
+	/** íŒŒì¼ í™•ì¥ì */
 	private String fileType = "";
 
-	/** ¼Û½ÅÀÚ ID */
+	/** ì†¡ì‹ ì ID */
 	private String senderID = "";
 	
-	/** ¼ö½ÅÀÚ ID */
+	/** ìˆ˜ì‹ ì ID */
 	private String recipientID = "";
 	
-	/** ÆÄÀÏ ¼Û½Å »óÅÂ */
+	/** íŒŒì¼ ì†¡ì‹  ìƒíƒœ */
 	private int uploadStatus = 0;
 	
-	/** ÆÄÀÏ ¼ö½Å »óÅÂ */
+	/** íŒŒì¼ ìˆ˜ì‹  ìƒíƒœ */
 	private int downloadStatus = 0;
 	
-	/** ÆÄÀÏ ¼Û½Å ¿Ï·á ÀÏÂ¥ */
+	/** íŒŒì¼ ì†¡ì‹  ì™„ë£Œ ì¼ì§œ */
 	private String uploadDate = "";
 	
-	/** ÆÄÀÏ ¼ö½Å ¿Ï·á ÀÏÂ¥ */
+	/** íŒŒì¼ ìˆ˜ì‹  ì™„ë£Œ ì¼ì§œ */
 	private String downloadDate = "";
 	
 	/**
-	 * ÆÄÀÏ Á¤º¸ ±âº» »ı¼ºÀÚ
+	 * íŒŒì¼ ì •ë³´ ê¸°ë³¸ ìƒì„±ì
 	 */
 	public FileInfo() {
 		
 	}
 	
 	/**
-	 * ÆÄÀÏ Á¤º¸ »ı¼ºÀÚ
+	 * íŒŒì¼ ì •ë³´ ìƒì„±ì
 	 * 
-	 * @param fileName ÆÄÀÏ ÀÌ¸§
-	 * @param fileSize ÆÄÀÏ »çÀÌÁî
-	 * @param fileType ÆÄÀÏ È®ÀåÀÚ
-	 * @param filePath ÆÄÀÏ À§Ä¡
-	 * @param senderID ¼Û½ÅÀÚ ID
-	 * @param recipientID ¼ö½ÅÀÚ ID
+	 * @param fileName íŒŒì¼ ì´ë¦„
+	 * @param fileSize íŒŒì¼ ì‚¬ì´ì¦ˆ
+	 * @param fileType íŒŒì¼ í™•ì¥ì
+	 * @param filePath íŒŒì¼ ìœ„ì¹˜
+	 * @param senderID ì†¡ì‹ ì ID
+	 * @param recipientID ìˆ˜ì‹ ì ID
 	 */
 	public FileInfo(String fileName, long fileSize, String fileType, String filePath, String senderID, String recipientID ) {
 		this.fileName = fileName;
@@ -79,172 +79,172 @@ public class FileInfo implements Serializable {
 	}
 	
 	/**
-	 * ÆÄÀÏ »çÀÌÁî¸¦ ¹İÈ¯ÇÑ´Ù.
+	 * íŒŒì¼ ì‚¬ì´ì¦ˆë¥¼ ë°˜í™˜í•œë‹¤.
 	 * 
-	 * @return ÆÄÀÏ »çÀÌÁî
+	 * @return íŒŒì¼ ì‚¬ì´ì¦ˆ
 	 */
 	public long getFileSize() {
 		return fileSize;
 	}
 
 	/**
-	 * ÆÄÀÏ »çÀÌÁî¸¦ ÀúÀåÇÑ´Ù.
+	 * íŒŒì¼ ì‚¬ì´ì¦ˆë¥¼ ì €ì¥í•œë‹¤.
 	 * 
 	 * @param fileSize
-	 *            ÆÄÀÏ »çÀÌÁî
+	 *            íŒŒì¼ ì‚¬ì´ì¦ˆ
 	 */
 	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 
 	/**
-	 * ÆÄÀÏ ÀÌ¸§À» ¹İÈ¯ÇÑ´Ù.
+	 * íŒŒì¼ ì´ë¦„ì„ ë°˜í™˜í•œë‹¤.
 	 * 
-	 * @return ÆÄÀÏ ÀÌ¸§
+	 * @return íŒŒì¼ ì´ë¦„
 	 */
 	public String getFileName() {
 		return fileName;
 	}
 
 	/**
-	 * ÆÄÀÏ ÀÌ¸§À» ÀúÀåÇÑ´Ù.
+	 * íŒŒì¼ ì´ë¦„ì„ ì €ì¥í•œë‹¤.
 	 * 
 	 * @param fileName
-	 *            ÆÄÀÏ ÀÌ¸§
+	 *            íŒŒì¼ ì´ë¦„
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
 	/**
-	 * ÆÄÀÏÀÇ À§Ä¡¸¦ ¹İÈ¯ÇÑ´Ù.
+	 * íŒŒì¼ì˜ ìœ„ì¹˜ë¥¼ ë°˜í™˜í•œë‹¤.
 	 * 
-	 * @return ÆÄÀÏ °æ·Î
+	 * @return íŒŒì¼ ê²½ë¡œ
 	 */
 	public String getFilePath() {
 		return filePath;
 	}
 
 	/**
-	 * ÆÄÀÏÀÇ À§Ä¡¸¦ ÀúÀåÇÑ´Ù.
+	 * íŒŒì¼ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•œë‹¤.
 	 * 
 	 * @param filePath
-	 *            ÆÄÀÏ °æ·Î
+	 *            íŒŒì¼ ê²½ë¡œ
 	 */
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
 
 	/**
-	 * ÆÄÀÏÀÇ È®ÀåÀÚ¸¦ ¹İÈ¯ÇÑ´Ù.
+	 * íŒŒì¼ì˜ í™•ì¥ìë¥¼ ë°˜í™˜í•œë‹¤.
 	 * 
-	 * @return ÆÄÀÏ È®ÀåÀÚ
+	 * @return íŒŒì¼ í™•ì¥ì
 	 */
 	public String getFileType() {
 		return fileType;
 	}
 
 	/**
-	 * ÆÄÀÏÀÇ È®ÀåÀÚ¸¦ ÀúÀåÇÑ´Ù.
+	 * íŒŒì¼ì˜ í™•ì¥ìë¥¼ ì €ì¥í•œë‹¤.
 	 * 
 	 * @param fileType
-	 *            ÆÄÀÏ È®ÀåÀÚ
+	 *            íŒŒì¼ í™•ì¥ì
 	 */
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
 
 	/**
-	 * ¼Û½ÅÀÚ¸¦ ¹İÈ¯ÇÑ´Ù.
-	 * @return ¼Û½ÅÀÚ ID
+	 * ì†¡ì‹ ìë¥¼ ë°˜í™˜í•œë‹¤.
+	 * @return ì†¡ì‹ ì ID
 	 */
 	public String getSenderID() {
 		return senderID;
 	}
 
 	/**
-	 * ¼Û½ÅÀÚ¸¦ ÀúÀåÇÑ´Ù.
-	 * @param sender ¼Û½ÅÀÚ ID
+	 * ì†¡ì‹ ìë¥¼ ì €ì¥í•œë‹¤.
+	 * @param sender ì†¡ì‹ ì ID
 	 */
 	public void setSenderID(String senderID) {
 		this.senderID = senderID;
 	}
 
 	/**
-	 * ¼ö½ÅÀÚ¸¦ ¹İÈ¯ÇÑ´Ù.
-	 * @return ¼ö½ÅÀÚ ID
+	 * ìˆ˜ì‹ ìë¥¼ ë°˜í™˜í•œë‹¤.
+	 * @return ìˆ˜ì‹ ì ID
 	 */
 	public String getRecipientID() {
 		return recipientID;
 	}
 
 	/**
-	 * ¼ö½ÅÀÚ¸¦ ÀúÀåÇÑ´Ù.
-	 * @param recipient ¼ö½ÅÀÚ ID
+	 * ìˆ˜ì‹ ìë¥¼ ì €ì¥í•œë‹¤.
+	 * @param recipient ìˆ˜ì‹ ì ID
 	 */
 	public void setRecipientID(String recipientID) {
 		this.recipientID = recipientID;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼Û½Å »óÅÂ¸¦ ¹İÈ¯ÇÑ´Ù.
-	 * @return ÆÄÀÏ ¼Û½Å »óÅÂ
+	 * íŒŒì¼ ì†¡ì‹  ìƒíƒœë¥¼ ë°˜í™˜í•œë‹¤.
+	 * @return íŒŒì¼ ì†¡ì‹  ìƒíƒœ
 	 */
 	public int getUploadStatus() {
 		return uploadStatus;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼Û½Å »óÅÂ¸¦ ÀúÀåÇÑ´Ù.
-	 * @param uploadStatus ÆÄÀÏ ¼Û½Å »óÅÂ
+	 * íŒŒì¼ ì†¡ì‹  ìƒíƒœë¥¼ ì €ì¥í•œë‹¤.
+	 * @param uploadStatus íŒŒì¼ ì†¡ì‹  ìƒíƒœ
 	 */
 	public void setUploadStatus(int uploadStatus) {
 		this.uploadStatus = uploadStatus;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼ö½Å »óÅÂ¸¦ ¹İÈ¯ÇÑ´Ù.
-	 * @return ÆÄÀÏ ¼ö½Å »óÅÂ
+	 * íŒŒì¼ ìˆ˜ì‹  ìƒíƒœë¥¼ ë°˜í™˜í•œë‹¤.
+	 * @return íŒŒì¼ ìˆ˜ì‹  ìƒíƒœ
 	 */
 	public int getDownloadStatus() {
 		return downloadStatus;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼ö½Å »óÅÂ¸¦ ÀúÀåÇÑ´Ù.
-	 * @param downloadStatus ÆÄÀÏ ¼ö½Å »óÅÂ
+	 * íŒŒì¼ ìˆ˜ì‹  ìƒíƒœë¥¼ ì €ì¥í•œë‹¤.
+	 * @param downloadStatus íŒŒì¼ ìˆ˜ì‹  ìƒíƒœ
 	 */
 	public void setDownloadStatus(int downloadStatus) {
 		this.downloadStatus = downloadStatus;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼Û½Å ¿Ï·á ÀÏÂ¥¸¦ ¹İÈ¯ÇÑ´Ù.
-	 * @return ÆÄÀÏ ¼Û½Å ¿Ï·á ÀÏÂ¥
+	 * íŒŒì¼ ì†¡ì‹  ì™„ë£Œ ì¼ì§œë¥¼ ë°˜í™˜í•œë‹¤.
+	 * @return íŒŒì¼ ì†¡ì‹  ì™„ë£Œ ì¼ì§œ
 	 */
 	public String getUploadDate() {
 		return uploadDate;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼Û½Å ¿Ï·á ÀÏÂ¥¸¦ ÀúÀåÇÑ´Ù.
-	 * @param uploadDate ÆÄÀÏ ¼Û½Å ¿Ï·á ÀÏÂ¥
+	 * íŒŒì¼ ì†¡ì‹  ì™„ë£Œ ì¼ì§œë¥¼ ì €ì¥í•œë‹¤.
+	 * @param uploadDate íŒŒì¼ ì†¡ì‹  ì™„ë£Œ ì¼ì§œ
 	 */
 	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼ö½Å ¿Ï·á ÀÏÂ¥¸¦ ¹İÈ¯ÇÑ´Ù.
-	 * @return ÆÄÀÏ ¼ö½Å ¿Ï·á ÀÏÂ¥
+	 * íŒŒì¼ ìˆ˜ì‹  ì™„ë£Œ ì¼ì§œë¥¼ ë°˜í™˜í•œë‹¤.
+	 * @return íŒŒì¼ ìˆ˜ì‹  ì™„ë£Œ ì¼ì§œ
 	 */
 	public String getDownloadDate() {
 		return downloadDate;
 	}
 
 	/**
-	 * ÆÄÀÏ ¼ö½Å ¿Ï·á ÀÏÂ¥¸¦ ÀúÀåÇÑ´Ù.
-	 * @param downloadDate ÆÄÀÏ ¼ö½Å ¿Ï·á ÀÏÂ¥
+	 * íŒŒì¼ ìˆ˜ì‹  ì™„ë£Œ ì¼ì§œë¥¼ ì €ì¥í•œë‹¤.
+	 * @param downloadDate íŒŒì¼ ìˆ˜ì‹  ì™„ë£Œ ì¼ì§œ
 	 */
 	public void setDownloadDate(String downloadDate) {
 		this.downloadDate = downloadDate;

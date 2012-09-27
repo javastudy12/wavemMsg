@@ -14,11 +14,10 @@ import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * ¹è°æ¼³Á¤À» À§ÇÑ È­¸é
+ * ë°°ê²½ì„¤ì •ì„ ìœ„í•œ í™”ë©´
  * 
  * <pre>
  * 	BackgroundFrame backgroundFrame = new BackgroundFrame();
- *  backgroundFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
@@ -28,30 +27,57 @@ public class BackgroundFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -2400000915834485391L;
 	
-	/** È¯°æ¼³Á¤ ÀÎ½ºÅÏ½º */
+	private static BackgroundFrame frame = null;
+	
+	/** í™˜ê²½ì„¤ì • ì¸ìŠ¤í„´ìŠ¤ */
 	private PropertiesInfo properties = PropertiesInfo.getInstance();
+
+	/**
+	 * ë°°ê²½ ì„¤ì • í™”ë©´ ìƒì„±ì <br>
+	 * ìµœì´ˆì— makeInitFrame()í˜¸ì¶œ <br>
+	 */
+	private BackgroundFrame() {
+		makeInitFrame();
+	}
+	
+	/**
+	 * ë°°ê²½ì„¤ì •ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return ë°°ê²½ì„¤ì •ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static BackgroundFrame getInstance() {
+		
+		if (frame == null) {
+			synchronized (BackgroundFrame.class) {
+				if (frame == null) {
+					frame = new BackgroundFrame();
+				}
+			}
+		}
+		
+		return frame;
+	}
 
 	@Override
 	public void makeInitFrame() {
-		// TODO Auto-generated method stub
+		getContentPane().setLayout(null);
 		
 	}
 
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
-		
+		this.dispose();
 	}
 	
 	/**
-	 * È¯°æ¼³Á¤À¸·ÎºÎÅÍ ÇöÀçÀÇ ¹è°æÈ­¸é ¼³Á¤ ·Îµå
+	 * í™˜ê²½ì„¤ì •ìœ¼ë¡œë¶€í„° í˜„ì¬ì˜ ë°°ê²½í™”ë©´ ì„¤ì • ë¡œë“œ
 	 */
 	public void loadBackgroundProperty() {
 		
 	}
 	
 	/**
-	 * ÇöÀç ¼³Á¤µÈ Á¤º¸ È¯°æ¼³Á¤¿¡ ÀúÀå
+	 * í˜„ì¬ ì„¤ì •ëœ ì •ë³´ í™˜ê²½ì„¤ì •ì— ì €ì¥
 	 */
 	public void saveBackgroundProperty() {
 		

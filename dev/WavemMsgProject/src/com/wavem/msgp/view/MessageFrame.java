@@ -14,14 +14,12 @@ package com.wavem.msgp.view;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * ÂÊÁö È­¸é
+ * ìª½ì§€ í™”ë©´
  * 
  * <pre>
- * 	MessageFrame messageFrame = new MessageFrame(); // ±âº»À¸·Î ÂÊÁö ¾²±â Ã¢ »ı¼º
- *  MessageFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
+ * 	MessageFrame messageFrame = new MessageFrame(); // ê¸°ë³¸ìœ¼ë¡œ ìª½ì§€ ì“°ê¸° ì°½ ìƒì„±
  *  
- *  MessageFrame messageFrame = new MessageFrame(false); // ÂÊÁö ¾²±âÃ¢ ¶Ç´Â ¹ŞÀºÂÊÁö Ã¢ ¼±ÅÃ »ı¼º
- *  MessageFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
+ *  MessageFrame messageFrame = new MessageFrame(false); // ìª½ì§€ ì“°ê¸°ì°½ ë˜ëŠ” ë°›ì€ìª½ì§€ ì°½ ì„ íƒ ìƒì„±
  * </pre>
  * 
  * @author 
@@ -31,41 +29,45 @@ public class MessageFrame extends WaveMsgFrame{
 	private static final long serialVersionUID = 4637357102247158992L;
 	
 	/**
-	 * ÂÊÁöÃ¢ »óÅÂ <br>
-	 * true : ÂÊÁö ¾²±â <br>
-	 * false : ¹ŞÀº ÂÊÁö <br>
+	 * ìª½ì§€ì°½ ìƒíƒœ <br>
+	 * true : ìª½ì§€ ì“°ê¸° <br>
+	 * false : ë°›ì€ ìª½ì§€ <br>
 	 */
 	private boolean convertingFlag = true;
 	
 	/**
-	 * ÂÊÁöÃ¢ »ı¼ºÀÚ <br>
-	 * »ı¼º ½Ã ÀÚµ¿À¸·Î ÂÊÁö ¾²±âÃ¢ »ı¼º
+	 * ìª½ì§€ì°½ ìƒì„±ì <br>
+	 * ìƒì„± ì‹œ ìë™ìœ¼ë¡œ ìª½ì§€ ì“°ê¸°ì°½ ìƒì„± <br>
+	 * ìµœì´ˆ makeInitFrame()í˜¸ì¶œ <br>
 	 */
 	public MessageFrame(){
-		
+		makeInitFrame();
 	}
 	
 	/**
-	 * ÂÊÁöÃ¢ »ı¼ºÀÚ <br>
-	 * »ı¼º ½Ã ÂÊÁö ÇÃ·¡±× ¼³Á¤
+	 * ìª½ì§€ì°½ ìƒì„±ì <br>
+	 * ìƒì„± ì‹œ ìª½ì§€ í”Œë˜ê·¸ ì„¤ì • <br>
+	 * ìµœì´ˆ makeInitFrame()í˜¸ì¶œ <br>
+	 * 
 	 * @param convertingFlag
 	 */
 	public MessageFrame(boolean convertingFlag) {
 		this.convertingFlag = convertingFlag;
+		makeInitFrame();
 	}
 	
 	@Override
 	public void makeInitFrame() {
-	
+		getContentPane().setLayout(null);
 	}
 	
 	@Override
 	public void close() {
-		
+		this.dispose();
 	}
 	
 	/**
-	 * convertingFlag¿¡ µû¸¥ ÂÊÁö È­¸é ¼³Á¤
+	 * convertingFlagì— ë”°ë¥¸ ìª½ì§€ í™”ë©´ ì„¤ì •
 	 */
 	public void convertFrame() {
 	
@@ -77,25 +79,25 @@ public class MessageFrame extends WaveMsgFrame{
 	}
 	
 	/**
-	 * ÂÊÁö ¾²±â
+	 * ìª½ì§€ ì“°ê¸°
 	 */
 	public void sendMsg() {
 	
 	}
 	
 	/**
-	 * ÂÊÁö ´äÀå
+	 * ìª½ì§€ ë‹µì¥
 	 */
 	public void replyMsg() {
 	
 	}
 	
 	/**
-	 * ÂÊÁöÃ¢ ¼³Á¤ <br>
-	 * true : ÂÊÁö ¾²±â <br>
-	 * false : ¹ŞÀº ÂÊÁö <br>
+	 * ìª½ì§€ì°½ ì„¤ì • <br>
+	 * true : ìª½ì§€ ì“°ê¸° <br>
+	 * false : ë°›ì€ ìª½ì§€ <br>
 	 * 
-	 * @param convertingFlag ÂÊÁöÈ­¸é ¼³Á¤°ª
+	 * @param convertingFlag ìª½ì§€í™”ë©´ ì„¤ì •ê°’
 	 */
 	public void setConvertingFlag(boolean convertingFlag) {
 		this.convertingFlag = convertingFlag;

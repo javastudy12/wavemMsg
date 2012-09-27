@@ -10,14 +10,26 @@
 
 package com.wavem.msgp.view;
 
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+import com.wavem.msgp.component.WaveMsgButton;
+import com.wavem.msgp.component.WaveMsgDialogBox;
 import com.wavem.msgp.component.WaveMsgFrame;
+import com.wavem.msgp.component.WaveMsgLabel;
+import com.wavem.msgp.component.WaveMsgPanel;
 import com.wavem.msgp.dto.UserInfo;
 
 /**
- * ¸Ş½ÅÀú ¸ŞÀÎ È­¸é <br>
+ * ë©”ì‹ ì € ë©”ì¸ í™”ë©´ <br>
  * 
  * <pre>
  * 	MsgMainFrame msgMain = MsgMainFrame.getInstance();
@@ -30,24 +42,40 @@ public class MsgMainFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -4042584463931283068L;
 	
-	/** ÇöÀç Á¢¼ÓÁßÀÎ »ç¿ëÀÚ ¸®½ºÆ®  */
-	public List<UserInfo> userList = null;
+	/** ë¡œê·¸ì¸ëœ ì‚¬ìš©ì ì •ë³´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static UserInfo loginUser = null;
 	
-	/** ¸Ş½ÅÀú ¸ŞÀÏ È­¸é ÀÎ½ºÅÏ½º */
+	/** ë©”ì‹ ì € ë©”ì¼ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
 	private static MsgMainFrame msgMainFrame = null;
+
+	/** í˜„ì¬ ì ‘ì†ì¤‘ì¸ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ ë³€ìˆ˜ */
+	public List<UserInfo> userList = null;
     
+	/** ìƒë‹¨ì˜ topíŒ¨ë„ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private WaveMsgPanel topPanel = null;
+	
+	/** ì˜†ì˜ sideíŒ¨ë„ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private WaveMsgPanel sidePanel = null;
+	
+	/** mainíŒ¨ë„ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private WaveMsgPanel mainPanel = null;
+	
+	/** footeríŒ¨ë„ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private WaveMsgPanel footerPanel = null;
+	
 	/**	
-	 * ¸ŞÀÎÈ­¸é MsgMainFrame »ı¼ºÀÚ <br>
-	 * ÃÖÃÊ userlist°´Ã¼ »ı¼º <br>
+	 * ë©”ì¸í™”ë©´ MsgMainFrame ìƒì„±ì <br>
+	 * ìµœì´ˆ userlistê°ì²´ ìƒì„± <br>
+	 * ìµœì´ˆ makeInitFrame()í˜¸ì¶œ <br>
 	 */
 	private MsgMainFrame() {
-		userList = new ArrayList<UserInfo>();
+		makeInitFrame();
 	}
 
 	/**
-	 * MsgMainFrame ÀÎ½ºÅÏ½º »ı¼º ¹× ¹İÈ¯
+	 * MsgMainFrame ì¸ìŠ¤í„´ìŠ¤ ìƒì„± ë° ë°˜í™˜
 	 * 
-	 * @return ±âÁ¸ È¤Àº »ı¼ºµÈ ¸ŞÀÏ È­¸é ÀÎ½ºÅÏ½º
+	 * @return ê¸°ì¡´ í˜¹ì€ ìƒì„±ëœ ë©”ì¼ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
 	 */
 	public static MsgMainFrame getInstance() {
 		if (msgMainFrame == null) {
@@ -61,114 +89,493 @@ public class MsgMainFrame extends WaveMsgFrame {
 		return msgMainFrame;
 	}
 	
+	
 	@Override
 	public void makeInitFrame() {
-		// TODO ¸ŞÀÎ È­¸é °ü·Ã 
+		
+		// ë¡œê·¸ì¸ ì²´í¬
+		if (MsgMainFrame.loginUser == null) {
+			makeLoginFrame();
+			return;
+		} 
+		
+		// íƒ€ì´í‹€ ì„¤ì •
+		setTitle("Wavem Messenger - " + MsgMainFrame.loginUser.getUserId());
+		
+		// ë©”ì¸ íŒ¨ë„ ì„¤ì •
+		getContentPane().setLayout(null);
+		getContentPane().setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(MsgMainFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 466, 738);
+		
+		/* ********************************************************************
+		 * ìƒë‹¨ì˜ TOP íŒ¨ë„ ì‹œì‘
+		 * ********************************************************************/
+		
+		// ìƒë‹¨ì˜ TOP íŒ¨ë„ ìƒì„±
+		topPanel = new WaveMsgPanel();
+		topPanel.setImage(
+				Toolkit.getDefaultToolkit().getImage(
+						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/TOP.png")
+				)
+		); 
+		topPanel.setBounds(0, 0, 450, 100); // ìƒë‹¨ TOP íŒ¨ë„ ë¶€ë¶„ì˜ ìœ„ì¹˜ ë° í¬ê¸° ì§€ì •
+		getContentPane().add(topPanel); // ë©”ì¸ íŒ¨ë„ì— ì¶”ê°€
+		topPanel.setLayout(null);
+		
+		// í”„ë¡œí•„ ì„¤ì • ë²„íŠ¼
+		WaveMsgButton profileBtn = new WaveMsgButton();
+		profileBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				makeProfileFrame();
+			}
+		});
+		profileBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/PROFILE.png"))); // ì¶”í›„ ì„œë²„ë¡œë¶€í„° ì´ë¯¸ì§€ ë°›ìŒ
+		profileBtn.setBounds(12, 10, 100, 80);
+		topPanel.add(profileBtn);
+		
+		WaveMsgLabel idNameInfo = new WaveMsgLabel();
+		idNameInfo.setBounds(124, 10, 200, 40);
+		topPanel.add(idNameInfo);
+		
+		/* ********************************************************************
+		 * ìƒë‹¨ì˜ TOP íŒ¨ë„ ë
+		 * ********************************************************************/
+		
+		
+		
+		/* ********************************************************************
+		 * ì˜† side íŒ¨ë„ ì‹œì‘
+		 * ********************************************************************/
+		
+		// ì˜† (side) íŒ¨ë„ ìƒì„±
+		sidePanel = new WaveMsgPanel();
+		sidePanel.setImage(
+				Toolkit.getDefaultToolkit().getImage(
+						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/SIDE.png")
+				)
+		);
+		sidePanel.setBounds(0, 100, 100, 500);
+		getContentPane().add(sidePanel);
+		sidePanel.setLayout(null);
+		
+		// ìª½ì§€ ì“°ê¸° ë²„íŠ¼
+		WaveMsgButton msgBtn = new WaveMsgButton();
+		msgBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/MSG_MAIN.png")));
+		msgBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				makeMessageFrame(); // ìµœì´ˆ ìª½ì§€ ì“°ê¸°ì°½ ì‹¤í–‰
+			}
+		});
+		msgBtn.setBounds(12, 10, 76, 60);
+		sidePanel.add(msgBtn);
+		
+		// ì±„íŒ… ë²„íŠ¼
+		WaveMsgButton chatBtn = new WaveMsgButton();
+		chatBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/CHAT_MAIN.png")));
+		chatBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				makeChatFrame(); // ì±„íŒ…ì°½ ì‹¤í–‰
+			}
+		});
+		chatBtn.setBounds(12, 80, 76, 60);
+		sidePanel.add(chatBtn);
+		
+		// ê·¸ë£¹ì„¤ì • ë²„íŠ¼
+		WaveMsgButton groupBtn = new WaveMsgButton();
+		groupBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/GROUP_MAIN.png")));
+		groupBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				makeGroupFrame(); // ê·¸ë£¹ ì„¤ì •ì°½ ì‹¤í–‰
+			}
+		});
+		groupBtn.setBounds(12, 150, 76, 60);
+		sidePanel.add(groupBtn);
+		
+		// ê³µì§€ì‚¬í•­ ë²„íŠ¼
+		WaveMsgButton noticeBtn = new WaveMsgButton();
+		noticeBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/NOTICE_MAIN.png")));
+		noticeBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				makeNoticeFrame(); // ê³µì§€ì‚¬í•­ í™•ì¸ì°½ ì‹¤í–‰
+			}
+		});
+		noticeBtn.setBounds(12, 220, 76, 60);
+		sidePanel.add(noticeBtn);
+		
+		// íŒŒì¼ ë³´ë‚´ê¸° ë²„íŠ¼
+		WaveMsgButton fileBtn = new WaveMsgButton();
+		fileBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/FILEUP_MAIN.png")));
+		fileBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				makeFileUploadFrame();
+			}
+		});
+		fileBtn.setBounds(12, 290, 76, 60);
+		sidePanel.add(fileBtn);
+		
+		/* ********************************************************************
+		 * ì˜† side íŒ¨ë„ ë
+		 * ********************************************************************/
+		
+		
+		
+		/* ********************************************************************
+		 * ë©”ì¸ íŒ¨ë„ ì‹œì‘
+		 * ********************************************************************/
+		
+		// ë©”ì¸ íŒ¨ë„ ìƒì„±
+		mainPanel = new WaveMsgPanel();
+		mainPanel.setImage(
+				Toolkit.getDefaultToolkit().getImage(
+						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/MAIN.png")
+				)
+		);
+		mainPanel.setBounds(100, 100, 350, 500);
+		getContentPane().add(mainPanel);
+		
+		/* ********************************************************************
+		 * ë©”ì¸ íŒ¨ë„ ë
+		 * ********************************************************************/
+		
+		
+		/* ********************************************************************
+		 * ë°”ë‹¥ footer íŒ¨ë„ ì‹œì‘
+		 * ********************************************************************/
+		
+		footerPanel = new WaveMsgPanel();
+		footerPanel.setImage(
+				Toolkit.getDefaultToolkit().getImage(
+						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/FOOTER.png")
+				)
+		);
+		footerPanel.setBounds(0, 600, 450, 100);
+		getContentPane().add(footerPanel);
+		footerPanel.setLayout(null);
+		
+		// ìª½ì§€ë‚´ì—­ ë²„íŠ¼
+		WaveMsgButton msgBoxBtn = new WaveMsgButton();
+		msgBoxBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				makeMessageBoxFrame(); 
+			}
+		});
+		msgBoxBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/MSG_FOOTER.png")));
+		msgBoxBtn.setBounds(12, 10, 75, 80);
+		footerPanel.add(msgBoxBtn);
+		
+		// ëŒ€í™”ë‚´ì—­ ë²„íŠ¼
+		WaveMsgButton chatBoxBtn = new WaveMsgButton();
+		chatBoxBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				makeChatBoxFrame();
+			}
+		});
+		chatBoxBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/CHAT_FOOTER.png")));
+		chatBoxBtn.setBounds(99, 10, 75, 80);
+		footerPanel.add(chatBoxBtn);
+		
+		// íŒŒì¼ë‚´ì—­ ë²„íŠ¼
+		WaveMsgButton fileBoxBtn = new WaveMsgButton();
+		fileBoxBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				makeFileBoxFrame();
+			}
+		});
+		fileBoxBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/FILE_FOOTER.png")));
+		fileBoxBtn.setBounds(186, 10, 75, 80);
+		footerPanel.add(fileBoxBtn);
+		
+		// í™˜ê²½ì„¤ì • ë²„íŠ¼
+		WaveMsgButton propertyBtn = new WaveMsgButton();
+		propertyBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				makePropertiesFrame();
+			}
+		});
+		propertyBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/PROPERTY_FOOTER.png")));
+		propertyBtn.setBounds(273, 10, 75, 80);
+		footerPanel.add(propertyBtn);
+		
+		// ë¡œê·¸ì•„ì›ƒ ë²„íŠ¼
+		WaveMsgButton logoutBtn = new WaveMsgButton();
+		logoutBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				logout();
+			}
+		});
+		logoutBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/LOGOUT_FOOTER.png")));
+		logoutBtn.setBounds(360, 10, 75, 80);
+		footerPanel.add(logoutBtn);
+		
+		
+		/* ********************************************************************
+		 * ë°”ë‹¥ footer íŒ¨ë„ ë
+		 * ********************************************************************/
+		
 	}
 
 	@Override
 	public void close() {
-		// TODO È­¸é Á¾·á 
-
+		this.dispose();
+		MsgMainFrame.msgMainFrame = null;
 	}
 
 	/**
-	 * ÃÖÃÊ È­¸é ·Îµù ½Ã ÃÊ±â µ¥ÀÌÅÍ »ı¼º
+	 * ìµœì´ˆ í™”ë©´ ë¡œë”© ì‹œ ì´ˆê¸° ë°ì´í„° ìƒì„±
 	 */
 	public void invokeInitData() {
 
 	}
 
 	/**
-	 * ·Î±×ÀÎ È­¸é »ı¼º <br>
-	 * ¼¼¼ÇÁ¤º¸ ¾øÀ» ½Ã ·Î±×ÀÎ Ã¢ »ı¼º
+	 * ë¡œê·¸ì¸ í™”ë©´ ìƒì„± <br>
+	 * ì„¸ì…˜ì •ë³´ ì—†ì„ ì‹œ ë¡œê·¸ì¸ ì°½ ìƒì„±
 	 */
 	public void makeLoginFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LoginFrame frame = new LoginFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * ÂÊÁöÇÔ È­¸é »ı¼º
+	 * ìª½ì§€ë‚´ì—­ í™”ë©´ ìƒì„±
 	 */
 	public void makeMessageBoxFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MessageBoxFrame frame = MessageBoxFrame.getInstance();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * °øÁö»çÇ× È­¸é »ı¼º
+	 * ê³µì§€ì‚¬í•­ í™”ë©´ ìƒì„±
 	 */
 	public void makeNoticeFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NoticeFrame frame = NoticeFrame.getInstance();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * ±×·ì È­¸é »ı¼º
+	 * ê·¸ë£¹ í™”ë©´ ìƒì„±
 	 */
 	public void makeGroupFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GroupFrame frame = GroupFrame.getInstance();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	/**
+	 * íŒŒì¼ ë³´ë‚´ê¸° í™”ë©´ ìƒì„±
+	 */
+	public void makeFileUploadFrame() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FileUploadFrame frame = new FileUploadFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	/**
+	 * íŒŒì¼ ë°›ê¸° í™”ë©´ ìƒì„±
+	 */
+	public void makeFileDownloadFrame() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FileDownloadFrame frame = new FileDownloadFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * ÆÄÀÏÇÔ È­¸é »ı¼º
+	 * íŒŒì¼ë‚´ì—­ í™”ë©´ ìƒì„±
 	 */
 	public void makeFileBoxFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FileBoxFrame frame = FileBoxFrame.getInstance();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * ÇÁ·ÎÇÊ È­¸é »ı¼º
+	 * í”„ë¡œí•„ í™”ë©´ ìƒì„±
 	 */
 	public void makeProfileFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ProfileFrame frame = ProfileFrame.getInstance(new UserInfo());
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * ´ëÈ­ÇÔ È­¸é »ı¼º
+	 * ëŒ€í™”í•¨ í™”ë©´ ìƒì„±
 	 */
 	public void makeChatBoxFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChatBoxFrame frame = ChatBoxFrame.getInstance();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * È¯°æ¼³Á¤ È­¸é »ı¼º
+	 * í™˜ê²½ì„¤ì • í™”ë©´ ìƒì„±
 	 */
 	public void makePropertiesFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					PropertyFrame frame = PropertyFrame.getInstance();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * ÂÊÁö È­¸é »ı¼º
+	 * ìª½ì§€ í™”ë©´ ìƒì„±
 	 */
 	public void makeMessageFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MessageFrame frame = new MessageFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * Ã¤ÆÃÃ¢ È­¸é »ı¼º
+	 * ì±„íŒ…ì°½ í™”ë©´ ìƒì„±
 	 */
 	public void makeChatFrame() {
-
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChatFrame frame = new ChatFrame("");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * ¼­¹öÀÇ »ç¿ëÀÚ ¸®½ºÆ® Ã¼Å©
+	 * ì„œë²„ì˜ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ ì²´í¬
 	 */
 	public void userChkToServer() {
 
 	}
 
 	/**
-	 * ¼­¹ö·ÎºÎÅÍ »ç¿ëÀÚ ¸®½ºÆ® Ã¼Å© ¿äÃ»
+	 * ì„œë²„ë¡œë¶€í„° ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ ì²´í¬ ìš”ì²­
 	 */
 	public void userChkFromServer() {
 
 	}
 
 	/**
-	 * ·Î±×¾Æ¿ô
+	 * ë¡œê·¸ì•„ì›ƒ
 	 */
 	public void logout() {
+		
+		WaveMsgDialogBox box = new WaveMsgDialogBox(null, "ë¡œê·¸ì•„ì›ƒ", "ì •ë§ë¡œ ë¡œê·¸ì•„ì›ƒí•˜ì‹œê² ìŠµë‹ˆê¹Œ", JOptionPane.YES_NO_CANCEL_OPTION);
 
+		if (box.getResult() == 0) {
+			// TODO : ë¡œê·¸ì•„ì›ƒ ì‹¤í–‰
+		} else {
+			// TODO : ë¡œê·¸ì•„ì›ƒ ì·¨ì†Œ
+		}
+		
 	}
 
+	/**
+	 * í˜„ì¬ ë¡œê·¸ì¸ëœ ì‚¬ìš©ì ì •ë³´ ë°˜í™˜
+	 * 
+	 * @return ë¡œê·¸ì¸ ì‚¬ìš©ì ì •ë³´
+	 */
+	public static UserInfo getLoginUser() {
+		return loginUser;
+	}
+	
+	/**
+	 * í˜„ì¬ ë¡œê·¸ì¸ëœ ì‚¬ìš©ì ì •ë³´ ì„¸íŒ…
+	 * 
+	 * @return ë¡œê·¸ì¸ ì‚¬ìš©ì ì •ë³´
+	 */
+	public static final void setLoginUser(UserInfo loginUser) {
+		MsgMainFrame.loginUser = loginUser;
+	}
 }

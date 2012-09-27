@@ -13,7 +13,7 @@ package com.wavem.msgp.comm;
 import java.io.Serializable;
 
 /** 
- * È¯°æ¼³Á¤ ·ÎÄÃ ÀúÀå Å¬·¡½º <br>
+ * í™˜ê²½ì„¤ì • ë¡œì»¬ ì €ì¥ í´ë˜ìŠ¤ <br>
  * 
  * <pre>
  * 	PropertiesInfo properties = PropertiesInfo.getInstance();
@@ -25,74 +25,79 @@ public class PropertiesInfo implements Serializable {
 	
 	private static final long serialVersionUID = -6484416053755315109L;
 	
-	/** ÂÊÁö ÀÚµ¿ÆË¾÷ ¼³Á¤ */
+	/** ìª½ì§€ ìë™íŒì—… ì„¤ì • */
 	private boolean msgAutoPopUpFlag = true;
 	
-	/** ÀÚµ¿ ºÎÀçÁß ¼³Á¤ */
+	/** ìë™ ë¶€ì¬ì¤‘ ì„¤ì • */
 	private boolean autoStatusChangeFlag = true;
 	
-	/** ÀÚµ¿ ºÎÀçÁß ¼³Á¤½Ã µ¿ÀÛ ½Ã°£ (ºĞ) */
+	/** ìë™ ë¶€ì¬ì¤‘ ì„¤ì •ì‹œ ë™ì‘ ì‹œê°„ (ë¶„) */
 	private int autoStatusChangeLimite = 5;
 	
-	/** ´õºí Å¬¸¯ ½Ã ¼³Á¤ (Ã¤ÆÃ, ÂÊÁö) */
+	/** ë”ë¸” í´ë¦­ ì‹œ ì„¤ì • (ì±„íŒ…, ìª½ì§€) */
 	private String doubleClickOperate = "";
 	
-	/** ÆÄÀÏ ´Ù¿î·Îµå ±âº» °æ·Î */
+	/** íŒŒì¼ ë‹¤ìš´ë¡œë“œ ê¸°ë³¸ ê²½ë¡œ */
 	private String fileDownPath = "";
 	
-	/** Ã¤ÆÃ ´ëÈ­ ³»¿ª ÀúÀå ¼³Á¤ */
+	/** ì±„íŒ… ëŒ€í™” ë‚´ì—­ ì €ì¥ ì„¤ì • */
 	private boolean chatSaveFlag = false;
 	
-	/** ´ëÈ­ ÀúÀå °æ·Î */
+	/** ëŒ€í™” ì €ì¥ ê²½ë¡œ */
 	private String chatSavePath = "";
 	
-	/** Å×¸¶ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤) */
+	/** í…Œë§ˆ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •) */
 	private boolean themeFlag = false;
 	
-	/** ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§ */
+	/** ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„ */
 	private String themeName = "";
 	
-	/** ¹è°æ ÀÌ¹ÌÁö °æ·Î */
+	/** ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ */
 	private String themePath = "";
 	
-	/** ÆùÆ® */
+	/** í°íŠ¸ */
 	private String font = "";
 	
-	/** »ö»ó */
+	/** ìƒ‰ìƒ */
 	private String color = "";
 	
-	/** ¾Ë¸²À½ ¼³Á¤ */
+	/** ì•Œë¦¼ìŒ ì„¤ì • */
 	private boolean arlamFlag = true;
 	
-	/** ¾Ë¸²À½ °æ·Î */
+	/** ì•Œë¦¼ìŒ ê²½ë¡œ */
 	private String arlamPath = "";
 	
-	/** Ã¤ÆÃ, ÂÊÁö ¹è°æ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤) */
+	/** ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •) */
 	private boolean chatBackgroundFlag = false;
 	
-	/** Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§ */
+	/** ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„ */
 	private String chatBackgroundName = "";
 	
-	/** Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö °æ·Î */
+	/** ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ */
 	private String chatBackgroundPath = "";
 
+	/** ë¡œê·¸ì¸ ì‹œ ì‚¬ìš©ì ID ì €ì¥ ì—¬ë¶€ */
+	private boolean idSaveChk = true;
 	
-	/** È¯°æ¼³Á¤ ÀÎ½ºÅÏ½º */
+	/** ë¡œê·¸ì¸ì‹œ ì €ì¥ëœ ì‚¬ìš©ì ID */
+	private String loginUserId = "";
+	
+	/** í™˜ê²½ì„¤ì • ì¸ìŠ¤í„´ìŠ¤ */
 	private static PropertiesInfo properties = null;
     
 	/**	
-	 * È¯°æ¼³Á¤ PropertiesInfo »ı¼ºÀÚ <br>
-	 * ÃÖÃÊ È¯°æ¼³Á¤ ·Îµå <br>
-	 * ¿ÜºÎ¿¡¼­ PropertiesInfoÅ¬·¡½º »ı¼º ¸·À½ <br>
+	 * í™˜ê²½ì„¤ì • PropertiesInfo ìƒì„±ì <br>
+	 * ìµœì´ˆ í™˜ê²½ì„¤ì • ë¡œë“œ <br>
+	 * ì™¸ë¶€ì—ì„œ PropertiesInfoí´ë˜ìŠ¤ ìƒì„± ë§‰ìŒ <br>
 	 */
 	private PropertiesInfo() {
 		loadPropertiesFile();
 	}
 
 	/**
-	 * PropertiesInfo ÀÎ½ºÅÏ½º »ı¼º ¹× ¹İÈ¯
+	 * PropertiesInfo ì¸ìŠ¤í„´ìŠ¤ ìƒì„± ë° ë°˜í™˜
 	 * 
-	 * @return ±âÁ¸ È¤Àº »ı¼ºµÈ ¸ŞÀÏ È­¸é ÀÎ½ºÅÏ½º
+	 * @return ê¸°ì¡´ í˜¹ì€ ìƒì„±ëœ ë©”ì¼ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
 	 */
 	public static PropertiesInfo getInstance() {
 		if (properties == null) {
@@ -107,335 +112,375 @@ public class PropertiesInfo implements Serializable {
 	}
 	
 	/**
-	 * È¯°æ¼³Á¤ ·Îµå (·ÎÄÃ)
+	 * í™˜ê²½ì„¤ì • ë¡œë“œ (ë¡œì»¬)
 	 * 
-	 * @return ·Îµå ¼º°ø ¿©ºÎ
+	 * @return ë¡œë“œ ì„±ê³µ ì—¬ë¶€
 	 */
 	public int loadPropertiesFile() {
 		return 0;
 	}
 	
 	/**
-	 * È¯°æ¼³Á¤ ÀúÀå (·ÎÄÃ)
+	 * í™˜ê²½ì„¤ì • ì €ì¥ (ë¡œì»¬)
 	 * 
-	 * @return ÀúÀå ¼³Á¤ ¿©ºÎ
+	 * @return ì €ì¥ ì„¤ì • ì—¬ë¶€
 	 */
 	public int savePropertiesFile() {
 		return 0;
 	}
 	
 	/**
-	 * ÂÊÁö ÀÚµ¿ÆË¾÷ ¼³Á¤ ¹İÈ¯
+	 * ìª½ì§€ ìë™íŒì—… ì„¤ì • ë°˜í™˜
 	 * 
-	 * @return ÂÊÁö ÀÚµ¿ÆË¾÷ ¼³Á¤°ª
+	 * @return ìª½ì§€ ìë™íŒì—… ì„¤ì •ê°’
 	 */
 	public boolean isMsgAutoPopUpFlag() {
 		return msgAutoPopUpFlag;
 	}
 
 	/**
-	 * ÂÊÁö ÀÚµ¿ÆË¾÷ ¼³Á¤ ÀúÀå 
+	 * ìª½ì§€ ìë™íŒì—… ì„¤ì • ì €ì¥ 
 	 * 
-	 * @param msgAutoPopUpFlag ÂÊÁö ÀÚµ¿ÆË¾÷ ¼³Á¤°ª
+	 * @param msgAutoPopUpFlag ìª½ì§€ ìë™íŒì—… ì„¤ì •ê°’
 	 */
 	public void setMsgAutoPopUpFlag(boolean msgAutoPopUpFlag) {
 		this.msgAutoPopUpFlag = msgAutoPopUpFlag;
 	}
 
 	/**
-	 * ÀÚµ¿ ºÎÀçÁß ¼³Á¤ ¹İÈ¯
+	 * ìë™ ë¶€ì¬ì¤‘ ì„¤ì • ë°˜í™˜
 	 * 
-	 * @return ÀÚµ¿ ºÎÀçÁß ¼³Á¤°ª
+	 * @return ìë™ ë¶€ì¬ì¤‘ ì„¤ì •ê°’
 	 */
 	public boolean isAutoStatusChangeFlag() {
 		return autoStatusChangeFlag;
 	}
 
 	/**
-	 * ÀÚµ¿ ºÎÀçÁß ¼³Á¤ ÀúÀå
+	 * ìë™ ë¶€ì¬ì¤‘ ì„¤ì • ì €ì¥
 	 * 
-	 * @param autoStatusChangeFlag ÀÚµ¿ ºÎÀçÁß ¼³Á¤°ª
+	 * @param autoStatusChangeFlag ìë™ ë¶€ì¬ì¤‘ ì„¤ì •ê°’
 	 */
 	public void setAutoStatusChangeFlag(boolean autoStatusChangeFlag) {
 		this.autoStatusChangeFlag = autoStatusChangeFlag;
 	}
 
 	/**
-	 * ÀÚµ¿ ºÎÀçÁß ¼³Á¤½Ã µ¿ÀÛ ½Ã°£ ¹İÈ¯ (ºĞ)
+	 * ìë™ ë¶€ì¬ì¤‘ ì„¤ì •ì‹œ ë™ì‘ ì‹œê°„ ë°˜í™˜ (ë¶„)
 	 * 
-	 * @return ÀÚµ¿ ºÎÀçÁß ¼³Á¤½Ã µ¿ÀÛ ½Ã°£
+	 * @return ìë™ ë¶€ì¬ì¤‘ ì„¤ì •ì‹œ ë™ì‘ ì‹œê°„
 	 */
 	public int getAutoStatusChangeLimite() {
 		return autoStatusChangeLimite;
 	}
 
 	/**
-	 * ÀÚµ¿ ºÎÀçÁß ¼³Á¤½Ã µ¿ÀÛ ½Ã°£ ÀúÀå (ºĞ)
+	 * ìë™ ë¶€ì¬ì¤‘ ì„¤ì •ì‹œ ë™ì‘ ì‹œê°„ ì €ì¥ (ë¶„)
 	 * 
-	 * @param autoStatusChangeLimite ÀÚµ¿ ºÎÀçÁß ¼³Á¤½Ã µ¿ÀÛ ½Ã°£
+	 * @param autoStatusChangeLimite ìë™ ë¶€ì¬ì¤‘ ì„¤ì •ì‹œ ë™ì‘ ì‹œê°„
 	 */
 	public void setAutoStatusChangeLimite(int autoStatusChangeLimite) {
 		this.autoStatusChangeLimite = autoStatusChangeLimite;
 	}
 
 	/**
-	 * ´õºí Å¬¸¯ ½Ã ¼³Á¤ (Ã¤ÆÃ, ÂÊÁö) ¹İÇÑ
+	 * ë”ë¸” í´ë¦­ ì‹œ ì„¤ì • (ì±„íŒ…, ìª½ì§€) ë°˜í•œ
 	 * 
-	 * @return ´õºí Å¬¸¯ ½Ã ¼³Á¤°ª (Ã¤ÆÃ, ÂÊÁö)
+	 * @return ë”ë¸” í´ë¦­ ì‹œ ì„¤ì •ê°’ (ì±„íŒ…, ìª½ì§€)
 	 */
 	public String getDoubleClickOperate() {
 		return doubleClickOperate;
 	}
 
 	/**
-	 * ´õºí Å¬¸¯ ½Ã ¼³Á¤ (Ã¤ÆÃ, ÂÊÁö) ÀúÀå
+	 * ë”ë¸” í´ë¦­ ì‹œ ì„¤ì • (ì±„íŒ…, ìª½ì§€) ì €ì¥
 	 * 
-	 * @param doubleClickOperate ´õºí Å¬¸¯ ½Ã ¼³Á¤°ª (Ã¤ÆÃ, ÂÊÁö)
+	 * @param doubleClickOperate ë”ë¸” í´ë¦­ ì‹œ ì„¤ì •ê°’ (ì±„íŒ…, ìª½ì§€)
 	 */
 	public void setDoubleClickOperate(String doubleClickOperate) {
 		this.doubleClickOperate = doubleClickOperate;
 	}
 
 	/**
-	 * ÆÄÀÏ ´Ù¿î·Îµå ±âº» °æ·Î ¹İÈ¯
+	 * íŒŒì¼ ë‹¤ìš´ë¡œë“œ ê¸°ë³¸ ê²½ë¡œ ë°˜í™˜
 	 * 
-	 * @return ÆÄÀÏ ´Ù¿î·Îµå ±âº» °æ·Î
+	 * @return íŒŒì¼ ë‹¤ìš´ë¡œë“œ ê¸°ë³¸ ê²½ë¡œ
 	 */
 	public String getFileDownPath() {
 		return fileDownPath;
 	}
 
 	/**
-	 * ÆÄÀÏ ´Ù¿î·Îµå ±âº» °æ·Î ÀúÀå
+	 * íŒŒì¼ ë‹¤ìš´ë¡œë“œ ê¸°ë³¸ ê²½ë¡œ ì €ì¥
 	 * 
-	 * @param fileDownPath ÆÄÀÏ ´Ù¿î·Îµå ±âº» °æ·Î
+	 * @param fileDownPath íŒŒì¼ ë‹¤ìš´ë¡œë“œ ê¸°ë³¸ ê²½ë¡œ
 	 */
 	public void setFileDownPath(String fileDownPath) {
 		this.fileDownPath = fileDownPath;
 	}
 
 	/**
-	 * Ã¤ÆÃ ´ëÈ­ ³»¿ª ÀúÀå ¼³Á¤ ¹İÈ¯
+	 * ì±„íŒ… ëŒ€í™” ë‚´ì—­ ì €ì¥ ì„¤ì • ë°˜í™˜
 	 * 
-	 * @return Ã¤ÆÃ ´ëÈ­ ³»¿ª ÀúÀå ¼³Á¤°ª
+	 * @return ì±„íŒ… ëŒ€í™” ë‚´ì—­ ì €ì¥ ì„¤ì •ê°’
 	 */
 	public boolean isChatSaveFlag() {
 		return chatSaveFlag;
 	}
 
 	/**
-	 * Ã¤ÆÃ ´ëÈ­ ³»¿ª ÀúÀå ¼³Á¤ ÀúÀå
+	 * ì±„íŒ… ëŒ€í™” ë‚´ì—­ ì €ì¥ ì„¤ì • ì €ì¥
 	 * 
-	 * @param chatSaveFlag Ã¤ÆÃ ´ëÈ­ ³»¿ª ÀúÀå ¼³Á¤°ª
+	 * @param chatSaveFlag ì±„íŒ… ëŒ€í™” ë‚´ì—­ ì €ì¥ ì„¤ì •ê°’
 	 */
 	public void setChatSaveFlag(boolean chatSaveFlag) {
 		this.chatSaveFlag = chatSaveFlag;
 	}
 
 	/**
-	 * ´ëÈ­ ÀúÀå °æ·Î ¹İÈ¯
+	 * ëŒ€í™” ì €ì¥ ê²½ë¡œ ë°˜í™˜
 	 * 
-	 * @return ´ëÈ­ ÀúÀå °æ·Î
+	 * @return ëŒ€í™” ì €ì¥ ê²½ë¡œ
 	 */
 	public String getChatSavePath() {
+		
+		// ë§Œì•½ ë‹¤ë¥¸ ì—ëŸ¬ë° ë²„ê·¸ë¡œ ì¸í•´ ì €ì¥ê²½ë¡œì— ë¬¸ì œê°€ ìƒê²¼ì„ ê²½ìš°
+		if (chatSavePath == null || chatSavePath.trim().equals("")) {
+			chatSavePath = "C:\\";
+		}
+		
 		return chatSavePath;
 	}
 
 	/**
-	 * ´ëÈ­ ÀúÀå °æ·Î ÀúÀå
+	 * ëŒ€í™” ì €ì¥ ê²½ë¡œ ì €ì¥
 	 * 
-	 * @param chatSavePath ´ëÈ­ ÀúÀå °æ·Î
+	 * @param chatSavePath ëŒ€í™” ì €ì¥ ê²½ë¡œ
 	 */
 	public void setChatSavePath(String chatSavePath) {
 		this.chatSavePath = chatSavePath;
 	}
 
 	/**
-	 * Å×¸¶ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤) ¹İÈ¯ <br>
-	 * true  : ±âº»¹è°æ <br>
-	 * false : »ç¿ëÀÚ¼³Á¤ <br>
+	 * í…Œë§ˆ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •) ë°˜í™˜ <br>
+	 * true  : ê¸°ë³¸ë°°ê²½ <br>
+	 * false : ì‚¬ìš©ìì„¤ì • <br>
 	 * 
-	 * @return Å×¸¶ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤)
+	 * @return í…Œë§ˆ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •)
 	 */
 	public boolean isThemeFlag() {
 		return themeFlag;
 	}
 
 	/**
-	 * Å×¸¶ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤) ÀúÀå <br>
-	 * true  : ±âº»¹è°æ <br>
-	 * false : »ç¿ëÀÚ¼³Á¤ <br> 
+	 * í…Œë§ˆ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •) ì €ì¥ <br>
+	 * true  : ê¸°ë³¸ë°°ê²½ <br>
+	 * false : ì‚¬ìš©ìì„¤ì • <br> 
 	 * 
-	 * @param themeFlag Å×¸¶ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤)
+	 * @param themeFlag í…Œë§ˆ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •)
 	 */
 	public void setThemeFlag(boolean themeFlag) {
 		this.themeFlag = themeFlag;
 	}
 
 	/**
-	 * ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§ ¹İÈ¯
+	 * ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„ ë°˜í™˜
 	 * 
-	 * @return ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§
+	 * @return ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„
 	 */
 	public String getThemeName() {
 		return themeName;
 	}
 
 	/**
-	 * ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§ ÀúÀå
+	 * ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„ ì €ì¥
 	 * 
-	 * @param themeName ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§
+	 * @param themeName ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„
 	 */
 	public void setThemeName(String themeName) {
 		this.themeName = themeName;
 	}
 
 	/**
-	 * ¹è°æ ÀÌ¹ÌÁö °æ·Î ¹İÈ¯
+	 * ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ ë°˜í™˜
 	 * 
-	 * @return ¹è°æ ÀÌ¹ÌÁö °æ·Î
+	 * @return ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ
 	 */
 	public String getThemePath() {
 		return themePath;
 	}
 
 	/**
-	 * ¹è°æ ÀÌ¹ÌÁö °æ·Î ÀúÀå
+	 * ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ ì €ì¥
 	 * 
-	 * @param themePath ¹è°æ ÀÌ¹ÌÁö °æ·Î
+	 * @param themePath ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ
 	 */
 	public void setThemePath(String themePath) {
 		this.themePath = themePath;
 	}
 
 	/**
-	 * ÆùÆ® ¹İÈ¯
+	 * í°íŠ¸ ë°˜í™˜
 	 * 
-	 * @return ÆùÆ®
+	 * @return í°íŠ¸
 	 */
 	public String getFont() {
 		return font;
 	}
 
 	/**
-	 * ÆùÆ® ÀúÀå
+	 * í°íŠ¸ ì €ì¥
 	 * 
-	 * @param font ÆùÆ®
+	 * @param font í°íŠ¸
 	 */
 	public void setFont(String font) {
 		this.font = font;
 	}
 
 	/** 
-	 * »ö»ó ¹İÈ¯
+	 * ìƒ‰ìƒ ë°˜í™˜
 	 * 
-	 * @return »ö»ó
+	 * @return ìƒ‰ìƒ
 	 */
 	public String getColor() {
 		return color;
 	}
 
 	/**
-	 * »ö»ó ÀúÀå
+	 * ìƒ‰ìƒ ì €ì¥
 	 * 
-	 * @param color »ö»ó
+	 * @param color ìƒ‰ìƒ
 	 */
 	public void setColor(String color) {
 		this.color = color;
 	}
 
 	/**
-	 * ¾Ë¸²À½ ¼³Á¤ ¹İÈ¯
+	 * ì•Œë¦¼ìŒ ì„¤ì • ë°˜í™˜
 	 * 
-	 * @return ¾Ë¸²À½ ¼³Á¤
+	 * @return ì•Œë¦¼ìŒ ì„¤ì •
 	 */
 	public boolean isArlamFlag() {
 		return arlamFlag;
 	}
 
 	/**
-	 * ¾Ë¸²À½ ¼³Á¤ ÀúÀå
+	 * ì•Œë¦¼ìŒ ì„¤ì • ì €ì¥
 	 * 
-	 * @param arlamFlag ¾Ë¸²À½ ¼³Á¤
+	 * @param arlamFlag ì•Œë¦¼ìŒ ì„¤ì •
 	 */
 	public void setArlamFlag(boolean arlamFlag) {
 		this.arlamFlag = arlamFlag;
 	}
 
 	/**
-	 * ¾Ë¸²À½ °æ·Î ¹İÇÑ
+	 * ì•Œë¦¼ìŒ ê²½ë¡œ ë°˜í•œ
 	 * 
-	 * @return ¾Ë¸²À½ °æ·Î
+	 * @return ì•Œë¦¼ìŒ ê²½ë¡œ
 	 */
 	public String getArlamPath() {
 		return arlamPath;
 	}
 
 	/**
-	 * ¾Ë¸²À½ °æ·Î ÀúÀå
+	 * ì•Œë¦¼ìŒ ê²½ë¡œ ì €ì¥
 	 * 
-	 * @param arlamPath ¾Ë¸²À½ °æ·Î
+	 * @param arlamPath ì•Œë¦¼ìŒ ê²½ë¡œ
 	 */
 	public void setArlamPath(String arlamPath) {
 		this.arlamPath = arlamPath;
 	}
 
 	/**
-	 * Ã¤ÆÃ, ÂÊÁö ¹è°æ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤) ¹İÈ¯ <br>
-	 * true  : ±âº»¹è°æ <br>
-	 * false : »ç¿ëÀÚ¼³Á¤ <br>
+	 * ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •) ë°˜í™˜ <br>
+	 * true  : ê¸°ë³¸ë°°ê²½ <br>
+	 * false : ì‚¬ìš©ìì„¤ì • <br>
 	 * 
-	 * @return Ã¤ÆÃ, ÂÊÁö ¹è°æ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤)
+	 * @return ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •)
 	 */
 	public boolean isChatBackgroundFlag() {
 		return chatBackgroundFlag;
 	}
 
 	/**
-	 * Ã¤ÆÃ, ÂÊÁö ¹è°æ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤) ÀúÀå <br>
-	 * true  : ±âº»¹è°æ <br>
-	 * false : »ç¿ëÀÚ¼³Á¤ <br>
+	 * ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •) ì €ì¥ <br>
+	 * true  : ê¸°ë³¸ë°°ê²½ <br>
+	 * false : ì‚¬ìš©ìì„¤ì • <br>
 	 * 
-	 * @param chatBackgroundFlag Ã¤ÆÃ, ÂÊÁö ¹è°æ ¼³Á¤ (±âº»¹è°æ, »ç¿ëÀÚ¼³Á¤)
+	 * @param chatBackgroundFlag ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì„¤ì • (ê¸°ë³¸ë°°ê²½, ì‚¬ìš©ìì„¤ì •)
 	 */
 	public void setChatBackgroundFlag(boolean chatBackgroundFlag) {
 		this.chatBackgroundFlag = chatBackgroundFlag;
 	}
 
 	/**
-	 * Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§ ¹İÈ¯
+	 * ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„ ë°˜í™˜
 	 * 
-	 * @return Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§
+	 * @return ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„
 	 */
 	public String getChatBackgroundName() {
 		return chatBackgroundName;
 	}
 
 	/**
-	 * Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§ ÀúÀå
+	 * ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„ ì €ì¥
 	 * 
-	 * @param chatBackgroundName Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö ÀÌ¸§
+	 * @param chatBackgroundName ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ì´ë¦„
 	 */
 	public void setChatBackgroundName(String chatBackgroundName) {
 		this.chatBackgroundName = chatBackgroundName;
 	}
 
 	/**
-	 * Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö °æ·Î ¹İÈ¯
+	 * ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ ë°˜í™˜
 	 * 
-	 * @return Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö °æ·Î
+	 * @return ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ
 	 */
 	public String getChatBackgroundPath() {
 		return chatBackgroundPath;
 	}
 
 	/**
-	 * Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö °æ·Î ÀúÀå
+	 * ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ ì €ì¥
 	 * 
-	 * @param chatBackgroundPath Ã¤ÆÃ, ÂÊÁö ¹è°æ ÀÌ¹ÌÁö °æ·Î
+	 * @param chatBackgroundPath ì±„íŒ…, ìª½ì§€ ë°°ê²½ ì´ë¯¸ì§€ ê²½ë¡œ
 	 */
 	public void setChatBackgroundPath(String chatBackgroundPath) {
 		this.chatBackgroundPath = chatBackgroundPath;
+	}
+
+	/**
+	 * ë¡œê·¸ì¸ ì‹œ ID ì €ì¥ ì—¬ë¶€ ë°˜í™˜
+	 * @return ì €ì¥ ì—¬ë¶€
+	 */
+	public boolean isIdSaveChk() {
+		return idSaveChk;
+	}
+
+	/**
+	 * ë¡œê·¸ì¸ ì‹œ ID ì €ì¥ ì—¬ë¶€ ì €ì¥
+	 * @param idSaveChk ì €ì¥ ì—¬ë¶€
+	 */
+	public void setIdSaveChk(boolean idSaveChk) {
+		this.idSaveChk = idSaveChk;
+	}
+
+	/**
+	 * ì €ì¥ëœ ì‚¬ìš©ì ID ë°˜í™˜
+	 * 
+	 * @return ì‚¬ìš©ì ID
+	 */
+	public String getLoginUserId() {
+		return loginUserId;
+	}
+
+	/**
+	 * ì‚¬ìš©ì ID ì €ì¥
+	 * 
+	 * @param loginUserId ì‚¬ìš©ì ID
+	 */
+	public void setLoginUserId(String loginUserId) {
+		this.loginUserId = loginUserId;
 	}
 
 }

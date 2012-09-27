@@ -17,21 +17,21 @@ import java.util.Map;
 import com.wavem.msgp.view.ChatFrame;
 
 /**
- * Ã¤ÆÃ ¹× ÂÊÁö °ü·Ã ÄÁÆ®·Ñ·¯
+ * ì±„íŒ… ë° ìª½ì§€ ê´€ë ¨ ì»¨íŠ¸ë¡¤ëŸ¬
  * 
  * @author
  *
  */
 public class ChatController {
 	
-	/** »ı¼ºµÈ Ã¤ÆÃ ÀÎ½ºÅÏ½º°ü¸® Map */
+	/** ìƒì„±ëœ ì±„íŒ… ì¸ìŠ¤í„´ìŠ¤ê´€ë¦¬ Map */
 	public static Map<String, ChatFrame> chatInstanceMap = Collections.synchronizedMap(new HashMap<String, ChatFrame>());
 
 	/**
-	 * È°¼ºÈ­ µÈ Ã¤ÆÃÃ¢ Áß Æ¯Á¤ Ã¢ ¹İÈ¯
+	 * í™œì„±í™” ëœ ì±„íŒ…ì°½ ì¤‘ íŠ¹ì • ì°½ ë°˜í™˜
 	 * 
-	 * @param chatUseID Map¿¡ ÀúÀåµÈ Ã¤ÆÃÃ¢ ÀÎ½ºÅÏ½º ID
-	 * @return ÇØ´çÇÏ´Â Ã¤ÆÃ È­¸é ¹İÈ¯
+	 * @param chatUseID Mapì— ì €ì¥ëœ ì±„íŒ…ì°½ ì¸ìŠ¤í„´ìŠ¤ ID
+	 * @return í•´ë‹¹í•˜ëŠ” ì±„íŒ… í™”ë©´ ë°˜í™˜
 	 */
 	public ChatFrame findChatInstance(String chatUseID) {
 	
@@ -39,42 +39,42 @@ public class ChatController {
 	}
 	
 	/**
-	 * Ã¤ÆÃ È­¸é »ı¼º
+	 * ì±„íŒ… í™”ë©´ ìƒì„±
 	 */
 	public void makeChatFrame() {
 	
 	}
 	
 	/**
-	 * ¼­¹ö·ÎºÎÅÍ Àü´Ş¹ŞÀº ¸Ş½ÃÁö¸¦ Ã¤ÆÃÃ¢¿¡ Àü´Ş
+	 * ì„œë²„ë¡œë¶€í„° ì „ë‹¬ë°›ì€ ë©”ì‹œì§€ë¥¼ ì±„íŒ…ì°½ì— ì „ë‹¬
 	 */
 	public void writeMsgToChatFrame() {
 	
 	}
 	
 	/**
-	 * Ã¤ÆÃÃ¢À¸·ÎºÎÅÍ Àü´Ş¹ŞÀº ¸Ş½ÃÁö¸¦ ¼­¹ö·Î Àü´Ş
+	 * ì±„íŒ…ì°½ìœ¼ë¡œë¶€í„° ì „ë‹¬ë°›ì€ ë©”ì‹œì§€ë¥¼ ì„œë²„ë¡œ ì „ë‹¬
 	 */
 	public void sendMsgToServer() {
 	
 	}
 	
 	/**
-	 * ÂÊÁöÃ¢À¸·ÎºÎÅÍ Àü´Ş¹ŞÀº ¸Ş½ÃÁö¸¦ ¼­¹ö·Î Àü´Ş
+	 * ìª½ì§€ì°½ìœ¼ë¡œë¶€í„° ì „ë‹¬ë°›ì€ ë©”ì‹œì§€ë¥¼ ì„œë²„ë¡œ ì „ë‹¬
 	 */
 	public void sendMessage() {
 	
 	}
 	
 	/**
-	 * ¼­¹ö·ÎºÎÅÍ Àü´Ş¹ŞÀº ¸Ş½ÃÁö¸¦ ¸ŞÀÎÈ­¸éÀ¸·Î Àü´ŞÇÏ¿© ¹ŞÀº ÂÊÁöÇÔ »ı¼º
+	 * ì„œë²„ë¡œë¶€í„° ì „ë‹¬ë°›ì€ ë©”ì‹œì§€ë¥¼ ë©”ì¸í™”ë©´ìœ¼ë¡œ ì „ë‹¬í•˜ì—¬ ë°›ì€ ìª½ì§€í•¨ ìƒì„±
 	 */
 	public void receiveMessage() {
 	
 	}
 	
 	/**
-	 * ÁÖ±âÀûÀ¸·Î Ã¤ÆÃÃ¢¿¡ ³²¾ÆÀÖ´Â »ç¿ëÀÚ Ã¼Å© (¼­¹ö¿Í µ¿±âÈ­ ÀÛ¾÷)
+	 * ì£¼ê¸°ì ìœ¼ë¡œ ì±„íŒ…ì°½ì— ë‚¨ì•„ìˆëŠ” ì‚¬ìš©ì ì²´í¬ (ì„œë²„ì™€ ë™ê¸°í™” ì‘ì—…)
 	 */
 	public void checkUserList() {
 	

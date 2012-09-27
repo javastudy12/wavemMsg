@@ -11,20 +11,13 @@
 
 package com.wavem.msgp.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-
-import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * ÂÊÁö³»¿ª È­¸é
+ * ìª½ì§€ë‚´ì—­ í™”ë©´
  * 
  * <pre>
  * 	MessageBoxFrame messageBoxFrame = new MessageBoxFrame();
- *  MessageBoxFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
@@ -34,42 +27,56 @@ public class MessageBoxFrame extends WaveMsgFrame{
 	
 	private static final long serialVersionUID = 2554647036331105004L;
 	
-	public MessageBoxFrame() {
+	/** ìª½ì§€ë‚´ì—­ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static MessageBoxFrame frame = null;
+	
+	/**
+	 * ìª½ì§€ë‚´ì—­ í™”ë©´ ìƒì„±ì <br>
+	 * ìµœì´ˆ makeInitFrame()í˜¸ì¶œ <br>
+	 */
+	private MessageBoxFrame() {
 		makeInitFrame();
 	}
 
+	/**
+	 * ìª½ì§€ë‚´ì—­ í™”ë©´ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return ìª½ì§€ë‚´ì—­ í™”ë©´ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static MessageBoxFrame getInstance() {
+		
+		if (frame == null) {
+			synchronized (MessageBoxFrame.class) {
+				if (frame == null) {
+					frame = new MessageBoxFrame();
+				}
+			}
+		}
+		
+		return frame;
+	}
+	
 	@Override
 	public void makeInitFrame() {
 		getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new WaveMsgButton();
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(0, 64, 97, 23);
-		getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(12, 113, 97, 23);
-		getContentPane().add(btnNewButton_1);
 	}
 	
 	@Override
 	public void close() {
-		
+		this.dispose();
 	}
 	
 	/**
-	 * ÂÊÁö ¸®½ºÆ® È£Ãâ
+	 * ìª½ì§€ ë¦¬ìŠ¤íŠ¸ í˜¸ì¶œ
 	 */
 	public void invokeMsgList() {
 	
 	}
 	
 	/**
-	 * ÂÊÁö ¸®½ºÆ®¿¡¼­ ÂÊÁö ¼±ÅÃ ½Ã
-	 * ÂÊÁö È­¸é È£Ãâ
+	 * ìª½ì§€ ë¦¬ìŠ¤íŠ¸ì—ì„œ ìª½ì§€ ì„ íƒ ì‹œ
+	 * ìª½ì§€ í™”ë©´ í˜¸ì¶œ
 	 */
 	public void invokeMsg() {
 	

@@ -13,7 +13,7 @@ package com.wavem.msgp.component;
 import javax.swing.JFrame;
 
 /**
- * ÇÁ·¹ÀÓ(È­¸é) ±¸¼º Ãß»óÅ¬·¡½º
+ * í”„ë ˆì„(í™”ë©´) êµ¬ì„± ì¶”ìƒí´ë˜ìŠ¤
  * 
  * @author
  * 
@@ -21,12 +21,12 @@ import javax.swing.JFrame;
 public abstract class WaveMsgFrame extends JFrame {
 
 	/**
-	 * È­¸é ·Îµù
+	 * í™”ë©´ ë¡œë”©
 	 */
-	public abstract void makeInitFrame();
+	public abstract void makeInitFrame() throws Exception ;
 
 	/**
-	 * È­¸é Á¾·á
+	 * í™”ë©´ ì¢…ë£Œ
 	 */
 	public abstract void close();
 

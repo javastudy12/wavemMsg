@@ -17,11 +17,10 @@ import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.FileInfo;
 
 /**
- * ÆÄÀÏ ¾÷·Îµå È­¸é
+ * íŒŒì¼ ì—…ë¡œë“œ í™”ë©´
  * 
  * <pre>
  * 	FileDownloadFrame fileDownloadFrame = new FileDownloadFrame();
- *  FileDownloadFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
@@ -31,36 +30,38 @@ public class FileUploadFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = 1783253655922461926L;
 	
-	/** ÆÄÀÏ ¾÷·Îµå ¸®½ºÆ® */
+	/** íŒŒì¼ ì—…ë¡œë“œ ë¦¬ìŠ¤íŠ¸ */
 	private List<FileInfo> fileList = null;
 	
 	/**
-	 * ÆÄÀÏ ¾÷·Îµå È­¸é »ı¼ºÀÚ <br>
-	 * ÆÄÀÏ ¸®½ºÆ® »ı¼º 
+	 * íŒŒì¼ ì—…ë¡œë“œ í™”ë©´ ìƒì„±ì <br>
+	 * íŒŒì¼ ë¦¬ìŠ¤íŠ¸ ìƒì„± <br>
+	 * ìµœì´ˆì— makeInitFrame()í˜¸ì¶œ <br>
 	 */
 	public FileUploadFrame() {
 		fileList = new ArrayList<FileInfo>();
+		makeInitFrame();
 	}
 	
 	@Override
 	public void makeInitFrame() {
-
+		getContentPane().setLayout(null);
 	}
 
 	@Override
 	public void close() {
-
+		this.dispose();
 	}
 
 	/**
-	 * ÆÄÀÏ ¿ÀÇÂ (ÆÄÀÏ °æ·Î ¼³Á¤)
+	 * íŒŒì¼ ì˜¤í”ˆ (íŒŒì¼ ê²½ë¡œ ì„¤ì •)
 	 */
 	public void openFile() {
 
 	}
 
 	/**
-	 * ÆÄÀÏ ¾÷·Îµå
+	 * íŒŒì¼ ì—…ë¡œë“œ
 	 */
 	public void uploadFile() {
 

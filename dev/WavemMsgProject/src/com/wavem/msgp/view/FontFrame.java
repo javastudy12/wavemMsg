@@ -8,18 +8,16 @@
  * 
  * ********************************************************************************************************/
 
-
 package com.wavem.msgp.view;
 
 import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * ÆÄÀÏ ÆùÆ® ¹× »ö»ó ¼³Á¤ È­¸é
+ * ì±„íŒ… í°íŠ¸ ë° ìƒ‰ìƒ ì„¤ì • í™”ë©´
  * 
  * <pre>
  * 	FontFrame fontFrame = new FontFrame();
- *  FontFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
@@ -29,36 +27,65 @@ public class FontFrame extends WaveMsgFrame{
 	
 	private static final long serialVersionUID = 7117625848207442204L;
 
-	/** È¯°æ¼³Á¤ ÀÎ½ºÅÏ½º */
+	/** í™˜ê²½ì„¤ì • ì¸ìŠ¤í„´ìŠ¤ */
 	private PropertiesInfo properties = PropertiesInfo.getInstance();
+	
+	/** ì±„íŒ… í°íŠ¸ ë° ìƒ‰ìƒ ì„¤ì • í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static FontFrame frame = null;
+	
+	/**
+	 * ì±„íŒ… í°íŠ¸ ë° ìƒ‰ìƒ ì„¤ì • í™”ë©´ <br>
+	 * ìµœì´ˆ makeInitFrame()í˜¸ì¶œ <br>
+	 */
+	private FontFrame() {
+		makeInitFrame();
+	}
+	
+	/**
+	 * ì±„íŒ… í°íŠ¸ ë° ìƒ‰ìƒ ì„¤ì • í™”ë©´ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return ì±„íŒ… í°íŠ¸ ë° ìƒ‰ìƒ ì„¤ì • í™”ë©´ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static FontFrame getInstance() {
+		
+		if (frame == null) {
+			synchronized (FontFrame.class) {
+				if (frame == null) {
+					frame = new FontFrame();
+				}
+			}
+		}
+		
+		return frame;
+	}
 	
 	@Override
 	public void makeInitFrame() {
-	
+		getContentPane().setLayout(null);
 	}
 	
 	@Override
 	public void close() {
-		
+		this.dispose();
 	}
 	
 	
 	/**
-	 * ±âÁ¸¿¡ ¼³Á¤µÈ ÆùÆ® ·Îµå
+	 * ê¸°ì¡´ì— ì„¤ì •ëœ í°íŠ¸ ë¡œë“œ
 	 */
 	public void loadFont() {
 	
 	}
 	
 	/**
-	 * ±âÁ¸¿¡ ¼³Á¤µÈ »ö»ó ·Îµå
+	 * ê¸°ì¡´ì— ì„¤ì •ëœ ìƒ‰ìƒ ë¡œë“œ
 	 */
 	public void loadColor() {
 	
 	}
 	
 	/**
-	 * ÇöÀç ¼³Á¤ÇÑ ÆùÆ® ¹× »ö»ó ÀúÀå
+	 * í˜„ì¬ ì„¤ì •í•œ í°íŠ¸ ë° ìƒ‰ìƒ ì €ì¥
 	 */
 	public void saveFontNColor() {
 	

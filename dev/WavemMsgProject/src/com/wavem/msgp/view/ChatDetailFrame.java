@@ -10,14 +10,17 @@
 
 package com.wavem.msgp.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * ´ëÈ­³»¿ª »ó¼¼º¸±â È­¸é
+ * ëŒ€í™”ë‚´ì—­ ìƒì„¸ë³´ê¸° í™”ë©´
  * 
  * <pre>
- * 	ChatDetailFrame chatDetailFrame = new ChatDetailFrame();
- *  ChatDetailFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
+ * 	ChatDetailFrame chatDetailFrame = new ChatDetailFrame("fileName");
  * </pre>
  * 
  * @author 
@@ -26,19 +29,42 @@ import com.wavem.msgp.component.WaveMsgFrame;
 public class ChatDetailFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = -1320842590690967600L;
-
+	
+	/** ì €ì¥í•œ ëŒ€í™” ë‚´ì—­ì„ ìœ„í•œ File field */
+	private FileReader chatFileReader = null;
+	
+	/** ì½ì–´ì•¼ í•  íŒŒì¼ ê²½ë¡œ ë° ì´ë¦„ */
+	private String fileName = "";
+	
+	/** 
+	 * ëŒ€í™”ë‚´ì—­ ìƒì„¸ë³´ê¸° ìƒì„±ì<br>
+	 * ìµœì´ˆ FileReaderì¸ìŠ¤í„´ìŠ¤ ìƒì„± ë° makeInitFrame()í˜¸ì¶œ<br>
+	 */
+	public ChatDetailFrame(String fileName) {
+		this.fileName = fileName;
+		
+		makeInitFrame();
+		
+		try {
+			this.chatFileReader = new FileReader(this.fileName);
+		} catch (FileNotFoundException e) {
+			// TODO ì—ëŸ¬ ì¶œë ¥ ë©”ì‹œì§€ ë°•ìŠ¤ í˜¸ì¶œë¡œì§ í•„ìš”
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void makeInitFrame() {
-
+		getContentPane().setLayout(null);
 	}
 
 	@Override
 	public void close() {
-
+		this.dispose();
 	}
 	
 	/**
-	 * ·ÎÄÃ¿¡¼­ ´ëÈ­ ³»¿ª ·Îµå
+	 * ë¡œì»¬ì—ì„œ ëŒ€í™” ë‚´ì—­ ë¡œë“œ
 	 */
 	public void loadChatData() {
 

@@ -10,8 +10,12 @@
 
 package com.wavem.msgp.main;
 
+import java.awt.EventQueue;
+
+import com.wavem.msgp.view.MsgMainFrame;
+
 /**
- * ÃÖÃÊ ½ÃÀÛÁ¡
+ * ìµœì´ˆ ì‹œì‘ì 
  * 
  * @author 
  *
@@ -19,7 +23,16 @@ package com.wavem.msgp.main;
 public class MsgMain {
 
 	public static void main(String[] args) {
-		// TODO ¼¼¼ÇÃ¼Å© ÈÄ ·Î±×ÀÎ È­¸é È£Ãâ ¹× ¸ŞÀÎ È­¸é È£Ãâ
+		// TODO ì„¸ì…˜ì²´í¬ í›„ ë¡œê·¸ì¸ í™”ë©´ í˜¸ì¶œ ë° ë©”ì¸ í™”ë©´ í˜¸ì¶œ
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MsgMainFrame frame = MsgMainFrame.getInstance();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-
 }

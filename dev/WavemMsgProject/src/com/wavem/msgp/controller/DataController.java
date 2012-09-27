@@ -11,8 +11,8 @@
 package com.wavem.msgp.controller;
 
 /**
- * ¼­¹ö¿Í µ¥ÀÌÅÍ Åë½ÅÀ» À§ÇÑ ÄÁÆ®·Ñ·¯ <br>
- * ±âº»ÀûÀÎ CRUD ÀÎÅÍÆäÀÌ½º¸¦ °¡Áö°í ÀÖ´Ù. <br>
+ * ì„œë²„ì™€ ë°ì´í„° í†µì‹ ì„ ìœ„í•œ ì»¨íŠ¸ë¡¤ëŸ¬ <br>
+ * ê¸°ë³¸ì ì¸ CRUD ì¸í„°í˜ì´ìŠ¤ë¥¼ ê°€ì§€ê³  ìˆë‹¤. <br>
  * 
  * @author HG01362
  *
@@ -20,28 +20,28 @@ package com.wavem.msgp.controller;
 public class DataController {
 	
 	/**
-	 * Á¶È¸
+	 * ì¡°íšŒ
 	 */
 	public void selectData() {
 
 	}
 
 	/**
-	 * ¼öÁ¤
+	 * ìˆ˜ì •
 	 */
 	public void updateData() {
 
 	}
 
 	/**
-	 * Ãß°¡
+	 * ì¶”ê°€
 	 */
 	public void insertData() {
 
 	}
 
 	/**
-	 * »èÁ¦
+	 * ì‚­ì œ
 	 */
 	public void deleteData() {
 

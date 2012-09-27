@@ -13,14 +13,13 @@ package com.wavem.msgp.view;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * °øÁö»çÇ× È­¸é <br>
+ * ê³µì§€ì‚¬í•­ í™”ë©´ <br>
  * 
- * ±ä±Ş°øÁö : ÀÚµ¿ÆË¾÷ <br>
- * ÀÏ¹İ°øÁö : ¾Ë¸²Ç¥½Ã <br>
+ * ê¸´ê¸‰ê³µì§€ : ìë™íŒì—… (ì¶”í›„) <br>
+ * ì¼ë°˜ê³µì§€ : ì•Œë¦¼í‘œì‹œ (ì¶”í›„) <br>
  * 
  * <pre>
  * 	NoticeFrame noticeFrame = new NoticeFrame();
- *  NoticeFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author
@@ -30,34 +29,63 @@ public class NoticeFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -3466883580966965039L;
 
+	/** ê³µì§€ì‚¬í•­ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static NoticeFrame frame = null;
+	
+	/**
+	 * ê³µì§€ì‚¬í•­ í™”ë©´ ìƒì„±ì <br>
+	 * ìµœì´ˆ makeInitFrame() í˜¸ì¶œ <br>
+	 */
+	private NoticeFrame() {
+		makeInitFrame();
+	}
+	
+	/**
+	 * ê³µì§€ì‚¬í•­ í™”ë©´ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return ê³µì§€ì‚¬í•­ í™”ë©´ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static NoticeFrame getInstance() {
+		
+		if (frame == null) {
+			synchronized (NoticeFrame.class) {
+				if (frame == null) {
+					frame = new NoticeFrame();
+				}
+			}
+		}
+		
+		return frame;
+	}
+	
 	@Override
 	public void makeInitFrame() {
-
+		getContentPane().setLayout(null);
 	}
 
 	@Override
 	public void close() {
-
+		this.dispose();
 	}
 
 	/**
-	 * °øÁö»çÇ× °Ô½Ã ¸®½ºÆ® È£Ãâ
+	 * ê³µì§€ì‚¬í•­ ê²Œì‹œ ë¦¬ìŠ¤íŠ¸ í˜¸ì¶œ
 	 */
 	public void invokeNoticeList() {
 
 	}
 
 	/**
-	 * °øÁö»çÇ× ÀÛ¼º <br>
-	 * °ü¸®ÀÚ ±ÇÇÑ ÇÊ¿ä <br>
-	 * ÀÏ¹İ »ç¿ëÀÚ´Â °ü¸®ÀÚÀÇ ½ÂÀÎÇÏ¿¡ ÀÛ¼º °¡´É <br>
+	 * ê³µì§€ì‚¬í•­ ì‘ì„± <br>
+	 * ê´€ë¦¬ì ê¶Œí•œ í•„ìš” <br>
+	 * ì¼ë°˜ ì‚¬ìš©ìëŠ” ê´€ë¦¬ìì˜ ìŠ¹ì¸í•˜ì— ì‘ì„± ê°€ëŠ¥ <br>
 	 */
 	public void writeNotice() {
 
 	}
 
 	/**
-	 * °øÁö»çÇ× ÀúÀå
+	 * ê³µì§€ì‚¬í•­ ì €ì¥
 	 */
 	public void saveNotice() {
 

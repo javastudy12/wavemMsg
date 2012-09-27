@@ -13,31 +13,60 @@ package com.wavem.msgp.view;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * ÆÄÀÏ³»¿ª È­¸é 
+ * íŒŒì¼ë‚´ì—­ í™”ë©´ 
  * 
  * <pre>
  * 	FileBoxFrame fileBoxFrame = new FileBoxFrame();
- *  FileBoxFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
  *
  */
 public class FileBoxFrame extends WaveMsgFrame {
+	
 	private static final long serialVersionUID = 5683706633732766606L;
 
+	/** íŒŒì¼ë‚´ì—­ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static FileBoxFrame frame = null;
+	
+	/**
+	 * íŒŒì¼ë‚´ì—­ í™”ë©´ ìƒì„±ì<br>
+	 * ìµœì¡° makeInitFrame()í˜¸ì¶œ<br>
+	 */
+	private FileBoxFrame() {
+		makeInitFrame();
+	}
+	
+	/**
+	 * íŒŒì¼ë‚´ì—­ í™”ë©´ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return íŒŒì¼ë‚´ì—­ í™”ë©´ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static FileBoxFrame getInstance() {
+		
+		if (frame == null) {
+			synchronized (FileBoxFrame.class) {
+				if (frame == null) {
+					frame = new FileBoxFrame();
+				}
+			}
+		}
+		
+		return frame;
+	}
+	
 	@Override
 	public void makeInitFrame() {
-
+		getContentPane().setLayout(null);
 	}
 
 	@Override
 	public void close() {
-
+		this.dispose();
 	}
 	
 	/**
-	 * ÆÄÀÏ ¸®½ºÆ® È£Ãâ
+	 * íŒŒì¼ ë¦¬ìŠ¤íŠ¸ í˜¸ì¶œ
 	 */
 	public void invokeFileHistoryList() {
 

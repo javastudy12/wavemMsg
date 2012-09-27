@@ -14,11 +14,10 @@ package com.wavem.msgp.view;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
- * ±×·ì È­¸é 
+ * ê·¸ë£¹ í™”ë©´ 
  * 
  * <pre>
  * 	GroupFrame groupFrame = new GroupFrame();
- *  GroupFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
@@ -28,60 +27,89 @@ public class GroupFrame extends WaveMsgFrame{
 	
 	private static final long serialVersionUID = -3827633116266407657L;
 	
+	/** ê·¸ë£¹ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static GroupFrame frame = null;
+	
+	/**
+	 * ê·¸ë£¹í™”ë©´ ìƒì„±ì <br>
+	 * ìµœì´ˆ makeInitFrame()í˜¸ì¶œ <br>
+	 */
+	private GroupFrame() {
+		makeInitFrame();
+	}
+	
+	/**
+	 * ê·¸ë£¹ í™”ë©´ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return ê·¸ë£¹ í™”ë©´ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static GroupFrame getInstance() {
+		
+		if (frame == null) {
+			synchronized (GroupFrame.class) {
+				if (frame == null) {
+					frame = new GroupFrame();
+				}
+			}
+		}
+		
+		return frame;
+	}
+	
 	@Override
 	public void makeInitFrame() {
-	
+		getContentPane().setLayout(null);
 	}
 	
 	@Override
 	public void close() {
-	
+		this.dispose();
 	}
 	
 	/**
-	 * ÀüÃ¼ »ç¿ëÀÚ ¸®½ºÆ® È£Ãâ
+	 * ì „ì²´ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ í˜¸ì¶œ
 	 */
 	public void invokeUserList() {
 	
 	}
 	
 	/**
-	 * ±×·ì »ç¿ëÀÚ ¸®½ºÆ® È£Ãâ
+	 * ê·¸ë£¹ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ í˜¸ì¶œ
 	 */
 	public void invokeGroupList() {
 	
 	}
 	
 	/**
-	 * ±×·ì »ı¼º
+	 * ê·¸ë£¹ ìƒì„±
 	 */
 	public void makeGroup() {
 	
 	}
 	
 	/**
-	 * ±×·ì »èÁ¦
+	 * ê·¸ë£¹ ì‚­ì œ
 	 */
 	public void deleteGroup() {
 	
 	}
 	
 	/**
-	 * ±×·ì¿¡ »ç¿ëÀÚ Ãß°¡
+	 * ê·¸ë£¹ì— ì‚¬ìš©ì ì¶”ê°€
 	 */
 	public void addUserToGroup() {
 	
 	}
 	
 	/**
-	 * ±×·ìÀÇ »ç¿ëÀÚ »èÁ¦
+	 * ê·¸ë£¹ì˜ ì‚¬ìš©ì ì‚­ì œ
 	 */
 	public void deleteUserToGroup() {
 	
 	}
 	
 	/**
-	 * ÇöÀç ¼³Á¤µÈ ±×·ì »ç¿ëÀÚ ÀúÀå
+	 * í˜„ì¬ ì„¤ì •ëœ ê·¸ë£¹ ì‚¬ìš©ì ì €ì¥
 	 */
 	public void saveGroup() {
 	

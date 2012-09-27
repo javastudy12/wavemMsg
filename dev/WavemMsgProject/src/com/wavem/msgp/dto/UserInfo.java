@@ -13,7 +13,7 @@ package com.wavem.msgp.dto;
 import java.io.Serializable;
 
 /**
- * »ç¿ëÀÚ Á¤º¸ Å¬·¡½º
+ * ì‚¬ìš©ì ì •ë³´ í´ë˜ìŠ¤
  * 
  * @author 
  *
@@ -21,5 +21,15 @@ import java.io.Serializable;
 public class UserInfo implements Serializable{
 
 	private static final long serialVersionUID = 1832993226207023300L;
+	
+	private String userId = null;
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 }

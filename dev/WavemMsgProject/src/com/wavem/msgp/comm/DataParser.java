@@ -11,7 +11,7 @@
 package com.wavem.msgp.comm;
 
 /**
- * ÇÁ·ÎÅäÄİ ÆÄ½Ì
+ * í”„ë¡œí† ì½œ íŒŒì‹±
  * 
  * @author 
  *

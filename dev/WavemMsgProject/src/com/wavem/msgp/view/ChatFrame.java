@@ -18,11 +18,10 @@ import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.UserInfo;
 
 /**
- * Ã¤ÆÃ È­¸é
+ * ì±„íŒ… í™”ë©´
  * 
  * <pre>
  * 	ChatFrame chatFrame = new ChatFrame("USERID201209241623");
- *  ChatFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
@@ -32,140 +31,141 @@ public class ChatFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = 7546904889590160105L;
 	
-	/**	Ã¤ÆÃ ³»¿ª */
+	/**	ì±„íŒ… ë‚´ì—­ */
 	private String chatHistory = "";
 
-	/** »ı¼ºµÈ Ã¤ÆÃÃ¢ ¼­ºñ½ºID */
+	/** ìƒì„±ëœ ì±„íŒ…ì°½ ì„œë¹„ìŠ¤ID */
 	private String chatServiceId = "";
 	
-	/** Ã¤ÆÃÃ¢¿¡ Âü¿©ÁßÀÎ »ç¿ëÀÚ ¸®½ºÆ® */
+	/** ì±„íŒ…ì°½ì— ì°¸ì—¬ì¤‘ì¸ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ */
 	private List<UserInfo> userList = null;
 	
 	/**
-	 * Ã¤ÆÃÃ¢ »ı¼ºÀÚ <br>
-	 * »ı¼ºÀÚ¸¦ ÅëÇØ ¼­ºñ½ºID¿Í »ç¿ëÀÚ ¸®½ºÆ® »ı¼º
+	 * ì±„íŒ…ì°½ ìƒì„±ì <br>
+	 * ìƒì„±ìë¥¼ í†µí•´ ì„œë¹„ìŠ¤IDì™€ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ ìƒì„±<br>
 	 * 
-	 * @param chatServiceId ¼­ºñ½º ID
+	 * @param chatServiceId ì„œë¹„ìŠ¤ ID
 	 */
 	public ChatFrame(String chatServiceId) {
 		this.chatServiceId = chatServiceId;
 		this.userList = Collections.synchronizedList(new ArrayList<UserInfo>());
+		makeInitFrame();
 	}
 	
 	@Override
 	public void makeInitFrame() {
-
+		getContentPane().setLayout(null);
 	}
 
 	@Override
 	public void close() {
-
+		this.dispose();
 	}
 
 	/**
-	 * ÃÖÃÊ »ı¼º¿¡ ÇÊ¿äÇÑ µ¥ÀÌÅÍ È£Ãâ
+	 * ìµœì´ˆ ìƒì„±ì— í•„ìš”í•œ ë°ì´í„° í˜¸ì¶œ
 	 */
 	public void invokeChatInfo() {
 
 	}
 
 	/**
-	 * ¼­¹ö·ÎºÎÅÍ »ç¿ëÀÚ Á¤º¸ È£Ãâ
+	 * ì„œë²„ë¡œë¶€í„° ì‚¬ìš©ì ì •ë³´ í˜¸ì¶œ
 	 */
 	public void invokeUserList() {
 
 	}
 
 	/**
-	 * ¸Ş½ÃÁö Àü´Ş
+	 * ë©”ì‹œì§€ ì „ë‹¬
 	 */
 	public void sendMsg() {
 
 	}
 
 	/**
-	 * ¸Ş½ÃÁö ¼ö½Å
+	 * ë©”ì‹œì§€ ìˆ˜ì‹ 
 	 */
 	public void receiveMsg() {
 
 	}
 
 	/**
-	 * Ã¤ÆÃÃ¢¿¡¼­ ³ª°£ »ç¿ëÀÚ Á¤º¸ ¼ö½Å
+	 * ì±„íŒ…ì°½ì—ì„œ ë‚˜ê°„ ì‚¬ìš©ì ì •ë³´ ìˆ˜ì‹ 
 	 */
 	public void receiveLeftUserInfo() {
 
 	}
 
 	/**
-	 * ¼ö½Å¹ŞÀº »ç¿ëÀÚ Á¤º¸¸¦ »õ·Î »ı¼º <br>
-	 * »ç¿ëÀÚ Á¤º¸ reset
+	 * ìˆ˜ì‹ ë°›ì€ ì‚¬ìš©ì ì •ë³´ë¥¼ ìƒˆë¡œ ìƒì„± <br>
+	 * ì‚¬ìš©ì ì •ë³´ reset
 	 */
 	public void makeUserList() {
 
 	}
 
 	/**
-	 * ÆùÆ® ¹× »ı»ó ¼³Á¤Ã¢ »ı¼º
+	 * í°íŠ¸ ë° ìƒìƒ ì„¤ì •ì°½ ìƒì„±
 	 */
 	public void makeFontFrame() {
 
 	}
 
 	/**
-	 * ¹è°æ ¼³Á¤ È­¸é »ı¼º
+	 * ë°°ê²½ ì„¤ì • í™”ë©´ ìƒì„±
 	 */
 	public void makeBackgroundFrame() {
 
 	}
 
 	/**
-	 * Ã¤ÆÃ ÃÊ´ë È­¸é »ı¼º
+	 * ì±„íŒ… ì´ˆëŒ€ í™”ë©´ ìƒì„±
 	 */
 	public void makeInviteFrame() {
 
 	}
 
 	/**
-	 * ÆÄÀÏ Àü¼Û ¹× ¼ö½Å È­¸é »ı¼º
+	 * íŒŒì¼ ì „ì†¡ ë° ìˆ˜ì‹  í™”ë©´ ìƒì„±
 	 */
 	public void makeFileFrame() {
 
 	}
 
 	/**
-	 * ´ëÈ­ ³»¿ª ÀúÀå
+	 * ëŒ€í™” ë‚´ì—­ ì €ì¥
 	 */
 	public void saveChatHistory() {
 
 	}
 
 	/**
-	 * ÀÌ¸ğÆ¼ÄÜ ¼±ÅÃ
+	 * ì´ëª¨í‹°ì½˜ ì„ íƒ
 	 */
 	public void selectEmoticon() {
 
 	}
 
 	/**
-	 * ¼­ºñ½º ID ¹İÈ¯
-	 * @return ¼­ºñ½º ID
+	 * ì„œë¹„ìŠ¤ ID ë°˜í™˜
+	 * @return ì„œë¹„ìŠ¤ ID
 	 */
 	public String getChatServiceId() {
 		return this.chatServiceId;
 	}
 
 	/**
-	 * Ã¤ÆÃ ³»¿ª ¹İÈ¯
-	 * @return Ã¤ÆÃ ³»¿ª
+	 * ì±„íŒ… ë‚´ì—­ ë°˜í™˜
+	 * @return ì±„íŒ… ë‚´ì—­
 	 */
 	public String getChatHistory() {
 		return chatHistory;
 	}
 	
 	/**
-	 * ÇöÀç Âü¿©ÁßÀÎ »ç¿ëÀÚ ¸®½ºÆ® ¹İÈ¯
-	 * @return »ç¿ëÀÚ ¸®½ºÆ®
+	 * í˜„ì¬ ì°¸ì—¬ì¤‘ì¸ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ ë°˜í™˜
+	 * @return ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸
 	 */
 	public List<UserInfo> getUserList() {
 		return userList;

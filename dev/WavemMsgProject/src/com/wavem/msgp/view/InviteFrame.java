@@ -8,20 +8,19 @@
  * 
  * ********************************************************************************************************/
 
-
 package com.wavem.msgp.view;
+
 import java.util.List;
 
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.UserInfo;
 
 /**
- * ÃÊ´ë È­¸é
+ * ì´ˆëŒ€ í™”ë©´
  * 
  * <pre>
- * 	// »ı¼ºÀÚ¿¡ ÀüÃ¼ »ç¿ëÀÚ¿Í Ã¤ÆÃÃ¢ Á¢¼Ó »ç¿ëÀÚ¸¦ ÆÄ¶ó¹ÌÅÍ·Î ³Ñ±ä´Ù.
+ * 	// ìƒì„±ìì— ì „ì²´ ì‚¬ìš©ìì™€ ì±„íŒ…ì°½ ì ‘ì† ì‚¬ìš©ìë¥¼ íŒŒë¼ë¯¸í„°ë¡œ ë„˜ê¸´ë‹¤.
  * 	InviteFrame inviteFrame = new InviteFrame(new ArrayList<UserInfo>(), new ArrayList<UserInfo>());
- *  InviteFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author
@@ -31,57 +30,86 @@ public class InviteFrame extends WaveMsgFrame{
 	
 	private static final long serialVersionUID = -8324014326166783001L;
 	
-	/** ÇöÀç ·Î±×ÀÎ ÇÑ ÀüÃ¼ »ç¿ëÀÚ ¸®½ºÆ® */
+	/** ì´ˆëŒ€ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static InviteFrame frame = null;
+	
+	/** í˜„ì¬ ë¡œê·¸ì¸ í•œ ì „ì²´ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ */
 	private List<UserInfo> allUserList = null;
 	
-	/** Ã¤ÆÃÃ¢¿¡ Á¢¼ÓÁßÀÎ »ç¿ëÀÚ ¸®½ºÆ® */
+	/** ì±„íŒ…ì°½ì— ì ‘ì†ì¤‘ì¸ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ */
 	private List<UserInfo> chatUserList = null;
 	
-	public InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) {
+	/**
+	 * ì´ˆëŒ€í™”ë©´ ìƒì„±ì <br>
+	 * ìµœì´ˆì— makeInitFrame()í˜¸ì¶œ <br>
+	 * 
+	 * @param allUserList ë¡œê·¸ì¸í•œ ì „ì²´ ì‚¬ìš©ì
+	 * @param chatUserList í˜„ì¬ ì°¸ì—¬í•œ ì‚¬ìš©ì
+	 */
+	private InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) {
 		this.allUserList = allUserList;
 		this.chatUserList = chatUserList;
+		makeInitFrame();
+	}
+	
+	/**
+	 * ì´ˆëŒ€ í™”ë©´ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return ì´ˆëŒ€ í™”ë©´ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static InviteFrame getInstance(List<UserInfo> allUserList, List<UserInfo> chatUserList) {
+		
+		if (frame == null) {
+			synchronized (InviteFrame.class) {
+				if (frame == null) {
+					frame = new InviteFrame(allUserList, chatUserList);
+				}
+			}
+		}
+		
+		return frame;
 	}
 	
 	@Override
 	public void makeInitFrame() {
-	
+		getContentPane().setLayout(null);
 	}
 	
 	@Override
 	public void close() {
-		
+		this.dispose();
 	}
 	
 	/**
-	 * ÇöÀç ·Î±×ÀÎ µÈ ÀüÃ¼ »ç¿ëÀÚ ¸®½ºÆ®¸¦ È­¸é¿¡ Ãâ·Â
+	 * í˜„ì¬ ë¡œê·¸ì¸ ëœ ì „ì²´ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ë¥¼ í™”ë©´ì— ì¶œë ¥
 	 */
 	public void makeAllUserList() {
 	
 	}
 	
 	/**
-	 * ÇöÀç Ã¤ÆÃÃ¢¿¡ Á¢¼ÓÇÑ »ç¿ëÀÚ ¸®½ºÆ®¸¦ È­¸é¿¡ Ãâ·Â 
+	 * í˜„ì¬ ì±„íŒ…ì°½ì— ì ‘ì†í•œ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ë¥¼ í™”ë©´ì— ì¶œë ¥ 
 	 */
 	public void makechatUserList() {
 	
 	}
 	
 	/**
-	 * ÀüÃ¼ »ç¿ëÀÚ ¸®½ºÆ®¿¡¼­ ¼±ÅÃÇÑ »ç¿ëÀÚ¸¦ ÃÊ´ëÇÒ »ç¿ëÀÚ ¸®½ºÆ®·Î ÀÌµ¿ (ÃÊ´ë)
+	 * ì „ì²´ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ì—ì„œ ì„ íƒí•œ ì‚¬ìš©ìë¥¼ ì´ˆëŒ€í•  ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ë¡œ ì´ë™ (ì´ˆëŒ€)
 	 */
 	public void addChatUserList() {
 	
 	}
 	
 	/**
-	 * ÃÊ´ëÇÒ »ç¿ëÀÚ ¸®½ºÆ®¿¡¼­ ¼±ÅÃÇÑ »ç¿ëÀÚ¤Ñ¤© ÀüÃ¼ »ç¿ëÀÚ ¸®½ºÆ®·Î ÀÌµ¿ (»èÁ¦)
+	 * ì´ˆëŒ€í•  ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ì—ì„œ ì„ íƒí•œ ì‚¬ìš©ìã…¡ã„¹ ì „ì²´ ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ë¡œ ì´ë™ (ì‚­ì œ)
 	 */
 	public void deleteChatUserList() {
 	
 	}
 	
 	/**
-	 * ÃÊ´ëÇÒ »ç¿ëÀÚ ¸®½ºÆ®ÀÇ »ç¿ëÀÚ¸¦ ÇöÀç Ã¤ÆÃÃ¢À¸·Î ÃÊ´ë
+	 * ì´ˆëŒ€í•  ì‚¬ìš©ì ë¦¬ìŠ¤íŠ¸ì˜ ì‚¬ìš©ìë¥¼ í˜„ì¬ ì±„íŒ…ì°½ìœ¼ë¡œ ì´ˆëŒ€
 	 */
 	public void inviteUser() {
 	

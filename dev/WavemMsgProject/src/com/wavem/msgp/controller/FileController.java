@@ -16,30 +16,30 @@ import java.util.List;
 import com.wavem.msgp.dto.FileInfo;
 
 /**
- * ÆÄÀÏ Àü¼ÛÀ» À§ÇÑ ÄÁÆ®·Ñ·¯
+ * íŒŒì¼ ì „ì†¡ì„ ìœ„í•œ ì»¨íŠ¸ë¡¤ëŸ¬
  * 
  * @author 
  * 
  */
 public class FileController {
 
-	/** ÆÄÀÏ »óÅÂ ÇÃ·¯±× */
+	/** íŒŒì¼ ìƒíƒœ í”ŒëŸ¬ê·¸ */
 	private int fileStatus = 0;
 	
-	/** Àü¼Û È¤Àº ¼ö½ÅÁßÀÎ ÆÄÀÏ ¸®½ºÆ® */
+	/** ì „ì†¡ í˜¹ì€ ìˆ˜ì‹ ì¤‘ì¸ íŒŒì¼ ë¦¬ìŠ¤íŠ¸ */
 	private List<FileInfo> fileList = null;
 	
 	/**
-	 * ÆÄÀÏ ¸®½ºÆ®¸¦ ¹ŞÀ½ <br>
-	 * ÆÄÀÏ »óÅÂ¸¦ ¹ŞÀ½ <br>
+	 * íŒŒì¼ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ìŒ <br>
+	 * íŒŒì¼ ìƒíƒœë¥¼ ë°›ìŒ <br>
 	 * 
 	 * <pre>
-	 * 	ÆÄÀÏ ¾÷·Îµå   : fileStatus = 1
-	 *  ÆÄÀÏ ´Ù¿î·Îµå : fileStatus = 2
+	 * 	íŒŒì¼ ì—…ë¡œë“œ   : fileStatus = 1
+	 *  íŒŒì¼ ë‹¤ìš´ë¡œë“œ : fileStatus = 2
 	 * </pre>
 	 * 
-	 * @param fileStatus ÆÄÀÏ »óÅÂ (¾÷·Îµå ´Ù¿î·Îµå ±¸ºĞ)
-	 * @param fileList ÆÄÀÏ ¸®½ºÆ®
+	 * @param fileStatus íŒŒì¼ ìƒíƒœ (ì—…ë¡œë“œ ë‹¤ìš´ë¡œë“œ êµ¬ë¶„)
+	 * @param fileList íŒŒì¼ ë¦¬ìŠ¤íŠ¸
 	 */
 	public FileController(int fileStatus, List<FileInfo> fileList) {
 		this.fileList = fileList;
@@ -47,46 +47,46 @@ public class FileController {
 	}
 
 	/**
-	 * ÆÄÀÏ ¾÷·Îµå °ü¸®
+	 * íŒŒì¼ ì—…ë¡œë“œ ê´€ë¦¬
 	 */
 	public void uploadFile() {
 
 	}
 
 	/**
-	 * ÆÄÀÏ ´Ù¿î·Îµå °ü¸®
+	 * íŒŒì¼ ë‹¤ìš´ë¡œë“œ ê´€ë¦¬
 	 */
 	public void downloadFile() {
 
 	}
 
 	/**
-	 * ÆÄÀÏ ¾÷·Îµå¸¦ À§ÇÑ ÆÄÀÏ Á¤º¸ Àü¼Û
+	 * íŒŒì¼ ì—…ë¡œë“œë¥¼ ìœ„í•œ íŒŒì¼ ì •ë³´ ì „ì†¡
 	 */
 	public void sendFileInfo() {
 
 	}
 
 	/**
-	 * ÆÄÀÏ ´Ù¿î·Îµå¸¦ À§ÇÑ ÆÄÀÏ Á¤º¸ ¼ö½Å
+	 * íŒŒì¼ ë‹¤ìš´ë¡œë“œë¥¼ ìœ„í•œ íŒŒì¼ ì •ë³´ ìˆ˜ì‹ 
 	 */
 	public void receiveFileInfo() {
 
 	}
 
 	/**
-	 * ÆÄÀÏ »óÅÂ ÇÃ·¯±×
+	 * íŒŒì¼ ìƒíƒœ í”ŒëŸ¬ê·¸
 	 * 
-	 * @return ÇöÀçÀÇ »óÅÂ¤Á ÇÃ·¯±× ¹İÈ¯
+	 * @return í˜„ì¬ì˜ ìƒíƒœã…‘ í”ŒëŸ¬ê·¸ ë°˜í™˜
 	 */
 	public int getFileStatus() {
 		return fileStatus;
 	}
 
 	/**
-	 * Àü¼Û È¤Àº ¼ö½ÅÁßÀÎ ÆÄÀÏ ¸®½ºÆ®¸¦ ¹İÈ¯
+	 * ì „ì†¡ í˜¹ì€ ìˆ˜ì‹ ì¤‘ì¸ íŒŒì¼ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°˜í™˜
 	 * 
-	 * @return Àü¼Û È¤Àº ¼ö½ÅÁßÀÎ ÆÄÀÏ ¸®½ºÆ®
+	 * @return ì „ì†¡ í˜¹ì€ ìˆ˜ì‹ ì¤‘ì¸ íŒŒì¼ ë¦¬ìŠ¤íŠ¸
 	 */
 	public List getFileList() {
 		return fileList;

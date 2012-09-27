@@ -11,40 +11,74 @@
 package com.wavem.msgp.view;
 
 import com.wavem.msgp.component.WaveMsgFrame;
+import com.wavem.msgp.dto.UserInfo;
 
 /**
- * ÇÁ·ÎÇÊ ¼³Á¤ È­¸é
+ * í”„ë¡œí•„ ì„¤ì • í™”ë©´
  * 
  * <pre>
  * 	ProfileFrame profileFrame = new ProfileFrame();
- *  ProfileFrame.makeInitFrame(); // ½ÇÁ¦ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í È­¸éÀ» ±×¸®´Â ¸Ş¼­µå
  * </pre>
  * 
  * @author 
  *
  */
 public class ProfileFrame extends WaveMsgFrame {
+
 	private static final long serialVersionUID = 5045138939543198397L;
 
+	/** í”„ë¡œí•„ ì„¤ì • í™”ë©´ ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private static ProfileFrame frame = null;
+	
+	/** ì‚¬ìš©ì ì •ë³´ë¥¼ ë‹´ê³  ìˆëŠ” UserInfo ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜ */
+	private UserInfo userInfo = null;
+	
+	/**
+	 * í”„ë¡œí•„ ì„¤ì • ìƒì„±ì <br>
+	 * ìµœì´ˆ makeInitFrame() í˜¸ì¶œ <br>
+	 */
+	private ProfileFrame(UserInfo userInfo) {
+		this.userInfo = userInfo;
+		makeInitFrame();
+	}
+	
+	/**
+	 * í”„ë¡œí•„ ì„¤ì • í™”ë©´ì„ ìœ„í•œ ì¸ìŠ¤í„´ìŠ¤ ë°˜í™˜
+	 * 
+	 * @return í”„ë¡œí•„ ì„¤ì • í™”ë©´ì„ ìœ„í•œ í™”ë©´ ì¸ìŠ¤í„´ìŠ¤
+	 */
+	public static ProfileFrame getInstance(UserInfo userInfo) {
+		
+		if (frame == null) { // ìƒì„±ëœ ì¸ìŠ¤í„´ìŠ¤ê°€ ì—†ëŠ” ê²½ìš° ìƒˆë¡œ ìƒì„±
+			synchronized (ProfileFrame.class) {
+				if (frame == null) {
+					frame = new ProfileFrame(userInfo);
+				}
+			}
+		} 
+		
+		return frame;
+	}
+	
 	@Override
 	public void makeInitFrame() {
-
+		getContentPane().setLayout(null);
 	}
 
 	@Override
 	public void close() {
-		
+		this.dispose();
 	}
 
 	/**
-	 * »ç¿ëÀÚ ÇÁ·ÎÇÊ È£Ãâ
+	 * ì‚¬ìš©ì í”„ë¡œí•„ í˜¸ì¶œ
 	 */
 	public void invokeProfileInfo() {
 
 	}
 
 	/**
-	 * »ç¿ëÀÚ ÇÁ·ÎÇÊ ¼öÁ¤
+	 * ì‚¬ìš©ì í”„ë¡œí•„ ìˆ˜ì •
 	 */
 	public void modifyProfileInfo() {
 
