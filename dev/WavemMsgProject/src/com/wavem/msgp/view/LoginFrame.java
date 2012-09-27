@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 
 import com.wavem.msgp.comm.PropertiesInfo;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgCheckBox;
 import com.wavem.msgp.component.WaveMsgDialogBox;
@@ -24,6 +25,8 @@ import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgPasswordField;
 import com.wavem.msgp.component.WaveMsgTextField;
+import com.wavem.msgp.controller.DataController;
+import com.wavem.msgp.dto.LoginParamInfo;
 import com.wavem.msgp.dto.UserInfo;
 
 import java.awt.event.KeyAdapter;
@@ -66,7 +69,7 @@ public class LoginFrame extends WaveMsgFrame{
 			MsgMainFrame.getInstance().close(); // 실패한 메인 화면 종료
 			makeInitFrame();
 		} catch (Exception e) {
-			new WaveMsgDialogBox("로그인 - ERROR", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox("로그인", e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -156,7 +159,7 @@ public class LoginFrame extends WaveMsgFrame{
 		closeBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				close();
+				System.exit(0); // 닫기버튼 클릭시 전체 종료
 			}
 		});
 		closeBtn.setBounds(166, 155, 60, 30);
@@ -176,26 +179,40 @@ public class LoginFrame extends WaveMsgFrame{
 	@SuppressWarnings("deprecation")
 	public void login() {
 		
+		// ID 체크
 		if (idField.getText().trim().equals("")) {
 			new WaveMsgDialogBox("로그인", "ID를 입력하세요", JOptionPane.WARNING_MESSAGE);
 			idField.requestFocus();
 			return;
 		}
 		
+		// 비밀번호 체크
 		if (passwordField.getText().trim().equals("")) {
 			new WaveMsgDialogBox("로그인", "비밀번호를 입력하세요", JOptionPane.WARNING_MESSAGE);
 			passwordField.requestFocus();
 			return;
 		}
 		
-		/* ****************************************************************
-		 * TODO : 로그인 요청 로직 (예외처리 필수)
-		 * 
-		 *  
-		 *  
-		 * ****************************************************************/
+		// 데이터 전송을 위한 객체 생성
+		LoginParamInfo parm = new LoginParamInfo();
+		parm.setUserId(idField.getText());
+		parm.setUserPw(passwordField.getText());
 		
-		int success = 1;
+		// 데이터 전송을 위한 인스턴스 생성
+		DataController dataCtrl = new DataController(parm);
+
+		// 데이터 전송 결과
+		int success = 0;
+		
+		// 데이터 전송
+		try {
+			dataCtrl.selectData();
+ 			
+		} catch (WaveMsgException e) {
+			new WaveMsgDialogBox("로그인", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+		}
+		
+		success = dataCtrl.getRes(); // 결과
 		
 		if (success == 0) { // 로그인 성공 시
 			makeMain();
@@ -222,13 +239,13 @@ public class LoginFrame extends WaveMsgFrame{
 	public void regPasswordInfo() {
 		setVisible(false); // 로그인창 감추기
 		
-		LoginRegPwFrame frame;
+		LoginRegPwFrame frame = null;
 		
 		try {
 			frame = new LoginRegPwFrame(this); // 비밀번호 등록 화면 생성
 			frame.setVisible(true);
 		} catch (Exception e) {
-			new WaveMsgDialogBox("비밀번호 등록 - ERROR", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox("비밀번호 등록", e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

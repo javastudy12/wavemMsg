@@ -12,6 +12,8 @@ package com.wavem.msgp.main;
 
 import java.awt.EventQueue;
 
+import com.wavem.msgp.comm.PropertiesInfo;
+import com.wavem.msgp.comm.SocketMgr;
 import com.wavem.msgp.view.MsgMainFrame;
 
 /**
@@ -21,9 +23,23 @@ import com.wavem.msgp.view.MsgMainFrame;
  *
  */
 public class MsgMain {
+	
+	public static SocketMgr socketMgr = null;
 
 	public static void main(String[] args) {
-		// TODO 세션체크 후 로그인 화면 호출 및 메인 화면 호출
+
+		// 환경설정 로드
+		PropertiesInfo property = PropertiesInfo.getInstance();
+		property.loadPropertiesFile();
+		
+		// 서버와 소켓 최초 생성
+		SocketMgr socketMgr = new SocketMgr();
+		socketMgr.start();
+		
+		// 메인에 현재의 소켓 메니저 등록
+		MsgMain.socketMgr = socketMgr;
+
+		// 화면 실행
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

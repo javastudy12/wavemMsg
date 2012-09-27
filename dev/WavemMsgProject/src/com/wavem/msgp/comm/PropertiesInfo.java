@@ -82,6 +82,12 @@ public class PropertiesInfo implements Serializable {
 	/** 로그인시 저장된 사용자 ID */
 	private String loginUserId = "";
 	
+	/** 서버 IP */
+	private String host = "localhost";
+	
+	/** 서버 PORT */
+	private int port = 9090; 
+	
 	/** 환경설정 인스턴스 */
 	private static PropertiesInfo properties = null;
     
@@ -481,6 +487,42 @@ public class PropertiesInfo implements Serializable {
 	 */
 	public void setLoginUserId(String loginUserId) {
 		this.loginUserId = loginUserId;
+	}
+
+	/**
+	 * 서버 주소 반환
+	 * 
+	 * @return 서버 HOST
+	 */
+	public String getHost() {
+		return host;
+	}
+
+	/**
+	 * 서버 주소 저장
+	 * 
+	 * @param host 서버 HOST
+	 */
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	/**
+	 * 서버 포트 반환
+	 * 
+	 * @return 서버 PORT
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * 서버 포트 저장
+	 * 
+	 * @param port 서버 PORT
+	 */
+	public void setPort(int port) {
+		this.port = port;
 	}
 
 }
