@@ -46,6 +46,7 @@ public class SocketCtrl extends Thread {
 			res = sc.write(buffer);
 		} catch (Exception e) {
 			new WaveMsgDialogBox("서버연결 - ERROR", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			res = -1;
 		} finally {
 			clearBuffer(buffer);
 		}

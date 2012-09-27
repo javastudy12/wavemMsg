@@ -214,6 +214,7 @@ public class LoginFrame extends WaveMsgFrame{
 		
 		success = dataCtrl.getRes(); // 결과
 		
+		// 아래 메인 실행 화면은 후추 DataController에서 처리하도록 한다.
 		if (success == 0) { // 로그인 성공 시
 			makeMain();
 		} else if (success == 1){ // 최초 로그인시

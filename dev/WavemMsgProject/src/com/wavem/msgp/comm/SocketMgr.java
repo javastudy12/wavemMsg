@@ -26,7 +26,15 @@ import javax.swing.JOptionPane;
 import com.wavem.msgp.component.WaveMsgDialogBox;
 
 /**
- * 소켓 통신 연결 관리 connection, disconnection 연결시간초과, 연결시도 횟수 체크
+ * 소켓 통신 연결 관리 connection, disconnection 연결시간초과, 연결시도 횟수 체크 <br>
+ * 
+ * 비동기 통신이기에 결과 값은 startReader()값을 통해서 얻을 수 있다. <br>
+ * 
+ * <pre>
+ * SocketMgr socketMgr = new SocketMgr();
+ * socketMgr.run();
+ * socketMgr.startWriter(String data); // 전송할 데이터
+ * </pre>
  * 
  * @author
  * 
@@ -47,6 +55,8 @@ public class SocketMgr extends Thread{
 
 	/** 환경설정 */
 	private PropertiesInfo property = PropertiesInfo.getInstance();
+	
+	private boolean socketConChk = true;
 	
 	@Override
 	public void run() {
@@ -98,16 +108,13 @@ public class SocketMgr extends Thread{
 	 */
 	public void startReader() {
 		try {
-			while (true) {
-				System.out.println("대기");
+			while (socketConChk) {
 				// 셀렉터의 select() 메소드로 준비된 이벤트가 있는지 확인함
 				selector.select();
 
-				System.out.println("시작");
 				// 셀렉터의 SelectedSet에 저장된 준비된 이벤트들 (SelectionKey 들)을
 				Iterator it = selector.selectedKeys().iterator();
 				
-				System.out.println("검색");
 				while (it.hasNext()) {
 					SelectionKey key = (SelectionKey) it.next();
 					if (key.isReadable()) {
@@ -169,6 +176,26 @@ public class SocketMgr extends Thread{
 			buffer.clear();
 			buffer = null;
 		}
+	}
+	
+	/**
+	 * 소켓 채널(현재의 쓰레드)를 종료 처리 <br>
+	 *  
+	 */
+	public void connectSocket() {
+		// TODO : 소켓 채널을 종료하기 위한 로직 
+		//        서버에 종료 요청
+	}
+	
+	/**
+	 * 연결 해제를 위한 세팅 <br>
+	 * true : 연결 유지 <br>
+	 * false : 연결 종료 <br>
+	 * 
+	 * @param socketConChk
+	 */
+	public void setSocketConChk(boolean socketConChk) {
+		this.socketConChk = socketConChk;
 	}
 
 }
