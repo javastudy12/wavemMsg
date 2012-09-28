@@ -66,4 +66,10 @@ public class FileUploadFrame extends WaveMsgFrame {
 	public void uploadFile() {
 
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

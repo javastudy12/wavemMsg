@@ -90,4 +90,10 @@ public class NoticeFrame extends WaveMsgFrame {
 	public void saveNotice() {
 
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

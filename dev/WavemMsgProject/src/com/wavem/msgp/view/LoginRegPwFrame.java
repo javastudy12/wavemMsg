@@ -178,4 +178,10 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 		
 	}
 
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

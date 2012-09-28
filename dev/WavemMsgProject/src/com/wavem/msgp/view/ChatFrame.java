@@ -171,4 +171,10 @@ public class ChatFrame extends WaveMsgFrame {
 		return userList;
 	}
 
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

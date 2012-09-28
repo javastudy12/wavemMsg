@@ -84,4 +84,10 @@ public class PropertyFrame extends WaveMsgFrame {
 	public void savePropertyInfo() {
 		properties.savePropertiesFile();
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

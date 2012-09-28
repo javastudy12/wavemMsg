@@ -82,4 +82,10 @@ public class BackgroundFrame extends WaveMsgFrame {
 	public void saveBackgroundProperty() {
 		
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

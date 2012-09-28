@@ -88,4 +88,10 @@ public class ChatBoxFrame extends WaveMsgFrame {
 	public void loadChatInfo() {
 
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

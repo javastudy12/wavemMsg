@@ -71,4 +71,10 @@ public class FileBoxFrame extends WaveMsgFrame {
 	public void invokeFileHistoryList() {
 
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

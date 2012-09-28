@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @author
  * 
  */
-public class FileInfo implements Serializable {
+public class FileInfo extends DataInfoDto {
 
 	private static final long serialVersionUID = 6747870772102035017L;
 
@@ -60,8 +60,18 @@ public class FileInfo implements Serializable {
 	}
 	
 	/**
+	 * 파일 정보 기본 생성자
+	 * 
+	 * @param serviceID 서비스 ID
+	 */
+	public FileInfo(String serviceID) {
+		super(serviceID);
+	}
+	
+	/**
 	 * 파일 정보 생성자
 	 * 
+	 * @param serviceID 서비스 ID
 	 * @param fileName 파일 이름
 	 * @param fileSize 파일 사이즈
 	 * @param fileType 파일 확장자
@@ -69,7 +79,8 @@ public class FileInfo implements Serializable {
 	 * @param senderID 송신자 ID
 	 * @param recipientID 수신자 ID
 	 */
-	public FileInfo(String fileName, long fileSize, String fileType, String filePath, String senderID, String recipientID ) {
+	public FileInfo(String serviceID, String fileName, long fileSize, String fileType, String filePath, String senderID, String recipientID ) {
+		super(serviceID);
 		this.fileName = fileName;
 		this.fileSize = fileSize;
 		this.fileType = fileType;

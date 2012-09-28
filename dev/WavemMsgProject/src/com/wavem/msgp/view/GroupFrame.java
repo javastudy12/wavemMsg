@@ -114,5 +114,11 @@ public class GroupFrame extends WaveMsgFrame{
 	public void saveGroup() {
 	
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

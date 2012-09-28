@@ -578,4 +578,10 @@ public class MsgMainFrame extends WaveMsgFrame {
 	public static final void setLoginUser(UserInfo loginUser) {
 		MsgMainFrame.loginUser = loginUser;
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
