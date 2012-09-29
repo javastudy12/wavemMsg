@@ -67,7 +67,7 @@ public class ProfileFrame extends WaveMsgFrame {
 	private UserInfo userInfo = null;
 	
 	/** 수정된 사용자 정보를 담고 있는 UserInfo 인스턴스 변수 */
-	private UserInfo userUpdateInfo = new UserInfo();
+	private UserInfo userUpdateInfo = null;
 	
 	/** 프로필 사진을 위한 이미지*/
 	private WaveMsgPanel profileImg = null;
@@ -134,6 +134,7 @@ public class ProfileFrame extends WaveMsgFrame {
 	private ProfileFrame(UserInfo userInfo) {
 		getContentPane().setBackground(Color.WHITE);
 		this.userInfo = userInfo;
+		this.userUpdateInfo = userInfo;
 		makeInitFrame();
 	}
 	
@@ -476,7 +477,7 @@ public class ProfileFrame extends WaveMsgFrame {
 		panel_homevalue.add(homeValue3);
 		
 		
-		//********** 집전화 **********
+		//********** 주소 **********
 		WaveMsgPanel panel_addr = new WaveMsgPanel();
 		panel_addr.setLayout(null);
 		panel_addr.setBorder(new LineBorder(Color.LIGHT_GRAY));
@@ -611,6 +612,7 @@ public class ProfileFrame extends WaveMsgFrame {
 		// 이미지 설정 방법 세팅
 		setProfileImgEnable(userInfo.isImgSet());
 		defaultRdBtn.setSelected(userInfo.isImgSet());
+		userRdBtn.setSelected(!userInfo.isImgSet());
 		
 		// 사용자 이름 세팅
 		nameValueLbl.setText(userInfo.getUserName());
@@ -718,7 +720,32 @@ public class ProfileFrame extends WaveMsgFrame {
 	 * 사용자 프로필 수정
 	 */
 	public void modifyProfileInfo() {
+		
+		// 변경된 프로필 사진 세팅
+		userUpdateInfo.setProfileImg(profileImg.getImage());
+		
+		// 프로필 사진 설정 방법 세팅
+		userUpdateInfo.setImgSet(defaultRdBtn.isSelected());
+		
+		// 상태메시지 세팅
+		userUpdateInfo.setStateMessage(messageValueTxt.getText());
+		
+		// e-mail 세팅
+		userUpdateInfo.setEmail(emailValueTxt.getText());
+		
+		// 핸드폰번호 세팅
+		userUpdateInfo.setPhone(phoneValue1.getText() + "-" + phoneValue2.getText() + "-" + phoneValue3.getText());
+		
+		// 집전화번호 세팅
+		userUpdateInfo.setHome(homeValue1.getText() + "-" + homeValue2.getText() + "-" + homeValue3.getText());
+		
+		// 주소 세팅
+		userUpdateInfo.setAddr(addrValueTxt.getText());
+		
 		DataController controller;
+		/* *********************************************
+		 * TODO : 저장 요청 코드
+		 * *********************************************/
 	}
 
 	@Override
