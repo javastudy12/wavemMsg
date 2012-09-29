@@ -100,7 +100,7 @@ public class ProfileFrame extends WaveMsgFrame {
 	private WaveMsgLabel idValueLbl = null;
 	
 	/** 사용자 직급 */
-	private WaveMsgLabel levelValueLbl = null;
+	private WaveMsgLabel rankValueLbl = null;
 	
 	/** 사용자 생년월일 */
 	private WaveMsgLabel birthValueLbl = null;
@@ -191,7 +191,7 @@ public class ProfileFrame extends WaveMsgFrame {
 		defaultRdBtn.setBounds(8, 6, 228, 23);
 		
 		// 사용자 설정 라디오 버튼
-		userRdBtn = new WaveMsgRadioButton("사용자 설정");
+		userRdBtn = new WaveMsgRadioButton("사용자 이미지");
 		userRdBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -300,26 +300,26 @@ public class ProfileFrame extends WaveMsgFrame {
 	
 		
 		//********** 직급(직책) **********
-		WaveMsgPanel panel_level = new WaveMsgPanel();
-		panel_level.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		panel_level.setLayout(null);
-		panel_level.setBounds(12, 60, 120, 25);
-		panel.add(panel_level);
+		WaveMsgPanel panel_rank = new WaveMsgPanel();
+		panel_rank.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_rank.setLayout(null);
+		panel_rank.setBounds(12, 60, 120, 25);
+		panel.add(panel_rank);
 		
-		WaveMsgLabel levelLbl = new WaveMsgLabel("직급 (직책)");
-		levelLbl.setBounds(5, 2, 103, 21);
-		panel_level.add(levelLbl);
+		WaveMsgLabel rankLbl = new WaveMsgLabel("직급 (직책)");
+		rankLbl.setBounds(5, 2, 103, 21);
+		panel_rank.add(rankLbl);
 		
-		WaveMsgPanel panel_levelvalue = new WaveMsgPanel();
-		panel_levelvalue.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		panel_levelvalue.setBackground(Color.WHITE);
-		panel_levelvalue.setBounds(144, 60, 244, 25);
-		panel.add(panel_levelvalue);
-		panel_levelvalue.setLayout(null);
+		WaveMsgPanel panel_rankvalue = new WaveMsgPanel();
+		panel_rankvalue.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panel_rankvalue.setBackground(Color.WHITE);
+		panel_rankvalue.setBounds(144, 60, 244, 25);
+		panel_rankvalue.setLayout(null);
+		panel.add(panel_rankvalue);
 		
-		levelValueLbl = new WaveMsgLabel("");
-		levelValueLbl.setBounds(5, 2, 227, 21);
-		panel_levelvalue.add(levelValueLbl);
+		rankValueLbl = new WaveMsgLabel("");
+		rankValueLbl.setBounds(5, 2, 227, 21);
+		panel_rankvalue.add(rankValueLbl);
 		
 		
 		//********** 생년월일 **********
@@ -601,13 +601,63 @@ public class ProfileFrame extends WaveMsgFrame {
 	 */
 	public void invokeProfileInfo() {
 		
-		// 첫 로딩시 기본 설정을 가져와야 하지만 현재 임시로 설정 
-		setProfileImgEnable(true); // 첫 로딩시 기본설정으로 설정
-		defaultRdBtn.setSelected(true);
-		
 		/* *******************************************************
 		 * TODO : 사용자 프로필 세팅
 		 * *******************************************************/
+		
+		// 프로필 사진 설정
+		profileImg.setImage(userInfo.getProfileImg());
+		
+		// 이미지 설정 방법 세팅
+		setProfileImgEnable(userInfo.isImgSet());
+		defaultRdBtn.setSelected(userInfo.isImgSet());
+		
+		// 사용자 이름 세팅
+		nameValueLbl.setText(userInfo.getUserName());
+		
+		// 사용자 ID 세팅
+		idValueLbl.setText(userInfo.getUserId());
+		
+		// 사용자 직급 세팅
+		rankValueLbl.setText(userInfo.getRank());
+		
+		// 생년월일 세팅
+		birthValueLbl.setText(userInfo.getBirth());
+		
+		// 상태메시지 세팅
+		messageValueTxt.setText(userInfo.getStateMessage());
+		
+		// e-mail 세팅
+		emailValueTxt.setText(userInfo.getEmail());
+		
+		// 핸드폰번호 세팅
+		String[] phoneStr = userInfo.getPhone().split("-");
+		switch (phoneStr.length) {
+		case 3:
+			phoneValue3.setText(phoneStr[2]);
+		case 2:
+			phoneValue2.setText(phoneStr[1]);
+		case 1:
+			phoneValue1.setText(phoneStr[0]);
+		default:
+			break;
+		}
+		
+		// 전화번호 세팅
+		String[] homeStr = userInfo.getHome().split("-");
+		switch (homeStr.length) {
+		case 3:
+			homeValue3.setText(homeStr[2]);
+		case 2:
+			homeValue2.setText(homeStr[1]);
+		case 1:
+			homeValue1.setText(homeStr[0]);
+		default:
+			break;
+		}
+		
+		// 주소 설정
+		addrValueTxt.setText(userInfo.getAddr());
 		
 	}
 
@@ -677,8 +727,8 @@ public class ProfileFrame extends WaveMsgFrame {
 		
 	}
 	
-	public static void main(String[] a) {
-		ProfileFrame frame = ProfileFrame.getInstance(MsgMainFrame.getLoginUser());
+	public static void main(String[] sd) {
+		ProfileFrame frame = ProfileFrame.getInstance(new UserInfo());
 		frame.setVisible(true);
 	}
 }

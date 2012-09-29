@@ -459,7 +459,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProfileFrame frame = ProfileFrame.getInstance(new UserInfo());
+					ProfileFrame frame = ProfileFrame.getInstance(loginUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
