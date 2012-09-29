@@ -152,64 +152,6 @@ public class SocketMgr extends Thread{
 	}
 
 	/**
-	 * 소켓 채널을 획득 <br>
-	 * 획득한 채널에서 데이터를 읽음 <br>
-	 * 
-	 * @param key 셀렉터 키
-	 */
-	/*
-	private void read(SelectionKey key) {
-		
-		// SelectionKey로 부터 소켓 채널을 얻어 옴
-		SocketChannel sc = (SocketChannel) key.channel();
-		System.out.println("소켓 채널 얻기 성공");
-		
-		// ByteBuffer를 생성함
-		ByteBuffer buffer = ByteBuffer.allocateDirect(1024);
-		
-		int read = 0;
-
-		try {
-			// 요청한 클라이언트의 소켓 채널로 부터 데이터를 읽어 들임
-			read = sc.read(buffer);
-			System.out.println(read + " byte를 읽었습니다.");
-		} catch (IOException e) {
-			try {
-				sc.close();
-			} catch (IOException e1) {
-			}
-		}
-
-		buffer.flip();
-		
-		String data = "";
-		try {
-			data = decoder.decode(buffer).toString();
-			System.out.println("Message - " + data);
-		} catch (CharacterCodingException e) {
-			new WaveMsgDialogBox("서버연결", "read Error", JOptionPane.ERROR_MESSAGE);
-		}
-
-		DataParser parser = new DataParser(data);
-		try {
-			parser.parseToInstance();
-		} catch (WaveMsgException e) {
-			new WaveMsgDialogBox("서버연결", "응답데이터 파싱 에러", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-		
-		// 버퍼 메모리를 해제함
-		clearBuffer(buffer);
-	}
-	 
-	private void clearBuffer(ByteBuffer buffer) {
-		if (buffer != null) {
-			buffer.clear();
-			buffer = null;
-		}
-	}
-	*/
-	/**
 	 * 소켓 채널(현재의 쓰레드)를 종료 처리 <br>
 	 *  
 	 */

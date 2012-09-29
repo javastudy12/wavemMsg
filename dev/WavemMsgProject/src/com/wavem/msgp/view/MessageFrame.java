@@ -247,16 +247,15 @@ public class MessageFrame extends WaveMsgFrame{
 	public void setConvertingFlag(boolean convertingFlag) {
 		this.convertingFlag = convertingFlag;
 	}
-	
-	
-	public static void main(String[] a) {
-		MessageFrame frame = new MessageFrame(false);
-		frame.setVisible(true);
-	}
 
 	@Override
 	public void callBackData() throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static void main(String[] a) {
+		MessageFrame frame = new MessageFrame(false);
+		frame.setVisible(true);
 	}
 }

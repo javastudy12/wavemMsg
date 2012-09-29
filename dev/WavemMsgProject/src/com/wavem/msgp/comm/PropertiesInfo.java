@@ -77,7 +77,7 @@ public class PropertiesInfo implements Serializable {
 	private String chatBackgroundPath = "";
 
 	/** 로그인 시 사용자 ID 저장 여부 */
-	private boolean idSaveChk = true;
+	private boolean idSaveChk = false;
 	
 	/** 로그인시 저장된 사용자 ID */
 	private String loginUserId = "";
