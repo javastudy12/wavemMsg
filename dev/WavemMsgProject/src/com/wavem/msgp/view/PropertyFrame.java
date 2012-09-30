@@ -25,13 +25,12 @@ import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgCheckBox;
 import com.wavem.msgp.component.WaveMsgComboBox;
+import com.wavem.msgp.component.WaveMsgFontFrame;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgRadioButton;
 import com.wavem.msgp.component.WaveMsgSpinner;
 import com.wavem.msgp.component.WaveMsgTextField;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
 
 /**
  * 환경설정 화면
@@ -117,7 +116,7 @@ public class PropertyFrame extends WaveMsgFrame {
 	@Override
 	public void makeInitFrame() {
 		getContentPane().setLayout(null);
-		setBounds(100, 100, 416, 510);
+		setBounds(100, 100, 416, 630);
 		
 		/* *********************************************************
 		 * 기본 설정 시작
@@ -291,13 +290,6 @@ public class PropertyFrame extends WaveMsgFrame {
 		ButtonGroup group = new ButtonGroup();
 		group.add(defaultSettingTheme);
 		group.add(userSettingTheme);
-		
-		
-		
-		
-		/* *********************************************************
-		 * 테마 설정 끝
-		 * *********************************************************/
 		
 		
 		loadPropertyInfo();

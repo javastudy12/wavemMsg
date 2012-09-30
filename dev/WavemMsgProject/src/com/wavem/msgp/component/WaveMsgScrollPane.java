@@ -10,6 +10,7 @@
 
 package com.wavem.msgp.component;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -34,6 +35,22 @@ public class WaveMsgScrollPane extends JScrollPane {
 	/** 배경 등록 Image 인스턴스 변수 */
 	private Image img = null;
 	
+	public WaveMsgScrollPane() {
+		super();
+	}
+	
+	public WaveMsgScrollPane(int arg0, int arg1) {
+		super(arg0, arg1);
+	}
+	
+	public  WaveMsgScrollPane(Component component) {
+		super(component);
+	}
+	
+	public  WaveMsgScrollPane(Component component, int arg0, int arg1) {
+		super(component, arg0, arg1);
+	}
+
 	/**
 	 * 이미지 설정
 	 * 
@@ -43,6 +60,7 @@ public class WaveMsgScrollPane extends JScrollPane {
 		this.img = img;
 		repaint();
 	}
+	
 	
 	/**
 	 * file 파일 경로에 있는 이미지 로드하여 설정
