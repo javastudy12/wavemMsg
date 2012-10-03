@@ -10,7 +10,6 @@
 
 package com.wavem.msgp.dto;
 
-import java.io.Serializable;
 
 /**
  * 사용자 정보 클래스
@@ -18,11 +17,19 @@ import java.io.Serializable;
  * @author 
  *
  */
-public class UserInfo implements Serializable{
+public class UserInfo extends DataInfoDto{
 
 	private static final long serialVersionUID = 1832993226207023300L;
 	
 	private String userId = null;
+	
+	public UserInfo() {
+		
+	}
+	
+	public UserInfo(String serviceId) {
+		
+	}
 
 	public String getUserId() {
 		return userId;

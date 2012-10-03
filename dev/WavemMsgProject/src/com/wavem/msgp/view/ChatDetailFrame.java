@@ -69,4 +69,10 @@ public class ChatDetailFrame extends WaveMsgFrame {
 	public void loadChatData() {
 
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

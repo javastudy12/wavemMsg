@@ -90,4 +90,10 @@ public class FontFrame extends WaveMsgFrame{
 	public void saveFontNColor() {
 	
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

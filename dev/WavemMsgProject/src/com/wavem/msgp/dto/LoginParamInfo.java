@@ -1,6 +1,5 @@
 package com.wavem.msgp.dto;
 
-import java.io.Serializable;
 
 /**
  * 로그인 폼
@@ -8,7 +7,7 @@ import java.io.Serializable;
  * @author 
  *
  */
-public class LoginParamInfo implements Serializable {
+public class LoginParamInfo extends DataInfoDto {
 
 	private static final long serialVersionUID = 7926402335493132974L;
 
@@ -18,6 +17,35 @@ public class LoginParamInfo implements Serializable {
 	/** 사용자 비밀번호 */
 	private String userPw = "";
 
+	/**
+	 * 요청 서비스 ID없이 객체 생성
+	 */
+	public LoginParamInfo() {
+		super();
+	}
+	
+	/**
+	 * 요청 서비스 ID를 입력하여 객체 생성
+	 * 
+	 * @param serviceID 서비스ID
+	 */
+	public LoginParamInfo(String serviceID) {
+		super(serviceID);
+	}
+	
+	/**
+	 * 요청 서비스 ID를 입력하여 객체 생성
+	 * 
+	 * @param serviceID 서비스 ID
+	 * @param userId 사용자 ID
+	 * @param userPw 사용자 비밀번호
+	 */
+	public LoginParamInfo(String serviceID, String userId, String userPw) {
+		super(serviceID);
+		this.userId = userId;
+		this.userPw = userPw;
+	}
+	
 	/**
 	 * 사용자 ID 반환
 	 * 

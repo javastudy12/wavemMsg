@@ -161,21 +161,31 @@ public class MessageFrame extends WaveMsgFrame{
 		getContentPane().add(scrollPane);
 		
 		JPanel footerPanel = new JPanel();
+		footerPanel.setBackground(Color.WHITE);
 		footerPanel.setBounds(0, 250, 350, 55);
 		getContentPane().add(footerPanel);
 		
 		// 닫기 버튼
 		WaveMsgButton waveMsgButton = new WaveMsgButton("CLOSE");
+		waveMsgButton.setBounds(278, 10, 60, 30);
 		waveMsgButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				close();
 			}
 		});
+		footerPanel.setLayout(null);
 		footerPanel.add(waveMsgButton);
 		
 		// 보내기 버튼
-		WaveMsgButton waveMsgButton_1 = new WaveMsgButton("SEND");
+		String imgNm = "";
+		if (convertingFlag) {
+			imgNm = "SEND";
+		} else {
+			imgNm = "REPLY";
+		}
+		WaveMsgButton waveMsgButton_1 = new WaveMsgButton(imgNm);
+		waveMsgButton_1.setBounds(206, 10, 60, 30);
 		waveMsgButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -210,17 +220,21 @@ public class MessageFrame extends WaveMsgFrame{
 	}
 	
 	/**
-	 * 쪽지 쓰기
+	 * 쪽지 보내기
 	 */
 	public void sendMsg() {
-	
+		/* *****************************************************
+		 * TODO : 쪽지 데이터를 보낸다.
+		 * *****************************************************/
 	}
 	
 	/**
 	 * 쪽지 답장
 	 */
 	public void replyMsg() {
-	
+		MessageFrame frame = new MessageFrame(true);
+		frame.setVisible(true);
+		close();
 	}
 	
 	/**
@@ -236,7 +250,13 @@ public class MessageFrame extends WaveMsgFrame{
 	
 	
 	public static void main(String[] a) {
-		MessageFrame frame = new MessageFrame(true);
+		MessageFrame frame = new MessageFrame(false);
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

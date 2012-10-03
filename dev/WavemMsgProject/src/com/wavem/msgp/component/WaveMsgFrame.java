@@ -24,6 +24,8 @@ public abstract class WaveMsgFrame extends JFrame {
 	 * 화면 로딩
 	 */
 	public abstract void makeInitFrame() throws Exception ;
+	
+	public abstract void callBackData() throws Exception ;
 
 	/**
 	 * 화면 종료

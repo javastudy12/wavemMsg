@@ -114,5 +114,11 @@ public class InviteFrame extends WaveMsgFrame{
 	public void inviteUser() {
 	
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -83,4 +83,10 @@ public class ProfileFrame extends WaveMsgFrame {
 	public void modifyProfileInfo() {
 
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

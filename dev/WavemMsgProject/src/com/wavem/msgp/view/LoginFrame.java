@@ -81,6 +81,7 @@ public class LoginFrame extends WaveMsgFrame{
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 254, 233);
+		setDefaultCloseOperation(MsgMainFrame.EXIT_ON_CLOSE);
 		
 		// ID 텍스트
 		WaveMsgLabel lblId = new WaveMsgLabel("ID");
@@ -194,12 +195,12 @@ public class LoginFrame extends WaveMsgFrame{
 		}
 		
 		// 데이터 전송을 위한 객체 생성
-		LoginParamInfo parm = new LoginParamInfo();
+		LoginParamInfo parm = new LoginParamInfo("W_M_I_1_01"); // 서비스 ID 입력
 		parm.setUserId(idField.getText());
 		parm.setUserPw(passwordField.getText());
 		
 		// 데이터 전송을 위한 인스턴스 생성
-		DataController dataCtrl = new DataController(parm);
+		DataController dataCtrl = new DataController(this, parm);
 
 		// 데이터 전송 결과
 		int success = 0;
@@ -210,25 +211,6 @@ public class LoginFrame extends WaveMsgFrame{
  			
 		} catch (WaveMsgException e) {
 			new WaveMsgDialogBox("로그인", e.getMessage(), JOptionPane.ERROR_MESSAGE);
-		}
-		
-		success = dataCtrl.getRes(); // 결과
-		
-		// 아래 메인 실행 화면은 후추 DataController에서 처리하도록 한다.
-		if (success == 0) { // 로그인 성공 시
-			makeMain();
-		} else if (success == 1){ // 최초 로그인시
-			regPasswordInfo();
-		} else {
-			
-			/* ****************************************************************
-			 * TODO : 실패 메시지를 받아와 띄운다.
-			 * 
-			 *  
-			 *  
-			 * ****************************************************************/
-			
-			new WaveMsgDialogBox("로그인", "없는 사용자입니다.", JOptionPane.WARNING_MESSAGE);
 		}
 		
 	}
@@ -265,6 +247,12 @@ public class LoginFrame extends WaveMsgFrame{
 		frame.setVisible(true);
 		
 		close(); // 로그인 화면 종료
+	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

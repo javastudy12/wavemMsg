@@ -81,4 +81,10 @@ public class MessageBoxFrame extends WaveMsgFrame{
 	public void invokeMsg() {
 	
 	}
+
+	@Override
+	public void callBackData() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
