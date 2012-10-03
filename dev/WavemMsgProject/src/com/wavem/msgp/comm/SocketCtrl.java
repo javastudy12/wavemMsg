@@ -24,28 +24,77 @@ import javax.swing.JOptionPane;
 import com.wavem.msgp.component.WaveMsgDialogBox;
 
 /**
- * 소켓 통신
+ * 소켓 통신 <br>
+ * 
+ * <pre>
+ * 
+ * 1. 데이터 전송을 위한 인스턴스 생성
+ * 	SocketCtrl socketCtrl = new SocketCtrl(sc, data, map);
+ * 	sc : 소켓 채널 (SocketChannel)
+ * 	data :  보낼 데이터 (String)
+ * 	map : 컨트롤러객체 저장 map (HashMap)
+ * 
+ * 2. 데이터 수신을 위한 인스턴스 생성 
+ * 	SocketCtrl socketCtrl = new SocketCtrl(sc, key, map);
+ * 	sc : 소켓 채널 (SocketChannel)
+ * 	key : 이벤트 검색을 위한 key (SelectionKey)
+ * 	map : 컨트롤러객체 저장 map (HashMap)
+ * </pre>
  * 
  * @author
  * 
  */
 public class SocketCtrl extends Thread {
 	
+	/** 연결되어있는 채널 */
 	private SocketChannel sc = null;
+	
+	/** 채널속의 key를 통해서 응답메시지 처리 위한 인스턴스 */
 	private SelectionKey key = null;
-	/** Charactor Set decoding */
+	
+	/** Charactor Set decoding - UTF-8*/
 	private CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
-	Map<String, Object> map = null;
+	
+	/** 소켓통신 요청한 컨트롤러 객체를 저장하기 위한 map인스턴스 */
+	private Map<String, Object> map = null;
+	
+	/** 서버에 전송할 데이터 */
 	private String data = "";
+	
+	/** 
+	 * 송신 및 수신 플러그 <br>
+	 * true  : 송신 <br>
+	 * false : 수신 <br>
+	 */
 	private int flag = 0;
+	
+	/** 결과 */
 	private int res = 0;
 
+	/**
+	 * 소켓 전송 컨트롤러 생성자 <br>
+	 * 
+	 * flag = true <br>
+	 * 
+	 * @param sc 현재 연결된 소켓 채널
+	 * @param data 전송하려는 데이터
+	 * @param map 컨트롤러 객체를 저장한 map (현재 사용 안함)
+	 */
 	public SocketCtrl(SocketChannel sc, String data, Map<String, Object> map) {
 		this.sc = sc;
 		this.data = data;
 		this.map = map;
 	}
 	
+	/**
+	 * 소켓 수신 컨트롤러 생성자 <br>
+	 * 
+	 * flag = false <br>
+	 * 
+	 * @param sc 현재 연결된 소켓 채널
+	 * @param key 서버로부터 이벤트를 확인하기 위한 key
+	 * @param map 이벤트가 발생되었을 때 응답하기 위해 컨트롤러 객체를 찾기 위한 map
+	 */
 	public SocketCtrl(SocketChannel sc, SelectionKey key, Map<String, Object> map) {
 		this.sc = sc;
 		this.key = key;
@@ -90,6 +139,12 @@ public class SocketCtrl extends Thread {
 		}
 	}
 	
+	/**
+	 * 서버로부터 메시지를 받는다. <br>
+	 * 
+	 * 서버로부터 받은 메시지로부터 serviceID값을 추출하여 해당하는 컨트롤러객체를 map에서 검색한다. <br>
+	 * 요청한 데이터 컨트롤러는 저장된 프레임 및 목적지에 데이터를 적용한다.<br>
+	 */
 	private void receiveMsg() {
 		
 		// SelectionKey로 부터 소켓 채널을 얻어 옴
@@ -135,6 +190,11 @@ public class SocketCtrl extends Thread {
 		clearBuffer(buffer);
 	}
 	
+	/**
+	 * buffer 클리어
+	 * 
+	 * @param buffer
+	 */
 	private void clearBuffer(ByteBuffer buffer) {
 		if (buffer != null) {
 			buffer.clear();
@@ -142,6 +202,11 @@ public class SocketCtrl extends Thread {
 		}
 	}
 	
+	/**
+	 * 서버로부터 응답
+	 * 
+	 * @return 응답
+	 */
 	public int getRes() {
 		return this.res;
 	}

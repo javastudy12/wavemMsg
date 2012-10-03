@@ -24,6 +24,7 @@ import com.wavem.msgp.view.MsgMainFrame;
  */
 public class MsgMain {
 	
+	/** 메인 소켓 */
 	public static SocketMgr socketMgr = null;
 
 	public static void main(String[] args) {
