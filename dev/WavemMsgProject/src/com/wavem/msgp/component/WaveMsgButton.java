@@ -10,10 +10,13 @@
 
 package com.wavem.msgp.component;
 
+import java.awt.Font;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.view.MsgMainFrame;
 
 /**
@@ -40,6 +43,7 @@ public class WaveMsgButton extends JButton {
 	 */
 	public WaveMsgButton() {
 		super();
+		setProperties();
 	}
 	
 	/**
@@ -51,6 +55,7 @@ public class WaveMsgButton extends JButton {
 	public WaveMsgButton(String imageName) {
 		this.imageName = imageName;
 		makeInitButton(); // 이미지 이름이 있는 경우 자동 세팅
+		setProperties();
 	}
 	
 	/**
@@ -61,6 +66,7 @@ public class WaveMsgButton extends JButton {
 	 */
 	public WaveMsgButton(Icon icon) {
 		super(icon);
+		setProperties();
 	}
 	
 	/**
@@ -76,5 +82,16 @@ public class WaveMsgButton extends JButton {
 		
 		// 버튼 선택 시 이미지 세팅
 		//setSelectedIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/"+imageName+"_F.png")));
+	}
+	
+	/**
+	 * 환경설정에 의한 설정 적용
+	 */
+	public void setProperties() {
+		
+		PropertiesInfo property = PropertiesInfo.getInstance();
+		
+		// 폰트 설정
+		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
 	}
 }

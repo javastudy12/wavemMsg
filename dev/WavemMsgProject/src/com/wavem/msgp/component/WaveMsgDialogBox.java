@@ -11,8 +11,11 @@
 package com.wavem.msgp.component;
 
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.JOptionPane;
+
+import com.wavem.msgp.comm.PropertiesInfo;
 
 /**
  * 다이얼로그 화면
@@ -69,6 +72,7 @@ public class WaveMsgDialogBox extends JOptionPane {
 		this.jOption = jOption;
 
 		makeInitFrame();
+		setProperties();
 	}
 	
 	/**
@@ -95,6 +99,7 @@ public class WaveMsgDialogBox extends JOptionPane {
 		this.jOption = jOption;
 
 		makeInitComfirmFrame();
+		setProperties();
 	}
 
 	/**
@@ -124,6 +129,17 @@ public class WaveMsgDialogBox extends JOptionPane {
 	 */
 	public int getResult() {
 		return this.res;
+	}
+	
+	/**
+	 * 환경설정에 의한 설정 적용
+	 */
+	public void setProperties() {
+		
+		PropertiesInfo property = PropertiesInfo.getInstance();
+		
+		// 폰트 설정
+		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
 	}
 
 }
