@@ -10,7 +10,18 @@
 
 package com.wavem.msgp.comm;
 
+import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import javax.swing.JOptionPane;
+
+import com.wavem.msgp.component.WaveMsgDialogBox;
 
 /** 
  * 환경설정 로컬 저장 클래스 <br>
@@ -56,16 +67,24 @@ public class PropertiesInfo implements Serializable {
 	private String themePath = "";
 	
 	/** 폰트 */
-	private String font = "";
+	private String font = "굴림";
+	private int fontStyle = Font.BOLD;
+	private int fontSize = 12;
+	
+	/** 채팅 폰트 */
+	private String chatFont = "굴림";
+	private int chatFontStyle = Font.BOLD;
+	private int chatFontSize = 12;
+	
 	
 	/** 색상 */
 	private String color = "";
 	
 	/** 알림음 설정 */
-	private boolean arlamFlag = true;
+	private boolean alarmFlag = true;
 	
 	/** 알림음 경로 */
-	private String arlamPath = "";
+	private String alarmPath = "";
 	
 	/** 채팅, 쪽지 배경 설정 (기본배경, 사용자설정) */
 	private boolean chatBackgroundFlag = false;
@@ -97,7 +116,7 @@ public class PropertiesInfo implements Serializable {
 	 * 외부에서 PropertiesInfo클래스 생성 막음 <br>
 	 */
 	private PropertiesInfo() {
-		loadPropertiesFile();
+		
 	}
 
 	/**
@@ -110,6 +129,16 @@ public class PropertiesInfo implements Serializable {
 			synchronized (PropertiesInfo.class) {
 				if (properties == null) {
 					properties = new PropertiesInfo();
+					
+					try {
+						properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - ClassNotFoundException", JOptionPane.ERROR_MESSAGE);
+					} catch (IOException e) {
+						e.printStackTrace();
+						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - IOException \n 설정파일이 없거나 잘못되었습니다.", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		}
@@ -121,18 +150,35 @@ public class PropertiesInfo implements Serializable {
 	 * 환경설정 로드 (로컬)
 	 * 
 	 * @return 로드 성공 여부
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public int loadPropertiesFile() {
-		return 0;
+	public void loadPropertiesFile() throws IOException, ClassNotFoundException {
+		
+		File file = new File("WaveMsgConfig.properties"); // 설정파일이 존재할 경우
+		
+		if (file.exists()) {
+			FileInputStream fileIn = new FileInputStream("WaveMsgConfig.properties");
+			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+			properties = (PropertiesInfo) objectIn.readObject();
+		}
+		
+		System.out.println("설정 로드 완료");
 	}
 	
 	/**
 	 * 환경설정 저장 (로컬)
 	 * 
 	 * @return 저장 설정 여부
+	 * @throws IOException 
 	 */
-	public int savePropertiesFile() {
-		return 0;
+	public void savePropertiesFile() throws IOException {
+		
+		FileOutputStream fileOut = new FileOutputStream("WaveMsgConfig.properties");
+		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+		objectOut.writeObject(PropertiesInfo.getInstance());
+		
+		System.out.println("설정 저장 완료");
 	}
 	
 	/**
@@ -344,6 +390,52 @@ public class PropertiesInfo implements Serializable {
 	}
 
 	/** 
+	 * 폰트 기타 저장
+	 * 
+	 * @return 폰트 기타
+	 */
+	public int getFontStyle() {
+		return fontStyle;
+	}
+
+	
+	public void setFontStyle(int fontStyle) {
+		this.fontStyle = fontStyle;
+	}
+
+	public int getFontSize() {
+		return fontSize;
+	}
+
+	public void setFontSize(int fontSize) {
+		this.fontSize = fontSize;
+	}
+
+	public String getChatFont() {
+		return chatFont;
+	}
+
+	public void setChatFont(String chatFont) {
+		this.chatFont = chatFont;
+	}
+
+	public int getChatFontStyle() {
+		return chatFontStyle;
+	}
+
+	public void setChatFontStyle(int chatFontStyle) {
+		this.chatFontStyle = chatFontStyle;
+	}
+
+	public int getChatFontSize() {
+		return chatFontSize;
+	}
+
+	public void setChatFontSize(int chatFontSize) {
+		this.chatFontSize = chatFontSize;
+	}
+
+	/** 
 	 * 색상 반환
 	 * 
 	 * @return 색상
@@ -366,8 +458,8 @@ public class PropertiesInfo implements Serializable {
 	 * 
 	 * @return 알림음 설정
 	 */
-	public boolean isArlamFlag() {
-		return arlamFlag;
+	public boolean isAlarmFlag() {
+		return alarmFlag;
 	}
 
 	/**
@@ -375,8 +467,8 @@ public class PropertiesInfo implements Serializable {
 	 * 
 	 * @param arlamFlag 알림음 설정
 	 */
-	public void setArlamFlag(boolean arlamFlag) {
-		this.arlamFlag = arlamFlag;
+	public void setAlarmFlag(boolean alarmFlag) {
+		this.alarmFlag = alarmFlag;
 	}
 
 	/**
@@ -384,8 +476,8 @@ public class PropertiesInfo implements Serializable {
 	 * 
 	 * @return 알림음 경로
 	 */
-	public String getArlamPath() {
-		return arlamPath;
+	public String getAlarmPath() {
+		return alarmPath;
 	}
 
 	/**
@@ -393,8 +485,8 @@ public class PropertiesInfo implements Serializable {
 	 * 
 	 * @param arlamPath 알림음 경로
 	 */
-	public void setArlamPath(String arlamPath) {
-		this.arlamPath = arlamPath;
+	public void setAlarmPath(String alarmPath) {
+		this.alarmPath = alarmPath;
 	}
 
 	/**

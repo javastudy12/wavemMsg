@@ -31,7 +31,6 @@ public class MsgMain {
 
 		// 환경설정 로드
 		PropertiesInfo property = PropertiesInfo.getInstance();
-		property.loadPropertiesFile();
 		
 		// 서버와 소켓 최초 생성
 		SocketMgr socketMgr = new SocketMgr();
