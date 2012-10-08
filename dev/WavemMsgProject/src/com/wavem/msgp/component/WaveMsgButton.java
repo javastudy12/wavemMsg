@@ -20,13 +20,12 @@ import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.view.MsgMainFrame;
 
 /**
- * 
- * 웨이브엠 공통 컴포넌트 <br>
- * 
  * 버튼 <br>
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JButton
  */
 public class WaveMsgButton extends JButton {
 
@@ -40,6 +39,8 @@ public class WaveMsgButton extends JButton {
 	
 	/**
 	 * 일반버튼
+	 * 
+	 * @see WaveMsgButton#setProperties()
 	 */
 	public WaveMsgButton() {
 		super();
@@ -51,6 +52,8 @@ public class WaveMsgButton extends JButton {
 	 * 버튼 경로에 있는 이미지를 선택 <br>
 	 * 
 	 * @param imageName 이미지 이름
+	 * @see WaveMsgButton#makeInitButton()
+	 * @see WaveMsgButton#setProperties()
 	 */
 	public WaveMsgButton(String imageName) {
 		this.imageName = imageName;
@@ -62,7 +65,8 @@ public class WaveMsgButton extends JButton {
 	 * 아이콘 설정 <br>
 	 * 기본버튼 적용 안됨 <br>
 	 * 
-	 * @param icon
+	 * @param icon 아이콘 이미지
+	 * @see WaveMsgButton#setProperties()
 	 */
 	public WaveMsgButton(Icon icon) {
 		super(icon);
@@ -93,5 +97,8 @@ public class WaveMsgButton extends JButton {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 }

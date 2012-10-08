@@ -10,6 +10,7 @@
 
 package com.wavem.msgp.comm;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,14 +24,16 @@ import javax.swing.JOptionPane;
 
 import com.wavem.msgp.component.WaveMsgDialogBox;
 
-/** 
+/**
  * 환경설정 로컬 저장 클래스 <br>
  * 
  * <pre>
- * 	PropertiesInfo properties = PropertiesInfo.getInstance();
+ * PropertiesInfo properties = PropertiesInfo.getInstance();
  * </pre>
- * @author 
- *
+ * 
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
  */
 public class PropertiesInfo implements Serializable {
 	
@@ -78,7 +81,7 @@ public class PropertiesInfo implements Serializable {
 	
 	
 	/** 색상 */
-	private String color = "";
+	private Color color = new Color(255, 255, 255);
 	
 	/** 알림음 설정 */
 	private boolean alarmFlag = true;
@@ -440,7 +443,7 @@ public class PropertiesInfo implements Serializable {
 	 * 
 	 * @return 색상
 	 */
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
@@ -449,7 +452,7 @@ public class PropertiesInfo implements Serializable {
 	 * 
 	 * @param color 색상
 	 */
-	public void setColor(String color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 

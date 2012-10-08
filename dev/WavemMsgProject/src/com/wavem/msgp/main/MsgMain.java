@@ -19,8 +19,12 @@ import com.wavem.msgp.view.MsgMainFrame;
 /**
  * 최초 시작점
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see PropertiesInfo
+ * @see SocketMgr
+ * @see MsgMainFrame
  */
 public class MsgMain {
 	

@@ -20,8 +20,10 @@ import com.wavem.msgp.comm.PropertiesInfo;
 /**
  * 다이얼로그 화면
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JOptionPane
  */
 public class WaveMsgDialogBox extends JOptionPane {
 
@@ -65,6 +67,8 @@ public class WaveMsgDialogBox extends JOptionPane {
 	 * @param title 타이틀
 	 * @param message 메시지 내용
 	 * @param jOption 옵션
+	 * @see WaveMsgDialogBox#makeInitFrame()
+	 * @see WaveMsgDialogBox#setProperties()
 	 */
 	public WaveMsgDialogBox(String title, String message, int jOption) {
 		this.title = title;
@@ -91,6 +95,8 @@ public class WaveMsgDialogBox extends JOptionPane {
 	 * @param title 타이틀
 	 * @param message 메시지 내용
 	 * @param jOption 옵션
+	 * @see WaveMsgDialogBox#makeInitComfirmFrame()
+	 * @see WaveMsgDialogBox#setProperties()
 	 */
 	public WaveMsgDialogBox(Component component, String title, String message, int jOption) {
 		this.component = component;
@@ -140,6 +146,9 @@ public class WaveMsgDialogBox extends JOptionPane {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 
 }

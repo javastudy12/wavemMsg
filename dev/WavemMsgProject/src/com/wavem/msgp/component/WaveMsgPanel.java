@@ -34,7 +34,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * </pre>
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JPanel
  */
 public class WaveMsgPanel extends JPanel {
 
@@ -45,6 +47,8 @@ public class WaveMsgPanel extends JPanel {
 	
 	/**
 	 * 패널 기본 생성자
+	 * 
+	 * @see WaveMsgPanel#setProperties()
 	 */
 	public WaveMsgPanel() {
 		super();
@@ -56,6 +60,7 @@ public class WaveMsgPanel extends JPanel {
 	 * 더블 버퍼링 사용 유무 초기화 <br>
 	 * 
 	 * @param b 더블 버퍼링 유무
+	 * @see WaveMsgPanel#setProperties()
 	 */
 	public WaveMsgPanel(boolean b) {
 		super(b);
@@ -67,6 +72,7 @@ public class WaveMsgPanel extends JPanel {
 	 * 레이아웃 초기화 <br>
 	 * 
 	 * @param layoutMgr 레이아웃
+	 * @see WaveMsgPanel#setProperties()
 	 */
 	public WaveMsgPanel(LayoutManager layoutMgr) {
 		super(layoutMgr);
@@ -79,6 +85,7 @@ public class WaveMsgPanel extends JPanel {
 	 * 
 	 * @param layoutMgr 레이아웃
 	 * @param b 더블 버퍼링 유무
+	 * @see WaveMsgPanel#setProperties()
 	 */
 	public WaveMsgPanel(LayoutManager layoutMgr, boolean b) {
 		super(layoutMgr, b);
@@ -158,5 +165,8 @@ public class WaveMsgPanel extends JPanel {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 }

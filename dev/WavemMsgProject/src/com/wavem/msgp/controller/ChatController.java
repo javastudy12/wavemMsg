@@ -19,8 +19,10 @@ import com.wavem.msgp.view.ChatFrame;
 /**
  * 채팅 및 쪽지 관련 컨트롤러
  * 
- * @author
- *
+ * @author 
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class ChatController {
 	

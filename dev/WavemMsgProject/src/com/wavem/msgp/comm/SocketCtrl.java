@@ -41,8 +41,9 @@ import com.wavem.msgp.component.WaveMsgDialogBox;
  * 	map : 컨트롤러객체 저장 map (HashMap)
  * </pre>
  * 
- * @author
- * 
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
  */
 public class SocketCtrl extends Thread {
 	

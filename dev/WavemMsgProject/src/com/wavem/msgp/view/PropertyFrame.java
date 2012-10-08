@@ -21,10 +21,8 @@ import java.io.IOException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -35,6 +33,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgCheckBox;
 import com.wavem.msgp.component.WaveMsgComboBox;
@@ -59,6 +58,9 @@ import com.wavem.msgp.component.WaveMsgTextField;
 public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface {
 	
 	private static final long serialVersionUID = 8935617435151137888L;
+	
+	/** 타이틀 */
+	private String title = "환경 설정";
 	
 	/** 환경설정 인스턴스 변수 */
 	private PropertiesInfo properties = null;
@@ -115,8 +117,9 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	/** 폰트 미리보기 */
 	private JEditorPane dtrpnHello = null;
 	
-	/** 폰트 설정 프레임 */
+	/** 폰트 및 컬러 설정 프레임 */
 	private WaveMsgFontFrame fontFrame = null;
+	private WaveMsgColorChooser colorFrame = null;
 	
 	/** 알림음 선택 */
 	private WaveMsgCheckBox alarmChkBox = null;
@@ -165,7 +168,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	
 	
 	/** 색상 */
-	private String color = "";
+	private Color color = null;
 	
 	/** 알림음 설정 */
 	private boolean alarmFlag = true;
@@ -189,19 +192,27 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	 * 환경설정 화면 생성자 <br>
 	 * 최초 환경설정 관련 인스턴스 획득 <br>
 	 * 최초 makeInitFrame() 호출 <br>
+	 * @throws WaveMsgException 
 	 */
-	private PropertyFrame() {
+	private PropertyFrame() throws WaveMsgException {
 		getContentPane().setBackground(Color.WHITE);
 		this.properties = PropertiesInfo.getInstance();
-		makeInitFrame();
+		
+		try {
+			makeInitFrame();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new WaveMsgException(CommMsg.LOAD_FRAME_ERROR);
+		}
 	}
 	
 	/**
 	 * 환경설정 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 환경설정 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static PropertyFrame getInstance() {
+	public static PropertyFrame getInstance() throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (PropertyFrame.class) {
@@ -215,14 +226,14 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame()  throws Exception  {
 
 		// 환경설정창에서 데이터 로딩
 		loadPropertyInfo();
 		
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 416, 760);
-		setTitle("환경설정");
+		setTitle(this.title);
 		
 		/* *********************************************************
 		 * 기본 설정 시작
@@ -479,9 +490,15 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		fontLbl.setBounds(12, 432, 57, 15);
 		getContentPane().add(fontLbl);
 		
-		fontDataLbl = new WaveMsgLabel("미리보기");
-		fontDataLbl.setBounds(64, 432, 72, 15);
-		getContentPane().add(fontDataLbl);
+		WaveMsgButton fontSetBtn = new WaveMsgButton("SETTING");
+		fontSetBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				makeFontFrame();
+			}
+		});
+		fontSetBtn.setBounds(62, 428, 60, 21);
+		getContentPane().add(fontSetBtn);
 		/* *********************************************************
 		 * 폰트 설정 끝
 		 * *********************************************************/
@@ -493,9 +510,15 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		colorLbl.setBounds(12, 482, 57, 15);
 		getContentPane().add(colorLbl);
 		
-		colorDataLbl = new WaveMsgLabel("미리보기");
-		colorDataLbl.setBounds(64, 482, 57, 15);
-		getContentPane().add(colorDataLbl);
+		WaveMsgButton colorSetBtn = new WaveMsgButton("SETTING");
+		colorSetBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				makeColorFrame();
+			}
+		});
+		colorSetBtn.setBounds(62, 478, 60, 21);
+		getContentPane().add(colorSetBtn);
 		/* *********************************************************
 		 * 색상 설정 끝
 		 * *********************************************************/
@@ -507,24 +530,15 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(134, 437, 136, 60);
+		panel.setBounds(134, 437, 150, 60);
 		getContentPane().add(panel);
 		
 		dtrpnHello = new JEditorPane();
 		dtrpnHello.setText("1. Hello\r\n2. 안녕하세요");
 		panel.add(dtrpnHello);
 		
-		JButton btnNewButton_1 = new JButton("폰트 설정");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				makeFontFrame();
-			}
-		});
-		btnNewButton_1.setBounds(282, 432, 106, 65);
-		getContentPane().add(btnNewButton_1);
-		
 		dtrpnHello.setFont(new Font(font, fontStyle, fontSize));
+		dtrpnHello.setForeground(this.color);
 		/* *********************************************************
 		 * 미리보기 끝
 		 * *********************************************************/
@@ -594,6 +608,10 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		});
 		closeBtn.setBounds(328, 636, 60, 23);
 		getContentPane().add(closeBtn);
+		
+		
+		
+		
 		
 	}
 
@@ -670,41 +688,68 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 			System.out.println(properties.getAutoStatusChangeLimite());
 			try {
 				properties.savePropertiesFile();
-				new WaveMsgDialogBox("환경설정", CommMsg.SAVE_MSG, JOptionPane.ERROR_MESSAGE);
+				new WaveMsgDialogBox(this.title, CommMsg.SAVE_MSG, JOptionPane.ERROR_MESSAGE);
 			} catch (IOException e) {
 				e.printStackTrace();
-				new WaveMsgDialogBox("환경설정", CommMsg.NOT_SAVE_MSG, JOptionPane.ERROR_MESSAGE);
+				new WaveMsgDialogBox(this.title, CommMsg.NOT_SAVE_MSG, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
 	
 	/**
-	 * 폰트 설정 화면 로드
+	 * 폰트 설정 화면 
 	 */
 	public void makeFontFrame() {
-		fontFrame = new WaveMsgFontFrame(this, this.font, this.fontStyle, this.fontSize);
-		fontFrame.setVisible(true);
+		try {
+			fontFrame = new WaveMsgFontFrame(this, this.font, this.fontStyle, this.fontSize);
+			fontFrame.setVisible(true);
+		} catch (WaveMsgException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	/**
+	 * 색상 설정 화면
+	 */
+	public void makeColorFrame() {
+		try {
+			colorFrame = new WaveMsgColorChooser(this, this.color);
+			colorFrame.setVisible(true);
+		} catch (WaveMsgException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	/**  
 	 * 폰트 설정 화면에서 호출 <br>
-	 * 폰트 및 컬러 미리보기 설정 및 데이터 설정 <br>
+	 * 폰트 미리보기 설정 및 데이터 설정 <br>
 	 */
 	@Override
-	public void setFontNColor() {
+	public void setFrameFont() {
 		
 		// 폰트 설정창에서 데이터 로드
-		String font = fontFrame.getFontPreview(); // 폰트 
-		int fontStyle = fontFrame.getStylePreview(); // 폰트 스타일
-		int fontSize = fontFrame.getSizePreview(); // 폰트 사이즈
-		
-		// 폰트 설정
-		this.font = font;
-		this.fontStyle = fontStyle;
-		this.fontSize = fontSize;
+		this.font = fontFrame.getFontPreview(); // 폰트 
+		this.fontStyle = fontFrame.getStylePreview(); // 폰트 스타일
+		this.fontSize = fontFrame.getSizePreview(); // 폰트 사이즈
 		
 		// 미리보기 화면에 폰트 설정
-		dtrpnHello.setFont(new Font(font, fontStyle, fontSize));
+		dtrpnHello.setFont(new Font(this.font, this.fontStyle, this.fontSize));
+	}
+	
+	/**  
+	 * 폰트 설정 화면에서 호출 <br>
+	 * 컬러 미리보기 설정 및 데이터 설정 <br>
+	 */
+	@Override
+	public void setFrameColor() {
+		
+		// 색상 설정
+		this.color = colorFrame.getSettingColor();
+		
+		// 미리보기 화면에 색상 설정
+		dtrpnHello.setForeground(this.color);
 	}
 	
 	/**
@@ -919,7 +964,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		
 	}
 	
-	public static void main(String[] sdf) {
+	public static void main(String[] sdf) throws WaveMsgException {
 		PropertyFrame frame = PropertyFrame.getInstance();
 		frame.setVisible(true);
 	}

@@ -21,7 +21,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 패스워드 텍스트 필드
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JPasswordField
  */
 public class WaveMsgPasswordField extends JPasswordField {
 
@@ -29,6 +31,8 @@ public class WaveMsgPasswordField extends JPasswordField {
 
 	/**
 	 * 패스워드 필드 기본 생성자
+	 * 
+	 * @see WaveMsgPasswordField#setProperties()
 	 */
 	public WaveMsgPasswordField() {
 		super();
@@ -40,6 +44,7 @@ public class WaveMsgPasswordField extends JPasswordField {
 	 * 필드의 컬럼 수 지정 <br>
 	 * 
 	 * @param columns 필드 컬럼
+	 * @see WaveMsgPasswordField#setProperties()
 	 */
 	public WaveMsgPasswordField(int columns) {
 		super(columns);
@@ -51,6 +56,7 @@ public class WaveMsgPasswordField extends JPasswordField {
 	 * 패스워드 문자열 초기화 <br>
 	 * 
 	 * @param text 문자열
+	 * @see WaveMsgPasswordField#setProperties()
 	 */
 	public WaveMsgPasswordField(String text) {
 		super(text);
@@ -63,6 +69,7 @@ public class WaveMsgPasswordField extends JPasswordField {
 	 * 
 	 * @param text 문자열
 	 * @param columns 필드 컬럼
+	 * @see WaveMsgPasswordField#setProperties()
 	 */
 	public WaveMsgPasswordField(String text, int columns) {
 		super(text, columns);
@@ -76,6 +83,7 @@ public class WaveMsgPasswordField extends JPasswordField {
 	 * @param doc 텍스트 저장소
 	 * @param txt 문자열
 	 * @param columns 필드 컬럼
+	 * @see WaveMsgPasswordField#setProperties()
 	 */
 	public WaveMsgPasswordField(Document doc, String txt, int columns) {
 		super(doc, txt, columns);
@@ -91,6 +99,9 @@ public class WaveMsgPasswordField extends JPasswordField {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 	
 }

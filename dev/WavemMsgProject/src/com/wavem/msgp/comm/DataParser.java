@@ -16,8 +16,9 @@ import com.wavem.msgp.dto.LoginParamInfo;
 /**
  * 프로토콜 파싱
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
  */
 public class DataParser {
 	

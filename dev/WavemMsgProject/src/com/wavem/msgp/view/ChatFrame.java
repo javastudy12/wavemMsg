@@ -10,12 +10,20 @@
 
 package com.wavem.msgp.view;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.ScrollPaneConstants;
+
 import com.wavem.msgp.component.WaveMsgFrame;
+import com.wavem.msgp.component.WaveMsgList;
+import com.wavem.msgp.component.WaveMsgPanel;
+import com.wavem.msgp.component.WaveMsgScrollPane;
+import com.wavem.msgp.component.WaveMsgTextArea;
 import com.wavem.msgp.dto.UserInfo;
+import javax.swing.JPanel;
 
 /**
  * 채팅 화면
@@ -40,6 +48,16 @@ public class ChatFrame extends WaveMsgFrame {
 	/** 채팅창에 참여중인 사용자 리스트 */
 	private List<UserInfo> userList = null;
 	
+	
+	
+	private WaveMsgTextArea textArea = null;
+	private WaveMsgScrollPane scrollPane = null;
+	
+	private WaveMsgList withUserList = null;
+	private WaveMsgScrollPane withUserlPane = null;
+	
+	private WaveMsgPanel actionBtnPane = null;
+	
 	/**
 	 * 채팅창 생성자 <br>
 	 * 생성자를 통해 서비스ID와 사용자 리스트 생성<br>
@@ -55,6 +73,62 @@ public class ChatFrame extends WaveMsgFrame {
 	@Override
 	public void makeInitFrame() {
 		getContentPane().setLayout(null);
+		setBounds(100, 100, 500, 598);
+		setTitle("채팅");
+		
+		/* *********************************************************
+		 * 대화 내역 창 시작
+		 * *********************************************************/
+		textArea = new WaveMsgTextArea();
+		getContentPane().add(textArea);
+		
+		scrollPane = new WaveMsgScrollPane(textArea);
+		scrollPane.setBounds(0, 0, 350, 400);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		getContentPane().add(scrollPane);
+		
+		/* *********************************************************
+		 * 대화 내역 창 끝
+		 * *********************************************************/
+		
+		
+		
+		/* *********************************************************
+		 * 참여자 시작
+		 * *********************************************************/
+		withUserList = new WaveMsgList();
+		
+		withUserlPane = new WaveMsgScrollPane(withUserList);
+		withUserlPane.setBounds(350, 0, 134, 400);
+		getContentPane().add(withUserlPane);
+		
+		/* *********************************************************
+		 * 참여자 끝
+		 * *********************************************************/
+		
+		
+		
+		/* *********************************************************
+		 * 기능 버튼 패널 시작
+		 * *********************************************************/
+		actionBtnPane = new WaveMsgPanel();
+		actionBtnPane.setBackground(Color.WHITE);
+		actionBtnPane.setBounds(0, 400, 484, 60);
+		getContentPane().add(actionBtnPane);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 460, 484, 100);
+		getContentPane().add(panel);
+		
+		
+		
+		
+		/* *********************************************************
+		 * 기능 버튼 패널 끝
+		 * *********************************************************/
+		
 	}
 
 	@Override
@@ -176,5 +250,4 @@ public class ChatFrame extends WaveMsgFrame {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

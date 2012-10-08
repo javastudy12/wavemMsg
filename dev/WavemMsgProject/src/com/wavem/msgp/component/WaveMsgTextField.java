@@ -21,7 +21,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 텍스트 필드
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JTextField
  */
 public class WaveMsgTextField extends JTextField {
 
@@ -29,6 +31,8 @@ public class WaveMsgTextField extends JTextField {
 
 	/**
 	 * 텍스트 필드 기본 생성자
+	 * 
+	 * @see WaveMsgTextField#setProperties()
 	 */
 	public WaveMsgTextField() {
 		super();
@@ -40,6 +44,7 @@ public class WaveMsgTextField extends JTextField {
 	 * 열 초기화 <br>
 	 * 
 	 * @param columns 열
+	 * @see WaveMsgTextField#setProperties()
 	 */
 	public WaveMsgTextField(int columns) {
 		super(columns);
@@ -50,6 +55,7 @@ public class WaveMsgTextField extends JTextField {
 	 * 텍스트 필드 문자열 초기화 <br>
 	 * 
 	 * @param text 문자열
+	 * @see WaveMsgTextField#setProperties()
 	 */
 	public WaveMsgTextField(String text) {
 		super(text);
@@ -59,8 +65,10 @@ public class WaveMsgTextField extends JTextField {
 	/**
 	 * 텍스트 필드 생성자 <br>
 	 * 텍스트 필드 문자열과 열 초기화 <br>
+	 * 
 	 * @param text 문자열
 	 * @param columns 열
+	 * @see WaveMsgTextField#setProperties()
 	 */
 	public WaveMsgTextField(String text, int columns) {
 		super(text, columns);
@@ -74,6 +82,7 @@ public class WaveMsgTextField extends JTextField {
 	 * @param doc 모델
 	 * @param text 무자열
 	 * @param columns 열
+	 * @see WaveMsgTextField#setProperties()
 	 */
 	public WaveMsgTextField(Document doc, String text, int columns) {
 		super(doc, text, columns);
@@ -89,5 +98,8 @@ public class WaveMsgTextField extends JTextField {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 }

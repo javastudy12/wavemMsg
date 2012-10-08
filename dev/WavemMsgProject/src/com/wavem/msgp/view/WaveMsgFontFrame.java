@@ -24,13 +24,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgComboBox;
 import com.wavem.msgp.component.WaveMsgFontInterface;
@@ -45,11 +46,16 @@ import com.wavem.msgp.component.WaveMsgTextPane;
 /**
  * 폰트 선택 공통 프레임
  * 
- * @author wody
+ * @author 정재요
  *
  */
-public class WaveMsgFontFrame extends JFrame {
+public class WaveMsgFontFrame extends WaveMsgFrame {
 
+	private static final long serialVersionUID = 2009641432934265812L;
+
+	/** 현재 화면 타이틀 */
+	private String title = "폰트 설정";
+	
 	/** 폰트 설정을 요청한 프레임 */
 	private WaveMsgFontInterface frame = null;
 	
@@ -60,8 +66,6 @@ public class WaveMsgFontFrame extends JFrame {
 	private WaveMsgList fontList = null;
 	
 	/** 폰트 이름 배열 */
-	//private String[] fontName = {}; // 전체 폰트 리스트
-	//private String[] fontViewName = {}; // 검색하였을 때 보여줄 폰트 리스트
 	private DefaultListModel<String> fontName = null;
 	private DefaultListModel<String> fontViewName = null;
 	
@@ -95,8 +99,9 @@ public class WaveMsgFontFrame extends JFrame {
 	 * @param font 폰트
 	 * @param fontEtc 폰트 기타 (bold, italic)
 	 * @param fontSize 폰트 크기
+	 * @throws WaveMsgException 
 	 */
-	public WaveMsgFontFrame(WaveMsgFontInterface frame, String font, int fontEtc, int fontSize) {
+	public WaveMsgFontFrame(WaveMsgFontInterface frame, String font, int fontEtc, int fontSize) throws WaveMsgException {
 		
 		/* *************************************************************
 		 * 환경변수 및 채팅 설정 구분 시작
@@ -109,10 +114,21 @@ public class WaveMsgFontFrame extends JFrame {
 		 * 환경변수 및 채팅 설정 구분 끝
 		 * *************************************************************/
 		
+		try {
+			makeInitFrame();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new WaveMsgException(CommMsg.LOAD_FRAME_ERROR);
+		}
+		
+	}
+	
+	@Override
+	public void makeInitFrame() throws Exception {
 		
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 400, 524);
-		setTitle("폰트 설정");
+		setTitle(this.title);
 		
 		/* *************************************************************
 		 * 폰트 검색 시작
@@ -268,6 +284,14 @@ public class WaveMsgFontFrame extends JFrame {
 	}
 	
 	/**
+	 * 화면 닫기 버튼
+	 */
+	@Override
+	public void close() {
+		this.dispose();
+	}
+	
+	/**
 	 * 데이터 로딩
 	 */
 	public void loadData() {
@@ -319,17 +343,10 @@ public class WaveMsgFontFrame extends JFrame {
 	}
 	
 	/**
-	 * 화면 닫기 버튼
-	 */
-	public void close() {
-		this.dispose();
-	}
-	
-	/**
 	 * 확인 버튼을 통한 데이터 적용
 	 */
 	public void apply() {
-		frame.setFontNColor();
+		frame.setFrameFont();
 		close();
 	}
 	
@@ -438,8 +455,13 @@ public class WaveMsgFontFrame extends JFrame {
 	public int getSizePreview() {
 		return this.sizePreview;
 	}
-	
-	public static void main(String[] adsf) {
+
+	@Override
+	public void callBackData() throws Exception {
+		// 로컬에서만 동작하기에 필요 없음
+	}
+
+	public static void main(String[] adsf) throws WaveMsgException {
 		WaveMsgFontFrame pa = new WaveMsgFontFrame(PropertyFrame.getInstance(), "굴림", Font.PLAIN, 12);
 		pa.setVisible(true);
 	}

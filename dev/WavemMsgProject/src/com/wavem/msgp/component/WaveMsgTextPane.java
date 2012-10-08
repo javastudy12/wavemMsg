@@ -21,7 +21,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 텍스트 패널
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JTextPane
  */
 public class WaveMsgTextPane extends JTextPane {
 
@@ -29,6 +31,8 @@ public class WaveMsgTextPane extends JTextPane {
 
 	/**
 	 * 텍스트 패널 기본 생성자 <br>
+	 * 
+	 * @see WaveMsgTextPane#setProperties()
 	 */
 	public WaveMsgTextPane() {
 		super();
@@ -40,6 +44,7 @@ public class WaveMsgTextPane extends JTextPane {
 	 * 문서양식 초기화 <br>
 	 * 
 	 * @param doc
+	 * @see WaveMsgTextPane#setProperties()
 	 */
 	public WaveMsgTextPane(StyledDocument doc) {
 		super(doc);
@@ -55,5 +60,8 @@ public class WaveMsgTextPane extends JTextPane {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 }

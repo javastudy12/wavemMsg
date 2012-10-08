@@ -22,7 +22,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 라디오 버튼 
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JRadioButton
  */
 public class WaveMsgRadioButton extends JRadioButton {
 
@@ -30,6 +32,8 @@ public class WaveMsgRadioButton extends JRadioButton {
 
 	/**
 	 * 라디오 버튼 기본 생성자
+	 * 
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton() {
 		super();
@@ -41,6 +45,7 @@ public class WaveMsgRadioButton extends JRadioButton {
 	 * 이벤트 리스너 객체 초기화 <br>
 	 * 
 	 * @param action 이벤트 리스너
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton(Action action) {
 		super(action);
@@ -52,6 +57,7 @@ public class WaveMsgRadioButton extends JRadioButton {
 	 * 아이콘 이미지 초기화 <br>
 	 * 
 	 * @param icon 아이콘 이미지
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton(Icon icon) {
 		super(icon);
@@ -63,6 +69,7 @@ public class WaveMsgRadioButton extends JRadioButton {
 	 * 라디오 버튼 문자열 초기화 <br>
 	 * 
 	 * @param str 문자열
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton(String str) {
 		super(str);
@@ -75,6 +82,7 @@ public class WaveMsgRadioButton extends JRadioButton {
 	 * 
 	 * @param icon 아이콘 이미지
 	 * @param b 선택 유무
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton(Icon icon, boolean b) {
 		super(icon, b);
@@ -87,6 +95,7 @@ public class WaveMsgRadioButton extends JRadioButton {
 	 * 
 	 * @param str 문자열
 	 * @param b 선택 유무
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton(String str, boolean b) {
 		super(str, b);
@@ -99,6 +108,7 @@ public class WaveMsgRadioButton extends JRadioButton {
 	 * 
 	 * @param str 문자열
 	 * @param icon 아이콘 이미지
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton(String str, Icon icon) {
 		super(str, icon);
@@ -112,6 +122,7 @@ public class WaveMsgRadioButton extends JRadioButton {
 	 * @param str 문자열
 	 * @param icon 아이콘 이미지
 	 * @param b 선택 유무
+	 * @see WaveMsgRadioButton#setProperties()
 	 */
 	public WaveMsgRadioButton(String str, Icon icon, boolean b) {
 		super(str, icon, b);
@@ -127,6 +138,9 @@ public class WaveMsgRadioButton extends JRadioButton {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 
 }

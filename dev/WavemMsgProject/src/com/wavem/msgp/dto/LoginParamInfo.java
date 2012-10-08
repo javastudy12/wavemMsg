@@ -4,8 +4,10 @@ package com.wavem.msgp.dto;
 /**
  * 로그인 폼
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class LoginParamInfo extends DataInfoDto {
 

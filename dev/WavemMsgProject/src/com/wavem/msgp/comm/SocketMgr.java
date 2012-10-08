@@ -39,8 +39,9 @@ import com.wavem.msgp.component.WaveMsgDialogBox;
  * socketMgr.startWriter(String data); // 전송할 데이터
  * </pre>
  * 
- * @author
- * 
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
  */
 public class SocketMgr extends Thread{
 

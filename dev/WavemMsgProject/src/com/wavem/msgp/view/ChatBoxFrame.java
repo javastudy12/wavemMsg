@@ -23,7 +23,9 @@ import com.wavem.msgp.component.WaveMsgFrame;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see 
  */
 public class ChatBoxFrame extends WaveMsgFrame {
 	
@@ -38,6 +40,10 @@ public class ChatBoxFrame extends WaveMsgFrame {
 	/**
 	 * 대화내역 화면 생성자<br>
 	 * 최초 실행 시 File인스턴스 생성 및 makeInitFrame() 호출<br>
+	 * 
+	 * @see PropertiesInfo#getInstance()
+	 * @see PropertiesInfo#getChatSavePath()
+	 * @see ChatBoxFrame#makeInitFrame()
 	 */
 	private ChatBoxFrame() {
 		PropertiesInfo properties = PropertiesInfo.getInstance(); // 대화저장 경로를 가져오기 위한 설정 인스턴스 획득

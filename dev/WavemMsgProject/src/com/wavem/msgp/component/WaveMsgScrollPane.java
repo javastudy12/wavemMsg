@@ -28,8 +28,10 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 
  * 현재 이미지 동작 안함
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JScrollPane
  */
 public class WaveMsgScrollPane extends JScrollPane {
 	
@@ -40,6 +42,8 @@ public class WaveMsgScrollPane extends JScrollPane {
 	
 	/**
 	 * 스크롤 패널 기본 생성자
+	 * 
+	 * @see WaveMsgScrollPane#setProperties()
 	 */
 	public WaveMsgScrollPane() {
 		super();
@@ -52,6 +56,7 @@ public class WaveMsgScrollPane extends JScrollPane {
 	 * 
 	 * @param vsbPolicy 종스크롤
 	 * @param hsbPolicy 횡스크롤
+	 * @see WaveMsgScrollPane#setProperties()
 	 */
 	public WaveMsgScrollPane(int vsbPolicy, int hsbPolicy) {
 		super(vsbPolicy, hsbPolicy);
@@ -60,7 +65,9 @@ public class WaveMsgScrollPane extends JScrollPane {
 	
 	/**
 	 * 스크롤 패널 생성자 <br>
+	 * 
 	 * @param view
+	 * @see WaveMsgScrollPane#setProperties()
 	 */
 	public  WaveMsgScrollPane(Component view) {
 		super(view);
@@ -69,9 +76,11 @@ public class WaveMsgScrollPane extends JScrollPane {
 	
 	/**
 	 * 스크롤 패널 생성자 <br>
+	 * 
 	 * @param view
 	 * @param vsbPolicy
 	 * @param hsbPolicy
+	 * @see WaveMsgScrollPane#setProperties()
 	 */
 	public  WaveMsgScrollPane(Component view, int vsbPolicy, int hsbPolicy) {
 		super(view, vsbPolicy, hsbPolicy);
@@ -152,6 +161,9 @@ public class WaveMsgScrollPane extends JScrollPane {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 
 }

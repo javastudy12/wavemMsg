@@ -21,7 +21,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * Spinner
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JSpinner
  */
 public class WaveMsgSpinner extends JSpinner {
 
@@ -29,6 +31,8 @@ public class WaveMsgSpinner extends JSpinner {
 
 	/**
 	 * 스피너 기본 생성자
+	 * 
+	 * @see WaveMsgSpinner#setProperties()
 	 */
 	public WaveMsgSpinner() {
 		super();
@@ -40,6 +44,7 @@ public class WaveMsgSpinner extends JSpinner {
 	 * 내용에 관련된 Model 객체 초기화 <br>
 	 * 
 	 * @param spinnerModel 모델
+	 * @see WaveMsgSpinner#setProperties()
 	 */
 	public WaveMsgSpinner(SpinnerModel spinnerModel) {
 		super(spinnerModel);
@@ -55,5 +60,9 @@ public class WaveMsgSpinner extends JSpinner {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
+		
 	}
 }

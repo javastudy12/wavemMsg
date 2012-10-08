@@ -14,12 +14,18 @@ package com.wavem.msgp.component;
  * 폰트 설정 창으로부터 폰트 데이터를 받기 위한 인터페이스
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
  */
 public interface WaveMsgFontInterface {
 	
 	/**
 	 * 폰트 설정
 	 */
-	public void setFontNColor();
+	public void setFrameFont();
+	
+	/**
+	 * 색상 설정
+	 */
+	public void setFrameColor();
 }

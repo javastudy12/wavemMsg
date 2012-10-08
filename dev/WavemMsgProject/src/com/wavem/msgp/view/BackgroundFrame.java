@@ -21,7 +21,9 @@ import com.wavem.msgp.component.WaveMsgFrame;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see PropertiesInfo#getInstance()
  */
 public class BackgroundFrame extends WaveMsgFrame {
 
@@ -35,6 +37,8 @@ public class BackgroundFrame extends WaveMsgFrame {
 	/**
 	 * 배경 설정 화면 생성자 <br>
 	 * 최초에 makeInitFrame()호출 <br>
+	 * 
+	 * @see BackgroundFrame#makeInitFrame()
 	 */
 	private BackgroundFrame() {
 		makeInitFrame();

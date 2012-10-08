@@ -22,7 +22,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 콤보박스
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JComboBox
  */
 public class WaveMsgComboBox extends JComboBox {
 
@@ -30,6 +32,8 @@ public class WaveMsgComboBox extends JComboBox {
 
 	/**
 	 * 콤보박스 기본 생성자
+	 * 
+	 * @see WaveMsgComboBox#setProperties()
 	 */
 	public WaveMsgComboBox() {
 		super();
@@ -41,6 +45,7 @@ public class WaveMsgComboBox extends JComboBox {
 	 * 콤보박스 리스트 데이터 ComboBoxModel객체를 초기화한다. <br>
 	 * 
 	 * @param combox list model
+	 * @see WaveMsgComboBox#setProperties()
 	 */
 	public WaveMsgComboBox(ComboBoxModel<String> combox) {
 		super(combox);
@@ -52,6 +57,7 @@ public class WaveMsgComboBox extends JComboBox {
 	 * 모든 타입의 배열을 받아 초기화한다. <br>
 	 * 
 	 * @param array 배열
+	 * @see WaveMsgComboBox#setProperties()
 	 */
 	public WaveMsgComboBox(Object[] array) {
 		super(array);
@@ -63,6 +69,7 @@ public class WaveMsgComboBox extends JComboBox {
 	 * Vector 객체를 받아 초기화한다. <br>
 	 * 
 	 * @param vector 콤보 리스트
+	 * @see WaveMsgComboBox#setProperties()
 	 */
 	public WaveMsgComboBox(Vector<String> vector) {
 		super(vector);
@@ -78,5 +85,8 @@ public class WaveMsgComboBox extends JComboBox {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 }

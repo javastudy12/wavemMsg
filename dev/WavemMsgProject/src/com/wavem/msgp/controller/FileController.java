@@ -19,7 +19,9 @@ import com.wavem.msgp.dto.FileInfo;
  * 파일 전송을 위한 컨트롤러
  * 
  * @author 
- * 
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class FileController {
 

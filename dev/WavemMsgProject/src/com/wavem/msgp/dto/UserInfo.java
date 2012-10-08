@@ -12,12 +12,13 @@ package com.wavem.msgp.dto;
 
 import java.awt.Image;
 
-
 /**
  * 사용자 정보 클래스
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class UserInfo extends DataInfoDto{
 

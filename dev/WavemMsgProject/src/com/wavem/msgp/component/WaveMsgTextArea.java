@@ -20,7 +20,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 텍스트 에어리어 
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JTextArea
  */
 public class WaveMsgTextArea extends JTextArea {
 	
@@ -28,6 +30,8 @@ public class WaveMsgTextArea extends JTextArea {
 
 	/**
 	 * 텍스트 에어리어 기본 생성자
+	 * 
+	 * @see WaveMsgTextArea#setProperties()
 	 */
 	public WaveMsgTextArea() {
 		super();
@@ -40,6 +44,7 @@ public class WaveMsgTextArea extends JTextArea {
 	 * 
 	 * @param row 행
 	 * @param col 열
+	 * @see WaveMsgTextArea#setProperties()
 	 */
 	public WaveMsgTextArea(int row, int col) {
 		super(row, col);
@@ -55,6 +60,9 @@ public class WaveMsgTextArea extends JTextArea {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 
 }

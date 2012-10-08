@@ -22,8 +22,10 @@ import com.wavem.msgp.main.MsgMain;
  * 서버와 데이터 통신을 위한 컨트롤러 <br>
  * 기본적인 CRUD 인터페이스를 가지고 있다. <br>
  * 
- * @author HG01362
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class DataController {
 	

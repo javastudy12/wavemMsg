@@ -22,7 +22,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 리스트
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JList
  */
 public class WaveMsgList extends JList {
 
@@ -30,6 +32,8 @@ public class WaveMsgList extends JList {
 
 	/**
 	 * 리스트 기본 생성자
+	 * 
+	 * @see WaveMsgList#setProperties()
 	 */
 	public WaveMsgList() {
 		super();
@@ -41,6 +45,7 @@ public class WaveMsgList extends JList {
 	 * ListModel 객체 초기화 <br>
 	 * 
 	 * @param listModel 리스트
+	 * @see WaveMsgList#setProperties()
 	 */
 	public WaveMsgList(ListModel<String> listModel) {
 		super(listModel);
@@ -52,6 +57,7 @@ public class WaveMsgList extends JList {
 	 * 모든 객체 배열 초기화 <br>
 	 * 
 	 * @param array 배열
+	 * @see WaveMsgList#setProperties()
 	 */
 	public WaveMsgList(Object[] array) {
 		super(array);
@@ -63,6 +69,7 @@ public class WaveMsgList extends JList {
 	 * Vector 객체 초기화 <br>
 	 * 
 	 * @param vector 리스트
+	 * @see WaveMsgList#setProperties()
 	 */
 	public WaveMsgList(Vector<String> vector) {
 		super(vector);
@@ -78,6 +85,9 @@ public class WaveMsgList extends JList {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 
 }

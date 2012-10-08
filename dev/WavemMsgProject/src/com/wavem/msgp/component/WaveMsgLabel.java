@@ -21,7 +21,9 @@ import com.wavem.msgp.comm.PropertiesInfo;
  * 라벨
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see JLabel
  */
 public class WaveMsgLabel extends JLabel {
 
@@ -29,6 +31,8 @@ public class WaveMsgLabel extends JLabel {
 
 	/**
 	 * 라벨 기본 생성자
+	 * 
+	 * @see WaveMsgLabel#setProperties()
 	 */
 	public WaveMsgLabel() {
 		super();
@@ -40,6 +44,7 @@ public class WaveMsgLabel extends JLabel {
 	 * 이미지 아이콘 초기화 <br>
 	 * 
 	 * @param icon 아이콘 이미지
+	 * @see WaveMsgLabel#setProperties()
 	 */
 	public WaveMsgLabel(Icon icon) {
 		super(icon);
@@ -51,6 +56,7 @@ public class WaveMsgLabel extends JLabel {
 	 * 라벨 텍스트 초기화 <br>
 	 * 
 	 * @param str 라벨 텍스트
+	 * @see WaveMsgLabel#setProperties()
 	 */
 	public WaveMsgLabel(String str) {
 		super(str);
@@ -63,6 +69,7 @@ public class WaveMsgLabel extends JLabel {
 	 * 
 	 * @param icon 아이콘 이미지
 	 * @param i 정렬
+	 * @see WaveMsgLabel#setProperties()
 	 */
 	public WaveMsgLabel(Icon icon, int i) {
 		super(icon, i);
@@ -75,6 +82,7 @@ public class WaveMsgLabel extends JLabel {
 	 * 
 	 * @param str 라벨 텍스트
 	 * @param i 정렬
+	 * @see WaveMsgLabel#setProperties()
 	 */
 	public WaveMsgLabel(String str, int i) {
 		super(str, i);
@@ -88,6 +96,7 @@ public class WaveMsgLabel extends JLabel {
 	 * @param str 라벨 텍스트
 	 * @param icon 아이콘 이미지
 	 * @param i 정렬
+	 * @see WaveMsgLabel#setProperties()
 	 */
 	public WaveMsgLabel(String str, Icon icon, int i) {
 		super(str, icon, i);
@@ -103,6 +112,9 @@ public class WaveMsgLabel extends JLabel {
 		
 		// 폰트 설정
 		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+		
+		// 색상 설정
+		setForeground(property.getColor());
 	}
 
 }
