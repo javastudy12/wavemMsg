@@ -548,7 +548,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		alarmChkBox.setBounds(22, 551, 115, 23);
 		getContentPane().add(alarmChkBox);
 		
-		JLabel alarmPathLbl = new JLabel("알림음 경로");
+		WaveMsgLabel alarmPathLbl = new WaveMsgLabel("알림음 경로");
 		alarmPathLbl.setBounds(32, 581, 89, 15);
 		getContentPane().add(alarmPathLbl);
 		

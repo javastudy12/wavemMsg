@@ -1,30 +1,93 @@
+/* ********************************************************************************************************
+ * Project    : WavemMessenger
+ * FileName   : WaveMsgTextField.java
+ * Date       : 2012.09.25
+ * 
+ * ModifyDate : 
+ * Comment    :
+ * 
+ * ********************************************************************************************************/
+
 package com.wavem.msgp.component;
+
+import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 
+import com.wavem.msgp.comm.PropertiesInfo;
+
+/**
+ * 텍스트 필드
+ * 
+ * @author 정재요
+ *
+ */
 public class WaveMsgTextField extends JTextField {
 
 	private static final long serialVersionUID = -6996038169410735037L;
 
+	/**
+	 * 텍스트 필드 기본 생성자
+	 */
 	public WaveMsgTextField() {
 		super();
+		setProperties();
 	}
 
-	public WaveMsgTextField(int i) {
-		super(i);
+	/**
+	 * 텍스트 필드 생성자 <br>
+	 * 열 초기화 <br>
+	 * 
+	 * @param columns 열
+	 */
+	public WaveMsgTextField(int columns) {
+		super(columns);
 	}
 
-	public WaveMsgTextField(String str) {
-		super(str);
+	/**
+	 * 텍스트 필드 생성자 <br>
+	 * 텍스트 필드 문자열 초기화 <br>
+	 * 
+	 * @param text 문자열
+	 */
+	public WaveMsgTextField(String text) {
+		super(text);
+		setProperties();
 	}
 
-	public WaveMsgTextField(String str, int i) {
-		super(str, i);
+	/**
+	 * 텍스트 필드 생성자 <br>
+	 * 텍스트 필드 문자열과 열 초기화 <br>
+	 * @param text 문자열
+	 * @param columns 열
+	 */
+	public WaveMsgTextField(String text, int columns) {
+		super(text, columns);
+		setProperties();
 	}
 
-	public WaveMsgTextField(Document doc, String str, int i) {
-		super(doc, str, i);
+	/**
+	 * 텍스트 필드 생성자 <br>
+	 * 텍스트 필드 생성모델을 위한 Document와 문자열, 열 초기화 <br>
+	 *  
+	 * @param doc 모델
+	 * @param text 무자열
+	 * @param columns 열
+	 */
+	public WaveMsgTextField(Document doc, String text, int columns) {
+		super(doc, text, columns);
+		setProperties();
 	}
 
+	/**
+	 * 환경설정에 의한 설정 적용
+	 */
+	public void setProperties() {
+		
+		PropertiesInfo property = PropertiesInfo.getInstance();
+		
+		// 폰트 설정
+		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
+	}
 }
