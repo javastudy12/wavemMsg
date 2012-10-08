@@ -12,6 +12,7 @@ package com.wavem.msgp.component;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -20,6 +21,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JScrollPane;
+
+import com.wavem.msgp.comm.PropertiesInfo;
 
 /**
  * 
@@ -35,20 +38,44 @@ public class WaveMsgScrollPane extends JScrollPane {
 	/** 배경 등록 Image 인스턴스 변수 */
 	private Image img = null;
 	
+	/**
+	 * 스크롤 패널 기본 생성자
+	 */
 	public WaveMsgScrollPane() {
 		super();
+		setProperties();
 	}
 	
-	public WaveMsgScrollPane(int arg0, int arg1) {
-		super(arg0, arg1);
+	/**
+	 * 스크롤 패널 생성자 <br>
+	 * 횡스크롤 종스크롤 초기화 <br>
+	 * 
+	 * @param vsbPolicy 종스크롤
+	 * @param hsbPolicy 횡스크롤
+	 */
+	public WaveMsgScrollPane(int vsbPolicy, int hsbPolicy) {
+		super(vsbPolicy, hsbPolicy);
+		setProperties();
 	}
 	
-	public  WaveMsgScrollPane(Component component) {
-		super(component);
+	/**
+	 * 스크롤 패널 생성자 <br>
+	 * @param view
+	 */
+	public  WaveMsgScrollPane(Component view) {
+		super(view);
+		setProperties();
 	}
 	
-	public  WaveMsgScrollPane(Component component, int arg0, int arg1) {
-		super(component, arg0, arg1);
+	/**
+	 * 스크롤 패널 생성자 <br>
+	 * @param view
+	 * @param vsbPolicy
+	 * @param hsbPolicy
+	 */
+	public  WaveMsgScrollPane(Component view, int vsbPolicy, int hsbPolicy) {
+		super(view, vsbPolicy, hsbPolicy);
+		setProperties();
 	}
 
 	/**
@@ -114,6 +141,17 @@ public class WaveMsgScrollPane extends JScrollPane {
 		} else {
 			return super.getPreferredSize();
 		}
+	}
+	
+	/**
+	 * 환경설정에 의한 설정 적용
+	 */
+	public void setProperties() {
+		
+		PropertiesInfo property = PropertiesInfo.getInstance();
+		
+		// 폰트 설정
+		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
 	}
 
 }

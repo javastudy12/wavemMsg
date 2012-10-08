@@ -11,14 +11,18 @@
 package com.wavem.msgp.component;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import com.wavem.msgp.comm.PropertiesInfo;
 
 /**
  * 패널 <br>
@@ -29,7 +33,7 @@ import javax.swing.JPanel;
  * 	panel.setImage(file);
  * </pre>
  * 
- * @author 
+ * @author 정재요
  *
  */
 public class WaveMsgPanel extends JPanel {
@@ -40,13 +44,55 @@ public class WaveMsgPanel extends JPanel {
 	private Image img = null;
 	
 	/**
+	 * 패널 기본 생성자
+	 */
+	public WaveMsgPanel() {
+		super();
+		setProperties();
+	}
+	
+	/**
+	 * 패널 생성자 <br>
+	 * 더블 버퍼링 사용 유무 초기화 <br>
+	 * 
+	 * @param b 더블 버퍼링 유무
+	 */
+	public WaveMsgPanel(boolean b) {
+		super(b);
+		setProperties();
+	}
+	
+	/**
+	 * 패널 생성자 <br>
+	 * 레이아웃 초기화 <br>
+	 * 
+	 * @param layoutMgr 레이아웃
+	 */
+	public WaveMsgPanel(LayoutManager layoutMgr) {
+		super(layoutMgr);
+		setProperties();
+	}
+	
+	/**
+	 * 패널 생성자 <br>
+	 * 더블 버퍼링 사용 유무 및 레이아웃 초기화 <br>
+	 * 
+	 * @param layoutMgr 레이아웃
+	 * @param b 더블 버퍼링 유무
+	 */
+	public WaveMsgPanel(LayoutManager layoutMgr, boolean b) {
+		super(layoutMgr, b);
+		setProperties();
+	}
+	
+	/**
 	 * 이미지 설정
 	 * 
 	 * @param img 이미지
 	 */
 	public final void setImage(Image img) {
 		this.img = img;
-		repaint();
+		repaint(); // 새로운 이미지로 화면을 새로그림
 	}
 	
 	/**
@@ -101,5 +147,16 @@ public class WaveMsgPanel extends JPanel {
 		} else {
 			return super.getPreferredSize();
 		}
+	}
+	
+	/**
+	 * 환경설정에 의한 설정 적용
+	 */
+	public void setProperties() {
+		
+		PropertiesInfo property = PropertiesInfo.getInstance();
+		
+		// 폰트 설정
+		setFont(new Font(property.getFont(), property.getFontStyle(), property.getFontSize()));
 	}
 }
