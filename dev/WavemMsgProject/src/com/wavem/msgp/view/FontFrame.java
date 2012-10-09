@@ -11,6 +11,7 @@
 package com.wavem.msgp.view;
 
 import com.wavem.msgp.comm.PropertiesInfo;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
@@ -21,7 +22,10 @@ import com.wavem.msgp.component.WaveMsgFrame;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
+ * @deprecated 사용하는 프레임 변경 {@link WaveMsgFontFrame}
  */
 public class FontFrame extends WaveMsgFrame{
 	
@@ -36,8 +40,10 @@ public class FontFrame extends WaveMsgFrame{
 	/**
 	 * 채팅 폰트 및 색상 설정 화면 <br>
 	 * 최초 makeInitFrame()호출 <br>
+	 * 
+	 * @throws WaveMsgException 
 	 */
-	private FontFrame() {
+	private FontFrame() throws WaveMsgException {
 		makeInitFrame();
 	}
 	
@@ -45,8 +51,9 @@ public class FontFrame extends WaveMsgFrame{
 	 * 채팅 폰트 및 색상 설정 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 채팅 폰트 및 색상 설정 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static FontFrame getInstance() {
+	public static FontFrame getInstance() throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (FontFrame.class) {
@@ -60,7 +67,7 @@ public class FontFrame extends WaveMsgFrame{
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
 	}
 	
@@ -92,7 +99,7 @@ public class FontFrame extends WaveMsgFrame{
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

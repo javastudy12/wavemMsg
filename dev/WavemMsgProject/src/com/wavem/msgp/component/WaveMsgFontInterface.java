@@ -19,13 +19,15 @@ package com.wavem.msgp.component;
  */
 public interface WaveMsgFontInterface {
 	
-	/**
-	 * 폰트 설정
+	/**  
+	 * 폰트 설정 화면에서 호출 <br>
+	 * 폰트 미리보기 설정 및 데이터 설정 <br>
 	 */
 	public void setFrameFont();
 	
-	/**
-	 * 색상 설정
+	/**  
+	 * 폰트 설정 화면에서 호출 <br>
+	 * 컬러 미리보기 설정 및 데이터 설정 <br>
 	 */
 	public void setFrameColor();
 }

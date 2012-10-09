@@ -47,14 +47,16 @@ import com.wavem.msgp.component.WaveMsgTextPane;
  * 폰트 선택 공통 프레임
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class WaveMsgFontFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = 2009641432934265812L;
 
-	/** 현재 화면 타이틀 */
-	private String title = "폰트 설정";
+	/** 타이틀 */
+	private String title = CommMsg.FONT_FRAME_TITLE;
 	
 	/** 폰트 설정을 요청한 프레임 */
 	private WaveMsgFontInterface frame = null;
@@ -114,20 +116,14 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 		 * 환경변수 및 채팅 설정 구분 끝
 		 * *************************************************************/
 		
-		try {
-			makeInitFrame();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new WaveMsgException(CommMsg.LOAD_FRAME_ERROR);
-		}
-		
+		makeInitFrame();
 	}
 	
 	@Override
-	public void makeInitFrame() throws Exception {
+	public void makeInitFrame() throws WaveMsgException {
 		
 		getContentPane().setLayout(null);
-		setBounds(100, 100, 400, 524);
+		setBounds(100, 100, 238, 524);
 		setTitle(this.title);
 		
 		/* *************************************************************
@@ -214,20 +210,6 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 		sizeCombo.setBounds(134, 300, 54, 21);
 		panel_font.add(sizeCombo);
 		/* *************************************************************
-		 * 폰트 기타 및 크기 끝
-		 * *************************************************************/
-		
-		
-		
-		/* *************************************************************
-		 * 색상 설정 시작
-		 * *************************************************************/
-		WaveMsgPanel panel_color = new WaveMsgPanel();
-		panel_color.setBackground(Color.WHITE);
-		panel_color.setBounds(211, 10, 161, 330);
-		getContentPane().add(panel_color);
-		panel_color.setLayout(null);
-		/* *************************************************************
 		 * 색상 설정 끝
 		 * *************************************************************/
 		
@@ -238,7 +220,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 		 * *************************************************************/
 		JPanel panel_preview = new JPanel();
 		panel_preview.setBackground(Color.WHITE);
-		panel_preview.setBounds(12, 339, 360, 100);
+		panel_preview.setBounds(12, 339, 200, 100);
 		getContentPane().add(panel_preview);
 		panel_preview.setLayout(null);
 		
@@ -249,7 +231,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 		
 		txtpnHello = new WaveMsgTextPane();
 		txtpnHello.setText(" - 가나다라마바사\r\n - Aa Bb Cc Dd Ee\r\n");
-		txtpnHello.setBounds(22, 30, 281, 51);
+		txtpnHello.setBounds(22, 30, 157, 51);
 		panel_preview.add(txtpnHello);
 		
 		/* *************************************************************
@@ -264,7 +246,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 				close();
 			}
 		});
-		closeBtn.setBounds(312, 449, 60, 23);
+		closeBtn.setBounds(152, 449, 60, 23);
 		getContentPane().add(closeBtn);
 		
 		// 확인 버튼
@@ -275,7 +257,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 				apply();
 			}
 		});
-		okBtn.setBounds(240, 449, 60, 23);
+		okBtn.setBounds(80, 449, 60, 23);
 		getContentPane().add(okBtn);
 		
 		
@@ -457,7 +439,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// 로컬에서만 동작하기에 필요 없음
 	}
 

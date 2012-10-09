@@ -17,10 +17,14 @@ import java.awt.Graphics;
 import java.awt.Insets;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
+import com.wavem.msgp.component.WaveMsgDialogBox;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgPanel;
@@ -40,10 +44,15 @@ import javax.swing.JPanel;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class MessageFrame extends WaveMsgFrame{
 	private static final long serialVersionUID = 4637357102247158992L;
+	
+	/** 타이틀 */
+	private String title = CommMsg.WMSG_FRAME_TITLE;
 	
 	/**
 	 * 쪽지창 상태 <br>
@@ -77,8 +86,10 @@ public class MessageFrame extends WaveMsgFrame{
 	 * 쪽지창 생성자 <br>
 	 * 생성 시 자동으로 쪽지 쓰기창 생성 <br>
 	 * 최초 makeInitFrame()호출 <br>
+	 * 
+	 * @throws WaveMsgException 
 	 */
-	public MessageFrame(){
+	public MessageFrame() throws WaveMsgException{
 		getContentPane().setBackground(Color.WHITE);
 		makeInitFrame();
 	}
@@ -89,16 +100,23 @@ public class MessageFrame extends WaveMsgFrame{
 	 * 최초 makeInitFrame()호출 <br>
 	 * 
 	 * @param convertingFlag
+	 * @throws WaveMsgException 
 	 */
-	public MessageFrame(boolean convertingFlag) {
+	public MessageFrame(boolean convertingFlag) throws WaveMsgException {
 		this.convertingFlag = convertingFlag;
 		makeInitFrame();
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 367, 343);
+		if (convertingFlag) {
+			this.title = CommMsg.WMSG_FRAME_TITLE;
+		} else {
+			this.title = CommMsg.RMSG_FRAME_TITLE;
+		}
+		setTitle(this.title);
 		
 		/* ********************************************************************
 		 * TOP 패널
@@ -232,7 +250,16 @@ public class MessageFrame extends WaveMsgFrame{
 	 * 쪽지 답장
 	 */
 	public void replyMsg() {
-		MessageFrame frame = new MessageFrame(true);
+		
+		MessageFrame frame = null;
+		
+		try {
+			frame = new MessageFrame(true);
+		} catch (WaveMsgException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+		}
+		
 		frame.setVisible(true);
 		close();
 	}
@@ -249,12 +276,12 @@ public class MessageFrame extends WaveMsgFrame{
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public static void main(String[] a) {
+	public static void main(String[] a) throws WaveMsgException {
 		MessageFrame frame = new MessageFrame(false);
 		frame.setVisible(true);
 	}

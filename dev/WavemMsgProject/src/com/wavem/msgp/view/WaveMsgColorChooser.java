@@ -28,14 +28,16 @@ import com.wavem.msgp.component.WaveMsgFrame;
  * 색상 설정 화면
  * 
  * @author 정재요
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class WaveMsgColorChooser extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -6672717492693301946L;
 
-	/** 현재 화면 타이틀 */
-	private String title = "색상 설정";
+	/** 타이틀 */
+	private String title = CommMsg.COLOR_FRAME_TITLE;
 	
 	/** 폰트 설정을 요청한 프레임 */
 	private WaveMsgFontInterface frame = null;
@@ -55,16 +57,11 @@ public class WaveMsgColorChooser extends WaveMsgFrame {
 		this.frame = frame; // 컬러 요청한 인스턴스
 		this.color = color; // 기존에 지정된 컬러
 		
-		try {
-			makeInitFrame();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new WaveMsgException(CommMsg.LOAD_FRAME_ERROR);
-		}
+		makeInitFrame();
 	}
 	
 	@Override
-	public void makeInitFrame() throws Exception {
+	public void makeInitFrame() throws WaveMsgException {
 		
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 624, 435);
@@ -132,9 +129,8 @@ public class WaveMsgColorChooser extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// 로컬에서만 동작하기에 따로 구현할 필요 없다.
-		
 	}
 	
 	public static void main(String[] s) throws WaveMsgException {

@@ -14,6 +14,8 @@ import java.awt.Color;
 
 import javax.swing.JOptionPane;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgCheckBox;
 import com.wavem.msgp.component.WaveMsgDialogBox;
@@ -27,8 +29,11 @@ import java.awt.event.MouseEvent;
 
 /**
  * 최초 로그인 시 비밀번호 등록 화면
- * @author 
- *
+ * 
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class LoginRegPwFrame extends WaveMsgFrame {
 
@@ -36,6 +41,9 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 	
 	/** 로그인 화면 */
 	LoginFrame loginFrame = null;
+	
+	/** 타이틀 */
+	private String title = CommMsg.REG_PW_FRAME_TITLE;
 	
 	/** 비밀번호 입력 필드 */
 	private WaveMsgPasswordField pwField = null;
@@ -48,15 +56,15 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 	 * 
 	 * @param loginFrame 로그인 화면
 	 */
-	public LoginRegPwFrame(LoginFrame loginFrame) throws Exception {
+	public LoginRegPwFrame(LoginFrame loginFrame) throws WaveMsgException {
 		this.loginFrame = loginFrame;
 		makeInitFrame();
 	}
 
 	@Override
-	public void makeInitFrame() throws Exception {
+	public void makeInitFrame() throws WaveMsgException {
 
-		setTitle("최초 비밀번호 등록");
+		setTitle(this.title);
 
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -148,21 +156,21 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 		
 		// 비밀번호 체크
 		if (pwField.getText().trim().equals("")) {
-			new WaveMsgDialogBox("비밀번호 등록", "비밀번호를 입력하세요", JOptionPane.WARNING_MESSAGE);
+			new WaveMsgDialogBox(this.title, "비밀번호를 입력하세요", JOptionPane.WARNING_MESSAGE);
 			pwField.requestFocus();
 			return;
 		}
 		
 		// 비밀번호 확인 체크
 		if (pwChkField.getText().trim().equals("")) {
-			new WaveMsgDialogBox("비밀번호 등록", "비밀번호 확인을 입력하세요", JOptionPane.WARNING_MESSAGE);
+			new WaveMsgDialogBox(this.title, "비밀번호 확인을 입력하세요", JOptionPane.WARNING_MESSAGE);
 			pwChkField.requestFocus();
 			return;
 		}
 		
 		// 비밀번호와 비밀번호 확인 체크
 		if (!pwField.getText().trim().equals(pwChkField.getText().trim())) {
-			new WaveMsgDialogBox("비밀번호 등록", "비밀번호와 비밀번호확인이 다릅니다.", JOptionPane.WARNING_MESSAGE);
+			new WaveMsgDialogBox(this.title, "비밀번호와 비밀번호확인이 다릅니다.", JOptionPane.WARNING_MESSAGE);
 			pwField.requestFocus();
 			return;
 		}
@@ -179,7 +187,7 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -35,6 +35,8 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgComboBox;
 import com.wavem.msgp.component.WaveMsgDialogBox;
@@ -54,7 +56,9 @@ import com.wavem.msgp.dto.UserInfo;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class ProfileFrame extends WaveMsgFrame {
 
@@ -62,6 +66,9 @@ public class ProfileFrame extends WaveMsgFrame {
 
 	/** 프로필 설정 화면 인스턴스 변수 */
 	private static ProfileFrame frame = null;
+
+	/** 타이틀 */
+	private String title = CommMsg.PROFILE_FRAME_TITLE;
 	
 	/** 사용자 정보를 담고 있는 UserInfo 인스턴스 변수 */
 	private UserInfo userInfo = null;
@@ -130,11 +137,13 @@ public class ProfileFrame extends WaveMsgFrame {
 	/**
 	 * 프로필 설정 생성자 <br>
 	 * 최초 makeInitFrame() 호출 <br>
+	 * @throws WaveMsgException 
 	 */
-	private ProfileFrame(UserInfo userInfo) {
+	private ProfileFrame(UserInfo userInfo) throws WaveMsgException {
 		getContentPane().setBackground(Color.WHITE);
 		this.userInfo = userInfo;
 		this.userUpdateInfo = userInfo;
+		
 		makeInitFrame();
 	}
 	
@@ -142,8 +151,9 @@ public class ProfileFrame extends WaveMsgFrame {
 	 * 프로필 설정 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 프로필 설정 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static ProfileFrame getInstance(UserInfo userInfo) {
+	public static ProfileFrame getInstance(UserInfo userInfo) throws WaveMsgException {
 		
 		if (frame == null) { // 생성된 인스턴스가 없는 경우 새로 생성
 			synchronized (ProfileFrame.class) {
@@ -157,9 +167,10 @@ public class ProfileFrame extends WaveMsgFrame {
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 416, 510);
+		setTitle(this.title);
 		
 		/* ****************************************************
 		 * 프로필 사진 설정 패널 시작
@@ -675,7 +686,7 @@ public class ProfileFrame extends WaveMsgFrame {
 				imgPath = profileImgPath.getAbsoluteFile() + "\\" + e.getItem().toString() + ".png";
 				profileImg.setImage(new File(imgPath));
 			} catch (IOException e1) {
-				new WaveMsgDialogBox("프로필", "선택한 이미지가 없습니다.", JOptionPane.ERROR_MESSAGE);
+				new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -711,7 +722,7 @@ public class ProfileFrame extends WaveMsgFrame {
 				profileImg.setImage(atemp);// 이미지 적용한다. // 이미지 변환
 				
 			} catch (IOException e) {
-				new WaveMsgDialogBox("프로필", "선택한 이미지가 없습니다.", JOptionPane.ERROR_MESSAGE);
+				new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -749,12 +760,12 @@ public class ProfileFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public static void main(String[] sd) {
+	public static void main(String[] sd) throws WaveMsgException {
 		ProfileFrame frame = ProfileFrame.getInstance(new UserInfo());
 		frame.setVisible(true);
 	}

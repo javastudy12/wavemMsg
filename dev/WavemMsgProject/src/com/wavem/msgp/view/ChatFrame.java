@@ -17,6 +17,8 @@ import java.util.List;
 
 import javax.swing.ScrollPaneConstants;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgList;
 import com.wavem.msgp.component.WaveMsgPanel;
@@ -32,12 +34,17 @@ import javax.swing.JPanel;
  * 	ChatFrame chatFrame = new ChatFrame("USERID201209241623");
  * </pre>
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class ChatFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = 7546904889590160105L;
+	
+	/** 타이틀 */
+	private String title = CommMsg.CHAT_FRAME_TITLE;
 	
 	/**	채팅 내역 */
 	private String chatHistory = "";
@@ -63,18 +70,19 @@ public class ChatFrame extends WaveMsgFrame {
 	 * 생성자를 통해 서비스ID와 사용자 리스트 생성<br>
 	 * 
 	 * @param chatServiceId 서비스 ID
+	 * @throws WaveMsgException 
 	 */
-	public ChatFrame(String chatServiceId) {
+	public ChatFrame(String chatServiceId) throws WaveMsgException {
 		this.chatServiceId = chatServiceId;
 		this.userList = Collections.synchronizedList(new ArrayList<UserInfo>());
 		makeInitFrame();
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 500, 598);
-		setTitle("채팅");
+		setTitle(this.title);
 		
 		/* *********************************************************
 		 * 대화 내역 창 시작
@@ -246,7 +254,7 @@ public class ChatFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

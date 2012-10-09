@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 
+import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
@@ -39,12 +40,17 @@ import java.awt.event.KeyEvent;
  * 	LoginFrame loginFrame = new LoginFrame();
  * </pre>
  * 
- * @author 
- *
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class LoginFrame extends WaveMsgFrame{
 	
 	private static final long serialVersionUID = -4114307065580336554L;
+	
+	/** 타이틀 */
+	private String title = CommMsg.LOGIN_FRAME_TITLE;
 	
 	/** ID입력 필드 */
 	private WaveMsgTextField idField = null;
@@ -61,22 +67,20 @@ public class LoginFrame extends WaveMsgFrame{
 	/**
 	 * 로그인 화면 생성자 <br>
 	 * 최초에 makeInitFrame()호출 <br>
+	 * 
+	 * @throws WaveMsgException 
 	 */
-	public LoginFrame() {
+	public LoginFrame() throws WaveMsgException {
 
-		try {
-			properties = PropertiesInfo.getInstance();
-			MsgMainFrame.getInstance().close(); // 실패한 메인 화면 종료
-			makeInitFrame();
-		} catch (Exception e) {
-			new WaveMsgDialogBox("로그인", e.getMessage(), JOptionPane.ERROR_MESSAGE);
-		}
+		properties = PropertiesInfo.getInstance();
+		MsgMainFrame.getInstance().close(); // 실패한 메인 화면 종료
+		makeInitFrame();
 	}
 	
 	@Override
-	public void makeInitFrame() throws Exception {
+	public void makeInitFrame() throws WaveMsgException {
 		
-		setTitle("로그인");
+		setTitle(this.title);
 		
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -182,14 +186,14 @@ public class LoginFrame extends WaveMsgFrame{
 		
 		// ID 체크
 		if (idField.getText().trim().equals("")) {
-			new WaveMsgDialogBox("로그인", "ID를 입력하세요", JOptionPane.WARNING_MESSAGE);
+			new WaveMsgDialogBox(this.title, CommMsg.ID_NOT_NULL_WARNING, JOptionPane.WARNING_MESSAGE);
 			idField.requestFocus();
 			return;
 		}
 		
 		// 비밀번호 체크
 		if (passwordField.getText().trim().equals("")) {
-			new WaveMsgDialogBox("로그인", "비밀번호를 입력하세요", JOptionPane.WARNING_MESSAGE);
+			new WaveMsgDialogBox(this.title, CommMsg.PW_NOT_NULL_WARNING, JOptionPane.WARNING_MESSAGE);
 			passwordField.requestFocus();
 			return;
 		}
@@ -208,9 +212,8 @@ public class LoginFrame extends WaveMsgFrame{
 		// 데이터 전송
 		try {
 			dataCtrl.selectData();
- 			
 		} catch (WaveMsgException e) {
-			new WaveMsgDialogBox("로그인", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -228,7 +231,7 @@ public class LoginFrame extends WaveMsgFrame{
 			frame = new LoginRegPwFrame(this); // 비밀번호 등록 화면 생성
 			frame.setVisible(true);
 		} catch (Exception e) {
-			new WaveMsgDialogBox("비밀번호 등록", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -243,14 +246,20 @@ public class LoginFrame extends WaveMsgFrame{
 		
 		MsgMainFrame.setLoginUser(new UserInfo()); // TODO : 실제 서버에서 가져온 데이터를 넣어야함
 		
-		MsgMainFrame frame =  MsgMainFrame.getInstance(); // 메인 생성
+		MsgMainFrame frame = null;
+		try {
+			frame = MsgMainFrame.getInstance();
+		} catch (WaveMsgException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+		} // 메인 생성
 		frame.setVisible(true);
 		
 		close(); // 로그인 화면 종료
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

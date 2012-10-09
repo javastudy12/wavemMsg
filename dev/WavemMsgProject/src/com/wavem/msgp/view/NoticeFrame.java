@@ -10,6 +10,8 @@
 
 package com.wavem.msgp.view;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
@@ -23,7 +25,9 @@ import com.wavem.msgp.component.WaveMsgFrame;
  * </pre>
  * 
  * @author
- * 
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class NoticeFrame extends WaveMsgFrame {
 
@@ -31,12 +35,17 @@ public class NoticeFrame extends WaveMsgFrame {
 
 	/** 공지사항 화면 인스턴스 변수 */
 	private static NoticeFrame frame = null;
+
+	/** 타이틀 */
+	private String title = CommMsg.NOTICE_FRAME_TITLE;
 	
 	/**
 	 * 공지사항 화면 생성자 <br>
 	 * 최초 makeInitFrame() 호출 <br>
+	 * 
+	 * @throws WaveMsgException 
 	 */
-	private NoticeFrame() {
+	private NoticeFrame() throws WaveMsgException {
 		makeInitFrame();
 	}
 	
@@ -44,8 +53,9 @@ public class NoticeFrame extends WaveMsgFrame {
 	 * 공지사항 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 공지사항 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static NoticeFrame getInstance() {
+	public static NoticeFrame getInstance() throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (NoticeFrame.class) {
@@ -59,8 +69,9 @@ public class NoticeFrame extends WaveMsgFrame {
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		setTitle(this.title);
 	}
 
 	@Override
@@ -92,7 +103,7 @@ public class NoticeFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

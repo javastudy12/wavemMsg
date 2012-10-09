@@ -12,7 +12,9 @@ package com.wavem.msgp.view;
 
 import java.io.File;
 
+import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
@@ -30,6 +32,9 @@ import com.wavem.msgp.component.WaveMsgFrame;
 public class ChatBoxFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = 3447984774238008875L;
+
+	/** 타이틀 */
+	private String title = CommMsg.CHAT_HISTORY_FRAME_TITLE;
 	
 	/** 저장한 대화 내역을 위한 File field */
 	private File chatFile = null;
@@ -40,12 +45,13 @@ public class ChatBoxFrame extends WaveMsgFrame {
 	/**
 	 * 대화내역 화면 생성자<br>
 	 * 최초 실행 시 File인스턴스 생성 및 makeInitFrame() 호출<br>
+	 * @throws WaveMsgException 
 	 * 
 	 * @see PropertiesInfo#getInstance()
 	 * @see PropertiesInfo#getChatSavePath()
 	 * @see ChatBoxFrame#makeInitFrame()
 	 */
-	private ChatBoxFrame() {
+	private ChatBoxFrame() throws WaveMsgException {
 		PropertiesInfo properties = PropertiesInfo.getInstance(); // 대화저장 경로를 가져오기 위한 설정 인스턴스 획득
 		String filePath = properties.getChatSavePath(); // 설정되어있는 파일 경로
 		
@@ -57,8 +63,9 @@ public class ChatBoxFrame extends WaveMsgFrame {
 	 * 대화내역 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 대화내역 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static ChatBoxFrame getInstance() {
+	public static ChatBoxFrame getInstance() throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (ChatBoxFrame.class) {
@@ -72,8 +79,9 @@ public class ChatBoxFrame extends WaveMsgFrame {
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		setTitle(this.title);
 	}
 
 	@Override
@@ -96,7 +104,7 @@ public class ChatBoxFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

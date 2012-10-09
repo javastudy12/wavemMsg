@@ -13,6 +13,8 @@ package com.wavem.msgp.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.FileInfo;
 
@@ -24,11 +26,16 @@ import com.wavem.msgp.dto.FileInfo;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class FileUploadFrame extends WaveMsgFrame {
 	
 	private static final long serialVersionUID = 1783253655922461926L;
+	
+	/** 타이틀 */
+	private String title = CommMsg.FILE_UP_FRAME_TITLE;
 	
 	/** 파일 업로드 리스트 */
 	private List<FileInfo> fileList = null;
@@ -37,15 +44,18 @@ public class FileUploadFrame extends WaveMsgFrame {
 	 * 파일 업로드 화면 생성자 <br>
 	 * 파일 리스트 생성 <br>
 	 * 최초에 makeInitFrame()호출 <br>
+	 * 
+	 * @throws WaveMsgException 
 	 */
-	public FileUploadFrame() {
+	public FileUploadFrame() throws WaveMsgException {
 		fileList = new ArrayList<FileInfo>();
 		makeInitFrame();
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		setTitle(this.title);
 	}
 
 	@Override
@@ -68,7 +78,7 @@ public class FileUploadFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

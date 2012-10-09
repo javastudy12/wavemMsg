@@ -10,6 +10,8 @@
 
 package com.wavem.msgp.view;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
@@ -20,7 +22,9 @@ import com.wavem.msgp.component.WaveMsgFrame;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class FileBoxFrame extends WaveMsgFrame {
 	
@@ -29,11 +33,15 @@ public class FileBoxFrame extends WaveMsgFrame {
 	/** 파일내역 화면 인스턴스 변수 */
 	private static FileBoxFrame frame = null;
 	
+	/** 타이틀 */
+	private String title = CommMsg.FILE_HISTORY_FRAME_TITLE;
+	
 	/**
 	 * 파일내역 화면 생성자<br>
 	 * 최조 makeInitFrame()호출<br>
+	 * @throws WaveMsgException 
 	 */
-	private FileBoxFrame() {
+	private FileBoxFrame() throws WaveMsgException {
 		makeInitFrame();
 	}
 	
@@ -41,8 +49,9 @@ public class FileBoxFrame extends WaveMsgFrame {
 	 * 파일내역 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 파일내역 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static FileBoxFrame getInstance() {
+	public static FileBoxFrame getInstance() throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (FileBoxFrame.class) {
@@ -56,8 +65,9 @@ public class FileBoxFrame extends WaveMsgFrame {
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		setTitle(this.title);
 	}
 
 	@Override
@@ -73,7 +83,7 @@ public class FileBoxFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -12,6 +12,8 @@ package com.wavem.msgp.view;
 
 import java.util.List;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.UserInfo;
 
@@ -24,7 +26,9 @@ import com.wavem.msgp.dto.UserInfo;
  * </pre>
  * 
  * @author
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class InviteFrame extends WaveMsgFrame{
 	
@@ -32,6 +36,9 @@ public class InviteFrame extends WaveMsgFrame{
 	
 	/** 초대 화면 인스턴스 변수 */
 	private static InviteFrame frame = null;
+
+	/** 타이틀 */
+	private String title = CommMsg.INVITE_FRAME_TITLE;
 	
 	/** 현재 로그인 한 전체 사용자 리스트 */
 	private List<UserInfo> allUserList = null;
@@ -45,8 +52,9 @@ public class InviteFrame extends WaveMsgFrame{
 	 * 
 	 * @param allUserList 로그인한 전체 사용자
 	 * @param chatUserList 현재 참여한 사용자
+	 * @throws WaveMsgException 
 	 */
-	private InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) {
+	private InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
 		this.allUserList = allUserList;
 		this.chatUserList = chatUserList;
 		makeInitFrame();
@@ -56,8 +64,9 @@ public class InviteFrame extends WaveMsgFrame{
 	 * 초대 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 초대 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static InviteFrame getInstance(List<UserInfo> allUserList, List<UserInfo> chatUserList) {
+	public static InviteFrame getInstance(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (InviteFrame.class) {
@@ -71,8 +80,9 @@ public class InviteFrame extends WaveMsgFrame{
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		setTitle(this.title);
 	}
 	
 	@Override
@@ -116,7 +126,7 @@ public class InviteFrame extends WaveMsgFrame{
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

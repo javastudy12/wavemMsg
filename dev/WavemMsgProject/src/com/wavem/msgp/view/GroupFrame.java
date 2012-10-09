@@ -11,6 +11,8 @@
 
 package com.wavem.msgp.view;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
@@ -21,11 +23,16 @@ import com.wavem.msgp.component.WaveMsgFrame;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class GroupFrame extends WaveMsgFrame{
 	
 	private static final long serialVersionUID = -3827633116266407657L;
+	
+	/** 타이틀 */
+	private String title = CommMsg.GROUP_FRAME_TITLE;
 	
 	/** 그룹 화면 인스턴스 변수 */
 	private static GroupFrame frame = null;
@@ -33,8 +40,10 @@ public class GroupFrame extends WaveMsgFrame{
 	/**
 	 * 그룹화면 생성자 <br>
 	 * 최초 makeInitFrame()호출 <br>
+	 * 
+	 * @throws WaveMsgException 
 	 */
-	private GroupFrame() {
+	private GroupFrame() throws WaveMsgException {
 		makeInitFrame();
 	}
 	
@@ -42,8 +51,9 @@ public class GroupFrame extends WaveMsgFrame{
 	 * 그룹 화면을 위한 인스턴스 반환
 	 * 
 	 * @return 그룹 화면을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static GroupFrame getInstance() {
+	public static GroupFrame getInstance() throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (GroupFrame.class) {
@@ -57,8 +67,9 @@ public class GroupFrame extends WaveMsgFrame{
 	}
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		setTitle(this.title);
 	}
 	
 	@Override
@@ -116,7 +127,7 @@ public class GroupFrame extends WaveMsgFrame{
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -12,6 +12,8 @@ package com.wavem.msgp.component;
 
 import javax.swing.JFrame;
 
+import com.wavem.msgp.comm.WaveMsgException;
+
 /**
  * 프레임(화면) 구성 추상클래스
  * 
@@ -29,7 +31,7 @@ public abstract class WaveMsgFrame extends JFrame {
 	 * 
 	 * @throws Exception 화면 로드 예외
 	 */
-	public abstract void makeInitFrame() throws Exception ;
+	public abstract void makeInitFrame() throws WaveMsgException ;
 	
 	/**
 	 * 데이터 요청 후 응답 처리 메서드 <br>
@@ -37,7 +39,7 @@ public abstract class WaveMsgFrame extends JFrame {
 	 * 
 	 * @throws Exception 데이터 로드 예외
 	 */
-	public abstract void callBackData() throws Exception ;
+	public abstract void callBackData() throws WaveMsgException ;
 
 	/**
 	 * 화면 종료

@@ -10,7 +10,9 @@
 
 package com.wavem.msgp.view;
 
+import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
@@ -30,6 +32,9 @@ public class BackgroundFrame extends WaveMsgFrame {
 	private static final long serialVersionUID = -2400000915834485391L;
 	
 	private static BackgroundFrame frame = null;
+
+	/** 타이틀 */
+	private String title = CommMsg.BACKGROUND_FRAME_TITLE;
 	
 	/** 환경설정 인스턴스 */
 	private PropertiesInfo properties = PropertiesInfo.getInstance();
@@ -37,10 +42,11 @@ public class BackgroundFrame extends WaveMsgFrame {
 	/**
 	 * 배경 설정 화면 생성자 <br>
 	 * 최초에 makeInitFrame()호출 <br>
+	 * @throws WaveMsgException 
 	 * 
 	 * @see BackgroundFrame#makeInitFrame()
 	 */
-	private BackgroundFrame() {
+	private BackgroundFrame() throws WaveMsgException {
 		makeInitFrame();
 	}
 	
@@ -48,8 +54,9 @@ public class BackgroundFrame extends WaveMsgFrame {
 	 * 배경설정을 위한 인스턴스 반환
 	 * 
 	 * @return 배경설정을 위한 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static BackgroundFrame getInstance() {
+	public static BackgroundFrame getInstance() throws WaveMsgException {
 		
 		if (frame == null) {
 			synchronized (BackgroundFrame.class) {
@@ -63,8 +70,9 @@ public class BackgroundFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		setTitle(this.title);
 		
 	}
 
@@ -88,7 +96,7 @@ public class BackgroundFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

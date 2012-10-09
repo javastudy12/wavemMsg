@@ -53,20 +53,22 @@ import com.wavem.msgp.component.WaveMsgTextField;
  * </pre>
  * 
  * @author 
- *
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface {
 	
 	private static final long serialVersionUID = 8935617435151137888L;
-	
-	/** 타이틀 */
-	private String title = "환경 설정";
 	
 	/** 환경설정 인스턴스 변수 */
 	private PropertiesInfo properties = null;
 
 	/** 환경설정 화면 인스턴스 변수 */
 	private static PropertyFrame frame = null;
+
+	/** 타이틀 */
+	private String title = CommMsg.PROPERTY_FRAME_TITLE;
 	
 	/** 쪽지 자동 팝업 */
 	private WaveMsgCheckBox msgAutoPop = null;
@@ -198,12 +200,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		getContentPane().setBackground(Color.WHITE);
 		this.properties = PropertiesInfo.getInstance();
 		
-		try {
-			makeInitFrame();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new WaveMsgException(CommMsg.LOAD_FRAME_ERROR);
-		}
+		makeInitFrame();
 	}
 	
 	/**
@@ -226,14 +223,14 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	}
 	
 	@Override
-	public void makeInitFrame()  throws Exception  {
+	public void makeInitFrame() throws WaveMsgException {
 
 		// 환경설정창에서 데이터 로딩
 		loadPropertyInfo();
 		
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 416, 760);
-		setTitle(this.title);
+		setTitle(CommMsg.PROPERTY_FRAME_TITLE);
 		
 		/* *********************************************************
 		 * 기본 설정 시작
@@ -657,7 +654,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	public void savePropertyInfo() {
 		
 		// 저장 할 것인지 질문 메시지
-		WaveMsgDialogBox box = new WaveMsgDialogBox(this, "환경설정", CommMsg.SAVE_Q_MSG, JOptionPane.OK_CANCEL_OPTION);
+		WaveMsgDialogBox box = new WaveMsgDialogBox(this, this.title, CommMsg.SAVE_Q_MSG, JOptionPane.OK_CANCEL_OPTION);
 		
 		if (box.getResult() == 0) {
 			
@@ -688,7 +685,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 			System.out.println(properties.getAutoStatusChangeLimite());
 			try {
 				properties.savePropertiesFile();
-				new WaveMsgDialogBox(this.title, CommMsg.SAVE_MSG, JOptionPane.ERROR_MESSAGE);
+				new WaveMsgDialogBox(this.title, CommMsg.SAVE_MSG, JOptionPane.INFORMATION_MESSAGE);
 			} catch (IOException e) {
 				e.printStackTrace();
 				new WaveMsgDialogBox(this.title, CommMsg.NOT_SAVE_MSG, JOptionPane.ERROR_MESSAGE);
@@ -705,7 +702,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 			fontFrame.setVisible(true);
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -718,14 +715,10 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 			colorFrame.setVisible(true);
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	/**  
-	 * 폰트 설정 화면에서 호출 <br>
-	 * 폰트 미리보기 설정 및 데이터 설정 <br>
-	 */
 	@Override
 	public void setFrameFont() {
 		
@@ -738,10 +731,6 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		dtrpnHello.setFont(new Font(this.font, this.fontStyle, this.fontSize));
 	}
 	
-	/**  
-	 * 폰트 설정 화면에서 호출 <br>
-	 * 컬러 미리보기 설정 및 데이터 설정 <br>
-	 */
 	@Override
 	public void setFrameColor() {
 		
@@ -959,7 +948,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	}
 	
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -20,6 +20,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
 import com.wavem.msgp.component.WaveMsgFrame;
@@ -34,12 +36,17 @@ import com.wavem.msgp.dto.UserInfo;
  * 	MsgMainFrame msgMain = MsgMainFrame.getInstance();
  * </pre>
  * 
- * @author
- * 
+ * @author 정재요
+ * @since jdk 1.6
+ * @version 1.0
+ * @see
  */
 public class MsgMainFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -4042584463931283068L;
+	
+	/** 타이틀 */
+	private String title = CommMsg.MSGMAIN_FRAME_TITLE;
 	
 	/** 로그인된 사용자 정보 인스턴스 변수 */
 	private static UserInfo loginUser = null;
@@ -66,8 +73,10 @@ public class MsgMainFrame extends WaveMsgFrame {
 	 * 메인화면 MsgMainFrame 생성자 <br>
 	 * 최초 userlist객체 생성 <br>
 	 * 최초 makeInitFrame()호출 <br>
+	 * 
+	 * @throws WaveMsgException 
 	 */
-	private MsgMainFrame() {
+	private MsgMainFrame() throws WaveMsgException {
 		makeInitFrame();
 	}
 
@@ -75,8 +84,9 @@ public class MsgMainFrame extends WaveMsgFrame {
 	 * MsgMainFrame 인스턴스 생성 및 반환
 	 * 
 	 * @return 기존 혹은 생성된 메일 화면 인스턴스
+	 * @throws WaveMsgException 
 	 */
-	public static MsgMainFrame getInstance() {
+	public static MsgMainFrame getInstance() throws WaveMsgException {
 		if (msgMainFrame == null) {
 			synchronized (MsgMainFrame.class) {
 				if (msgMainFrame == null) {
@@ -90,7 +100,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 	
 	
 	@Override
-	public void makeInitFrame() {
+	public void makeInitFrame() throws WaveMsgException {
 		
 		// 로그인 체크
 		if (MsgMainFrame.loginUser == null) {
@@ -99,7 +109,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		} 
 		
 		// 타이틀 설정
-		setTitle("Wavem Messenger - " + MsgMainFrame.loginUser.getUserId());
+		setTitle(this.title + " - " + MsgMainFrame.loginUser.getUserId());
 		
 		// 메인 패널 설정
 		getContentPane().setLayout(null);
@@ -350,6 +360,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -366,6 +377,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -382,6 +394,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -398,6 +411,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -414,6 +428,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -430,6 +445,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -446,6 +462,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -462,6 +479,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -478,6 +496,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -494,6 +513,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -510,6 +530,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -526,6 +547,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -550,7 +572,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 	 */
 	public void logout() {
 		
-		WaveMsgDialogBox box = new WaveMsgDialogBox(null, "로그아웃", "정말로 로그아웃하시겠습니까", JOptionPane.YES_NO_CANCEL_OPTION);
+		WaveMsgDialogBox box = new WaveMsgDialogBox(this, CommMsg.LOGOUT_TITLE, CommMsg.LOGOUT_Q_MSG, JOptionPane.YES_NO_CANCEL_OPTION);
 
 		if (box.getResult() == 0) {
 			// TODO : 로그아웃 실행
@@ -579,7 +601,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 	}
 
 	@Override
-	public void callBackData() throws Exception {
+	public void callBackData() throws WaveMsgException {
 		// TODO Auto-generated method stub
 		
 	}
