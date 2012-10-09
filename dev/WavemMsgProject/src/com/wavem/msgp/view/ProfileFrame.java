@@ -36,6 +36,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.CommSet;
 import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgComboBox;
@@ -461,7 +462,7 @@ public class ProfileFrame extends WaveMsgFrame {
 		panel_home.setBounds(12, 85, 120, 25);
 		panel_modify.add(panel_home);
 		
-		JLabel homeLbl = new JLabel("집전화");
+		WaveMsgLabel homeLbl = new WaveMsgLabel("집전화");
 		homeLbl.setBounds(5, 2, 103, 21);
 		panel_home.add(homeLbl);
 		
@@ -588,7 +589,8 @@ public class ProfileFrame extends WaveMsgFrame {
 			 * 파일을 검색하여 콤보에 세팅 시작
 			 * **********************************************************/
 			if (profileImgPath == null) {
-				profileImgPath = new File(ProfileFrame.class.getResource("/com/wavem/resource/img/profile/").getPath());
+				//profileImgPath = new File(ProfileFrame.class.getResource("/com/wavem/resource/img/profile/").getPath());
+				profileImgPath = new File(CommSet.getOriProfileImgPath());
 				
 				String[] fileList = profileImgPath.list();
 

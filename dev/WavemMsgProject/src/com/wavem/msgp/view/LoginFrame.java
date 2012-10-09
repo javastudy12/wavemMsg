@@ -209,12 +209,15 @@ public class LoginFrame extends WaveMsgFrame{
 		// 데이터 전송 결과
 		int success = 0;
 		
-		// 데이터 전송
-		try {
-			dataCtrl.selectData();
-		} catch (WaveMsgException e) {
-			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
-		}
+		// TODO : 데이터 전송
+//		try {
+//			dataCtrl.selectData();
+//			makeMain();
+//		} catch (WaveMsgException e) {
+//			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
+//		}
+		
+		makeMain(); // TODO : 데이터 통신 후 삭제
 		
 	}
 	

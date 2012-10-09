@@ -95,7 +95,7 @@ public class SocketMgr extends Thread{
 			
 		} catch (IOException e) {
 			new WaveMsgDialogBox("서버연결 - ERROR", "initServer Error", JOptionPane.ERROR_MESSAGE);
-			System.exit(0);
+			//System.exit(0);  // 임시로 막음 테스트용
 		}
 	}
 

@@ -52,6 +52,9 @@ public class CommMsg {
 	/** 로그아웃 메시지 */
 	public static final String LOGOUT_Q_MSG = "정말로 로그아웃 하시겠습니까?";
 	
+	/** 채팅방 나가기 메시지 */
+	public static final String OUTCHAT_Q_MSG = "정말로 나가시겠습니까?";
+	
 	
 	
 	
@@ -64,6 +67,9 @@ public class CommMsg {
 	
 	/** 이미지 설정 중 선택한 이미지가 없는 경우 */
 	public static final String NOT_EXSIST_IMG = "선택한 이미지가 없습니다.";
+	
+	/** 환경 설정 에러 */
+	public static final String PROPERTY_SAVE_ERROR = "환경 설정을 저장할 수 없습니다.";
 	
 	
 	

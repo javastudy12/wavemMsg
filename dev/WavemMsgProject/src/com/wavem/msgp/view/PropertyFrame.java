@@ -32,6 +32,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.CommSet;
 import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
@@ -128,7 +129,8 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	private JTextField alarmPathTxt = null;
 	private WaveMsgButton alarmFindBtn = null;
 	
-	private File themeImgFile = new File(PropertyFrame.class.getResource("/com/wavem/resource/img/profile/").getPath());
+	//private File themeImgFile = new File(PropertyFrame.class.getResource("/com/wavem/resource/img/profile/").getPath());
+	private File themeImgFile = new File(CommSet.getProfileImgPath());
 	
 	//******************************************************
 	// 환경설정 데이터 저장 변수
@@ -197,7 +199,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	 * @throws WaveMsgException 
 	 */
 	private PropertyFrame() throws WaveMsgException {
-		getContentPane().setBackground(Color.WHITE);
+		
 		this.properties = PropertiesInfo.getInstance();
 		
 		makeInitFrame();
@@ -214,6 +216,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		if (frame == null) {
 			synchronized (PropertyFrame.class) {
 				if (frame == null) {
+					
 					frame = new PropertyFrame();
 				}
 			}
@@ -228,6 +231,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		// 환경설정창에서 데이터 로딩
 		loadPropertyInfo();
 		
+		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 416, 760);
 		setTitle(CommMsg.PROPERTY_FRAME_TITLE);
@@ -957,4 +961,5 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		PropertyFrame frame = PropertyFrame.getInstance();
 		frame.setVisible(true);
 	}
+
 }

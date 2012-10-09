@@ -35,7 +35,7 @@ import com.wavem.msgp.component.WaveMsgDialogBox;
  * @since jdk 1.6
  * @version 1.0
  */
-public class PropertiesInfo implements Serializable {
+public class PropertiesInfo extends Thread implements Serializable {
 	
 	private static final long serialVersionUID = -6484416053755315109L;
 	
@@ -81,7 +81,8 @@ public class PropertiesInfo implements Serializable {
 	
 	
 	/** 색상 */
-	private Color color = new Color(255, 255, 255);
+	private Color color = new Color(0, 0, 0);
+	private Color chatColor = new Color(0, 0, 0);
 	
 	/** 알림음 설정 */
 	private boolean alarmFlag = true;
@@ -132,21 +133,34 @@ public class PropertiesInfo implements Serializable {
 			synchronized (PropertiesInfo.class) {
 				if (properties == null) {
 					properties = new PropertiesInfo();
-					
-					try {
-						properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - ClassNotFoundException", JOptionPane.ERROR_MESSAGE);
-					} catch (IOException e) {
-						e.printStackTrace();
-						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - IOException \n 설정파일이 없거나 잘못되었습니다.", JOptionPane.ERROR_MESSAGE);
-					}
+					properties.start();
+//					try {
+//						properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
+//					} catch (ClassNotFoundException e) {
+//						e.printStackTrace();
+//						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - ClassNotFoundException", JOptionPane.ERROR_MESSAGE);
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - IOException \n 설정파일이 없거나 잘못되었습니다.", JOptionPane.ERROR_MESSAGE);
+//					}
 				}
 			}
 		}
 
 		return properties;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - ClassNotFoundException", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - IOException \n 설정파일이 없거나 잘못되었습니다.", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	/**
@@ -156,7 +170,7 @@ public class PropertiesInfo implements Serializable {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public void loadPropertiesFile() throws IOException, ClassNotFoundException {
+	public synchronized void loadPropertiesFile() throws IOException, ClassNotFoundException {
 		
 		File file = new File("WaveMsgConfig.properties"); // 설정파일이 존재할 경우
 		
@@ -175,7 +189,7 @@ public class PropertiesInfo implements Serializable {
 	 * @return 저장 설정 여부
 	 * @throws IOException 
 	 */
-	public void savePropertiesFile() throws IOException {
+	public synchronized void savePropertiesFile() throws IOException {
 		
 		FileOutputStream fileOut = new FileOutputStream("WaveMsgConfig.properties");
 		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -454,6 +468,24 @@ public class PropertiesInfo implements Serializable {
 	 */
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	/** 
+	 * 채팅 색상 반환
+	 * 
+	 * @return 색상
+	 */
+	public Color getChatColor() {
+		return chatColor;
+	}
+
+	/**
+	 * 채팅 색상 저장
+	 * 
+	 * @param color 색상
+	 */
+	public void setChatColor(Color chatColor) {
+		this.chatColor = chatColor;
 	}
 
 	/**

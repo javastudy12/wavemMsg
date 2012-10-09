@@ -16,6 +16,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import com.wavem.msgp.comm.CommSet;
 import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.view.MsgMainFrame;
 
@@ -82,7 +83,8 @@ public class WaveMsgButton extends JButton {
 		setSize(60, 30);
 		
 		// 버튼 이미지 세팅
-		setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/"+imageName+".png")));
+		//setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/"+imageName+".png")));
+		setIcon(CommSet.getButtonImgIcon(imageName));
 		
 		// 버튼 선택 시 이미지 세팅
 		//setSelectedIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/"+imageName+"_F.png")));

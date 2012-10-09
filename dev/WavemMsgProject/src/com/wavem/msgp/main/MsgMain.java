@@ -29,7 +29,25 @@ import com.wavem.msgp.view.MsgMainFrame;
 public class MsgMain {
 	
 	/** 메인 소켓 */
-	public static SocketMgr socketMgr = null;
+	private static SocketMgr socketMgr = null;
+	
+	/**
+	 * 소켓 연결 클래스
+	 * 
+	 * @return
+	 */
+	public static SocketMgr getSocketMgr() {
+		
+		if (socketMgr == null) {
+			synchronized (SocketMgr.class) {
+				if (socketMgr == null) {
+					socketMgr = new SocketMgr();
+				}
+			}
+		}
+		
+		return socketMgr;
+	}
 
 	public static void main(String[] args) {
 
@@ -37,7 +55,7 @@ public class MsgMain {
 		PropertiesInfo property = PropertiesInfo.getInstance();
 		
 		// 서버와 소켓 최초 생성
-		SocketMgr socketMgr = new SocketMgr();
+		SocketMgr socketMgr = getSocketMgr();
 		socketMgr.start();
 		
 		// 메인에 현재의 소켓 메니저 등록

@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.CommSet;
 import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
@@ -123,11 +124,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		
 		// 상단의 TOP 패널 생성
 		topPanel = new WaveMsgPanel();
-		topPanel.setImage(
-				Toolkit.getDefaultToolkit().getImage(
-						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/TOP.png")
-				)
-		); 
+		topPanel.setImage(CommSet.getPaneImage("TOP")); 
 		topPanel.setBounds(0, 0, 450, 100); // 상단 TOP 패널 부분의 위치 및 크기 지정
 		getContentPane().add(topPanel); // 메인 패널에 추가
 		topPanel.setLayout(null);
@@ -140,7 +137,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 				makeProfileFrame();
 			}
 		});
-		profileBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/PROFILE.png"))); // 추후 서버로부터 이미지 받음
+		profileBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/PROFILE.png"))); // TODO : 추후 서버로부터 이미지 받음
 		profileBtn.setBounds(12, 10, 100, 80);
 		topPanel.add(profileBtn);
 		
@@ -160,18 +157,13 @@ public class MsgMainFrame extends WaveMsgFrame {
 		
 		// 옆 (side) 패널 생성
 		sidePanel = new WaveMsgPanel();
-		sidePanel.setImage(
-				Toolkit.getDefaultToolkit().getImage(
-						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/SIDE.png")
-				)
-		);
+		sidePanel.setImage(CommSet.getPaneImage("SIDE"));
 		sidePanel.setBounds(0, 100, 100, 500);
 		getContentPane().add(sidePanel);
 		sidePanel.setLayout(null);
 		
 		// 쪽지 쓰기 버튼
-		WaveMsgButton msgBtn = new WaveMsgButton();
-		msgBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/MSG_MAIN.png")));
+		WaveMsgButton msgBtn = new WaveMsgButton("MSG_MAIN");
 		msgBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -182,8 +174,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		sidePanel.add(msgBtn);
 		
 		// 채팅 버튼
-		WaveMsgButton chatBtn = new WaveMsgButton();
-		chatBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/CHAT_MAIN.png")));
+		WaveMsgButton chatBtn = new WaveMsgButton("CHAT_MAIN");
 		chatBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -194,8 +185,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		sidePanel.add(chatBtn);
 		
 		// 그룹설정 버튼
-		WaveMsgButton groupBtn = new WaveMsgButton();
-		groupBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/GROUP_MAIN.png")));
+		WaveMsgButton groupBtn = new WaveMsgButton("GROUP_MAIN");
 		groupBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -206,8 +196,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		sidePanel.add(groupBtn);
 		
 		// 공지사항 버튼
-		WaveMsgButton noticeBtn = new WaveMsgButton();
-		noticeBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/NOTICE_MAIN.png")));
+		WaveMsgButton noticeBtn = new WaveMsgButton("NOTICE_MAIN");
 		noticeBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -218,8 +207,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		sidePanel.add(noticeBtn);
 		
 		// 파일 보내기 버튼
-		WaveMsgButton fileBtn = new WaveMsgButton();
-		fileBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/FILEUP_MAIN.png")));
+		WaveMsgButton fileBtn = new WaveMsgButton("FILEUP_MAIN");
 		fileBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -241,11 +229,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 		
 		// 메인 패널 생성
 		mainPanel = new WaveMsgPanel();
-		mainPanel.setImage(
-				Toolkit.getDefaultToolkit().getImage(
-						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/MAIN.png")
-				)
-		);
+		mainPanel.setImage(CommSet.getPaneImage("MAIN"));
 		mainPanel.setBounds(100, 100, 350, 500);
 		getContentPane().add(mainPanel);
 		
@@ -259,72 +243,63 @@ public class MsgMainFrame extends WaveMsgFrame {
 		 * ********************************************************************/
 		
 		footerPanel = new WaveMsgPanel();
-		footerPanel.setImage(
-				Toolkit.getDefaultToolkit().getImage(
-						MsgMainFrame.class.getResource("/com/wavem/resource/img/pane/FOOTER.png")
-				)
-		);
+		footerPanel.setImage(CommSet.getPaneImage("FOOTER"));
 		footerPanel.setBounds(0, 600, 450, 100);
 		getContentPane().add(footerPanel);
 		footerPanel.setLayout(null);
 		
 		// 쪽지내역 버튼
-		WaveMsgButton msgBoxBtn = new WaveMsgButton();
+		WaveMsgButton msgBoxBtn = new WaveMsgButton("MSG_FOOTER");
 		msgBoxBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				makeMessageBoxFrame(); 
 			}
 		});
-		msgBoxBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/MSG_FOOTER.png")));
 		msgBoxBtn.setBounds(12, 10, 75, 80);
 		footerPanel.add(msgBoxBtn);
 		
 		// 대화내역 버튼
-		WaveMsgButton chatBoxBtn = new WaveMsgButton();
+		WaveMsgButton chatBoxBtn = new WaveMsgButton("CHAT_FOOTER");
 		chatBoxBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				makeChatBoxFrame();
 			}
 		});
-		chatBoxBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/CHAT_FOOTER.png")));
 		chatBoxBtn.setBounds(99, 10, 75, 80);
 		footerPanel.add(chatBoxBtn);
 		
 		// 파일내역 버튼
-		WaveMsgButton fileBoxBtn = new WaveMsgButton();
+		WaveMsgButton fileBoxBtn = new WaveMsgButton("FILE_FOOTER");
 		fileBoxBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				makeFileBoxFrame();
 			}
 		});
-		fileBoxBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/FILE_FOOTER.png")));
 		fileBoxBtn.setBounds(186, 10, 75, 80);
 		footerPanel.add(fileBoxBtn);
 		
 		// 환경설정 버튼
-		WaveMsgButton propertyBtn = new WaveMsgButton();
+		WaveMsgButton propertyBtn = new WaveMsgButton("PROPERTY_FOOTER");
 		propertyBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				makePropertiesFrame();
 			}
 		});
-		propertyBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/PROPERTY_FOOTER.png")));
 		propertyBtn.setBounds(273, 10, 75, 80);
 		footerPanel.add(propertyBtn);
 		
 		// 로그아웃 버튼
-		WaveMsgButton logoutBtn = new WaveMsgButton();
+		WaveMsgButton logoutBtn = new WaveMsgButton("LOGOUT_FOOTER");
 		logoutBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				logout();
 			}
 		});
-		logoutBtn.setIcon(new ImageIcon(MsgMainFrame.class.getResource("/com/wavem/resource/img/button/LOGOUT_FOOTER.png")));
 		logoutBtn.setBounds(360, 10, 75, 80);
 		footerPanel.add(logoutBtn);
 		
@@ -606,5 +581,9 @@ public class MsgMainFrame extends WaveMsgFrame {
 		
 	}
 	
+	public static void main(String[] sd) throws WaveMsgException {
+		MsgMainFrame frame = MsgMainFrame.getInstance();
+		frame.setVisible(true);
+	}
 	
 }

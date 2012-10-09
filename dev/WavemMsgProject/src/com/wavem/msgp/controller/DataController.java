@@ -39,7 +39,7 @@ public class DataController {
 	private DataParser parser = null;
 	
 	/** 메인 소켓 */
-	private SocketMgr socketMgr = MsgMain.socketMgr;
+	private SocketMgr socketMgr = MsgMain.getSocketMgr();
 	
 	/**
 	 * 데이터 컨트롤러 생성자 <br>
