@@ -51,9 +51,6 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 	/** 환경설정 인스턴스 */
 	private PropertiesInfo properties = PropertiesInfo.getInstance();
 	
-	/** 채팅 폰트 및 색상 설정 화면 인스턴스 변수 */
-	private static ChatFontFrame frame = null;
-	
 	/** 타이틀 */
 	private String title = CommMsg.FONT_FRAME_TITLE;
 	
@@ -79,7 +76,7 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 	 * 
 	 * @throws WaveMsgException 
 	 */
-	private ChatFontFrame(WaveMsgFontInterface chatFrame) throws WaveMsgException {
+	public ChatFontFrame(WaveMsgFontInterface chatFrame) throws WaveMsgException {
 		
 		this.chatFrame = chatFrame;
 		
@@ -93,18 +90,18 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 	 * @return 채팅 폰트 및 색상 설정 화면을 위한 화면 인스턴스
 	 * @throws WaveMsgException 
 	 */
-	public static ChatFontFrame getInstance(WaveMsgFontInterface chatFrame) throws WaveMsgException {
-		
-		if (frame == null) {
-			synchronized (ChatFontFrame.class) {
-				if (frame == null) {
-					frame = new ChatFontFrame(chatFrame);
-				}
-			}
-		}
-		
-		return frame;
-	}
+//	public static ChatFontFrame getInstance(WaveMsgFontInterface chatFrame) throws WaveMsgException {
+//		
+//		if (frame == null) {
+//			synchronized (ChatFontFrame.class) {
+//				if (frame == null) {
+//					frame = new ChatFontFrame(chatFrame);
+//				}
+//			}
+//		}
+//		
+//		return frame;
+//	}
 	
 	@Override
 	public void makeInitFrame() throws WaveMsgException {

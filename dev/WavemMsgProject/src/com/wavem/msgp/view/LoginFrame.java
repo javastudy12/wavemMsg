@@ -112,7 +112,7 @@ public class LoginFrame extends WaveMsgFrame{
 		idField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
-				if (key.getKeyCode() == 10) { // Enter Key 입력 시
+				if (key.getKeyCode() == KeyEvent.VK_ENTER) { // Enter Key 입력 시
 					login();
 				}
 			}
@@ -132,7 +132,7 @@ public class LoginFrame extends WaveMsgFrame{
 		passwordField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
-				if (key.getKeyCode() == 10) { // Enter Key 입력 시
+				if (key.getKeyCode() == KeyEvent.VK_ENTER) { // Enter Key 입력 시
 					login();
 				}
 			}
@@ -163,7 +163,7 @@ public class LoginFrame extends WaveMsgFrame{
 		WaveMsgButton closeBtn = new WaveMsgButton("CLOSE");
 		closeBtn.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseClicked(MouseEvent e) {
 				System.exit(0); // 닫기버튼 클릭시 전체 종료
 			}
 		});

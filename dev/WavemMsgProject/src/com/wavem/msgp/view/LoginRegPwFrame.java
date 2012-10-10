@@ -95,7 +95,7 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 		pwField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
-				if (key.getKeyCode() == 10) {
+				if (key.getKeyCode() == KeyEvent.VK_ENTER) {
 					regPw();
 				}
 			}
@@ -109,7 +109,7 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 		pwChkField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
-				if (key.getKeyCode() == 10) {
+				if (key.getKeyCode() == KeyEvent.VK_ENTER) {
 					regPw();
 				}
 			}

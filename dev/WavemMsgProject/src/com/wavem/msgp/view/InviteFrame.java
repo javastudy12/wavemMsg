@@ -35,7 +35,7 @@ public class InviteFrame extends WaveMsgFrame{
 	private static final long serialVersionUID = -8324014326166783001L;
 	
 	/** 초대 화면 인스턴스 변수 */
-	private static InviteFrame frame = null;
+//	private static InviteFrame frame = null;
 
 	/** 타이틀 */
 	private String title = CommMsg.INVITE_FRAME_TITLE;
@@ -54,7 +54,7 @@ public class InviteFrame extends WaveMsgFrame{
 	 * @param chatUserList 현재 참여한 사용자
 	 * @throws WaveMsgException 
 	 */
-	private InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
+	public InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
 		this.allUserList = allUserList;
 		this.chatUserList = chatUserList;
 		makeInitFrame();
@@ -66,18 +66,18 @@ public class InviteFrame extends WaveMsgFrame{
 	 * @return 초대 화면을 위한 화면 인스턴스
 	 * @throws WaveMsgException 
 	 */
-	public static InviteFrame getInstance(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
-		
-		if (frame == null) {
-			synchronized (InviteFrame.class) {
-				if (frame == null) {
-					frame = new InviteFrame(allUserList, chatUserList);
-				}
-			}
-		}
-		
-		return frame;
-	}
+//	public static InviteFrame getInstance(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
+//		
+//		if (frame == null) {
+//			synchronized (InviteFrame.class) {
+//				if (frame == null) {
+//					frame = new InviteFrame(allUserList, chatUserList);
+//				}
+//			}
+//		}
+//		
+//		return frame;
+//	}
 	
 	@Override
 	public void makeInitFrame() throws WaveMsgException {

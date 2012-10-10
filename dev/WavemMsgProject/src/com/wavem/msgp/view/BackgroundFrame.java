@@ -31,8 +31,6 @@ public class BackgroundFrame extends WaveMsgFrame {
 
 	private static final long serialVersionUID = -2400000915834485391L;
 	
-	private static BackgroundFrame frame = null;
-
 	/** 타이틀 */
 	private String title = CommMsg.BACKGROUND_FRAME_TITLE;
 	
@@ -46,7 +44,7 @@ public class BackgroundFrame extends WaveMsgFrame {
 	 * 
 	 * @see BackgroundFrame#makeInitFrame()
 	 */
-	private BackgroundFrame() throws WaveMsgException {
+	public BackgroundFrame() throws WaveMsgException {
 		makeInitFrame();
 	}
 	
@@ -56,18 +54,18 @@ public class BackgroundFrame extends WaveMsgFrame {
 	 * @return 배경설정을 위한 화면 인스턴스
 	 * @throws WaveMsgException 
 	 */
-	public static BackgroundFrame getInstance() throws WaveMsgException {
-		
-		if (frame == null) {
-			synchronized (BackgroundFrame.class) {
-				if (frame == null) {
-					frame = new BackgroundFrame();
-				}
-			}
-		}
-		
-		return frame;
-	}
+//	public static BackgroundFrame getInstance() throws WaveMsgException {
+//		
+//		if (frame == null) {
+//			synchronized (BackgroundFrame.class) {
+//				if (frame == null) {
+//					frame = new BackgroundFrame();
+//				}
+//			}
+//		}
+//		
+//		return frame;
+//	}
 
 	@Override
 	public void makeInitFrame() throws WaveMsgException {

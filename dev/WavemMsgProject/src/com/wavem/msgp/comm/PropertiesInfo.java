@@ -133,16 +133,16 @@ public class PropertiesInfo extends Thread implements Serializable {
 			synchronized (PropertiesInfo.class) {
 				if (properties == null) {
 					properties = new PropertiesInfo();
-					properties.start();
-//					try {
-//						properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
-//					} catch (ClassNotFoundException e) {
-//						e.printStackTrace();
-//						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - ClassNotFoundException", JOptionPane.ERROR_MESSAGE);
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - IOException \n 설정파일이 없거나 잘못되었습니다.", JOptionPane.ERROR_MESSAGE);
-//					}
+					//properties.start();
+					try {
+						properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - ClassNotFoundException", JOptionPane.ERROR_MESSAGE);
+					} catch (IOException e) {
+						e.printStackTrace();
+						new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - IOException \n 설정파일이 없거나 잘못되었습니다.", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		}
