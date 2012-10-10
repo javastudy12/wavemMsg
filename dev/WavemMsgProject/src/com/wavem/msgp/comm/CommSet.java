@@ -34,6 +34,9 @@ public class CommSet {
 	/** 패널 적용 이미지 경로 */
 	private static String paneImgPath = "/com/wavem/resource/img/pane/";
 	
+	
+	private static String chatBackImgPath = "/com/wavem/resource/img/chatback/";
+	
 	/**
 	 * 현재 클래스 패스 내에 있는 이미지를 ImageIcon 인스턴스로 반환
 	 * 
@@ -63,13 +66,21 @@ public class CommSet {
 	}
 	
 	/**
-	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환
+	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환 <br>
+	 * 이미지 이름에 확장자를 입력하지 않을 경우 자동을 png확장자를 찾는다. <br>
 	 * 
 	 * @param imgNm 존재하는 이미지의 이름
 	 * @return 실제 경로
 	 */
 	public static String  getOriButtonImgPath(String imgNm) {
-		return CommSet.class.getResource(buttonImgPath + imgNm+".png").getPath();
+		
+		int ex = imgNm.indexOf(".");
+		
+		if (ex > 0) {
+			return CommSet.class.getResource(buttonImgPath + imgNm).getPath();
+		}
+		
+		return CommSet.class.getResource(buttonImgPath + imgNm +".png").getPath();
 	}
 	
 	/**
@@ -91,7 +102,8 @@ public class CommSet {
 	}
 	
 	/**
-	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환
+	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환 <br>
+	 * 이미지 이름에 확장자를 입력하지 않을 경우 자동을 png확장자를 찾는다. <br>
 	 * 
 	 * @param imgNm 존재하는 이미지의 이름
 	 * @return 실제 경로
@@ -130,7 +142,8 @@ public class CommSet {
 	}
 	
 	/**
-	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환
+	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환 <br>
+	 * 이미지 이름에 확장자를 입력하지 않을 경우 자동을 png확장자를 찾는다. <br>
 	 * 
 	 * @param imgNm 존재하는 이미지의 이름
 	 * @return 실제 경로
@@ -143,7 +156,7 @@ public class CommSet {
 			return CommSet.class.getResource(paneImgPath + imgNm).getPath();
 		}
 		
-		return CommSet.class.getResource(paneImgPath + imgNm+".png").getPath();
+		return CommSet.class.getResource(paneImgPath + imgNm + ".png").getPath();
 	}
 	
 	/**
@@ -156,5 +169,44 @@ public class CommSet {
 		return Toolkit.getDefaultToolkit().getImage(getOriPaneImgPath(imgNm));
 	}
 	
+	
+	
+	
+	
+	/**
+	 * 채팅 배경 이미지 경로 반환
+	 * 
+	 * @return 채팅 배경 이미지 경로
+	 */
+	public static String getChatBackImgPath() {
+		return chatBackImgPath;
+	}
+	
+	/**
+	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환
+	 * 
+	 * @return 실제 경로
+	 */
+	public static String getOriChatBackImgPath() {
+		return CommSet.class.getResource(chatBackImgPath).getPath();
+	}
+	
+	/**
+	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환 <br>
+	 * 이미지 이름에 확장자를 입력하지 않을 경우 자동을 png확장자를 찾는다. <br>
+	 * 
+	 * @param imgNm 존재하는 이미지의 이름
+	 * @return 실제 경로
+	 */
+	public static String getOriChatBackImgPath(String imgNm) {
+		
+		int ex = imgNm.indexOf(".");
+		
+		if (ex > 0) {
+			return CommSet.class.getResource(chatBackImgPath + imgNm).getPath();
+		}
+		
+		return CommSet.class.getResource(chatBackImgPath + imgNm + ".png").getPath();
+	}
 	
 }

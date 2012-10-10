@@ -71,6 +71,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 	private DefaultListModel<String> fontName = null;
 	private DefaultListModel<String> fontViewName = null;
 	
+	/** 리스트 선택 인덱스 */
 	private int selectedFontListIndex = 0;
 	
 	/** 기타 선택 콤보 */

@@ -594,8 +594,19 @@ public class ProfileFrame extends WaveMsgFrame {
 				
 				String[] fileList = profileImgPath.list();
 
-				for (int i=0; i<fileList.length; i++) {
-					defaultImgCombo.addItem(fileList[i].replace(".png", ""));
+//				for (int i=0; i<fileList.length; i++) {
+//					defaultImgCombo.addItem(fileList[i].replace(".png", ""));
+//				}
+				
+				for (String fileName : fileList) {
+					
+					// 확장자가 있는 경우 확장자를 제거한다.
+					int index = fileName.indexOf(".");
+					if (index > 0) {
+						fileName = fileName.substring(0, index);
+					}
+					
+					defaultImgCombo.addItem(fileName);
 				}
 			}
 			/* **********************************************************

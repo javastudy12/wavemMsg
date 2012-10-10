@@ -91,7 +91,7 @@ public class PropertiesInfo extends Thread implements Serializable {
 	private String alarmPath = "";
 	
 	/** 채팅, 쪽지 배경 설정 (기본배경, 사용자설정) */
-	private boolean chatBackgroundFlag = false;
+	private boolean chatBackgroundFlag = true;
 	
 	/** 채팅, 쪽지 배경 이미지 이름 */
 	private String chatBackgroundName = "";

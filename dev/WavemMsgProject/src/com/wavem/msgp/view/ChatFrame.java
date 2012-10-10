@@ -33,6 +33,7 @@ import javax.swing.text.StyledDocument;
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.comm.WaveMsgException;
+import com.wavem.msgp.component.WaveMsgBackImgInterface;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
 import com.wavem.msgp.component.WaveMsgFontInterface;
@@ -56,7 +57,7 @@ import com.wavem.msgp.dto.UserInfo;
  * @version 1.0
  * @see
  */
-public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface {
+public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, WaveMsgBackImgInterface {
 	
 	private static final long serialVersionUID = 7546904889590160105L;
 	
@@ -451,7 +452,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface {
 		try {
 			
 			if (backGFrame == null) { // 설정창이 이미 생성된 경우 새로 생성하지 않는다.
-				backGFrame = new BackgroundFrame();
+				backGFrame = new BackgroundFrame(this);
 				backGFrame.setVisible(true);
 			} else {
 				backGFrame.requestFocus();
@@ -464,6 +465,12 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface {
 
 	}
 
+	@Override
+	public void setBackGround() {
+		// TODO 배경 설정
+		
+	}
+	
 	/**
 	 * 채팅 초대 화면 생성
 	 */
@@ -580,6 +587,8 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface {
 		ChatFrame frame = new ChatFrame("asdf");
 		frame.setVisible(true);
 	}
+
+
 }
 
 
