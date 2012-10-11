@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
 
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgCheckBox;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgPasswordField;

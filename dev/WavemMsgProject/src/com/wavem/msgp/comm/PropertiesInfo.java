@@ -35,7 +35,7 @@ import com.wavem.msgp.component.WaveMsgDialogBox;
  * @since jdk 1.6
  * @version 1.0
  */
-public class PropertiesInfo extends Thread implements Serializable {
+public class PropertiesInfo implements Serializable {
 	
 	private static final long serialVersionUID = -6484416053755315109L;
 	
@@ -66,6 +66,9 @@ public class PropertiesInfo extends Thread implements Serializable {
 	/** 배경 이미지 이름 */
 	private String themeName = "";
 	
+	/** 배경 이미지 확장자 */
+	private String themeExtension = "";
+	
 	/** 배경 이미지 경로 */
 	private String themePath = "";
 	
@@ -81,8 +84,8 @@ public class PropertiesInfo extends Thread implements Serializable {
 	
 	
 	/** 색상 */
-	private Color color = new Color(0, 0, 0);
-	private Color chatColor = new Color(0, 0, 0);
+	private Color color = new Color(0, 0, 0); // 클라이언트 적용 색상
+	private Color chatColor = new Color(0, 0, 0); // 채팅 및 쪽지 적용 색상
 	
 	/** 알림음 설정 */
 	private boolean alarmFlag = true;
@@ -90,13 +93,16 @@ public class PropertiesInfo extends Thread implements Serializable {
 	/** 알림음 경로 */
 	private String alarmPath = "";
 	
-	/** 채팅, 쪽지 배경 설정 (기본배경, 사용자설정) */
+	/** 채팅배경 설정 (기본배경, 사용자설정) */
 	private boolean chatBackgroundFlag = true;
 	
-	/** 채팅, 쪽지 배경 이미지 이름 */
+	/** 채팅배경 이미지 이름 */
 	private String chatBackgroundName = "";
 	
-	/** 채팅, 쪽지 배경 이미지 경로 */
+	/** 채팅배경 이미지 확장자 */
+	private String chatBackgroundExtension = "";
+	
+	/** 채팅배경 이미지 경로 */
 	private String chatBackgroundPath = "";
 
 	/** 로그인 시 사용자 ID 저장 여부 */
@@ -133,7 +139,6 @@ public class PropertiesInfo extends Thread implements Serializable {
 			synchronized (PropertiesInfo.class) {
 				if (properties == null) {
 					properties = new PropertiesInfo();
-					//properties.start();
 					try {
 						properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
 					} catch (ClassNotFoundException e) {
@@ -150,18 +155,6 @@ public class PropertiesInfo extends Thread implements Serializable {
 		return properties;
 	}
 	
-	@Override
-	public void run() {
-		try {
-			properties.loadPropertiesFile(); // 로컬에 설정파일이 있는 경우 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - ClassNotFoundException", JOptionPane.ERROR_MESSAGE);
-		} catch (IOException e) {
-			e.printStackTrace();
-			new WaveMsgDialogBox("PropertiesInfo", "설정 로드 에러 - IOException \n 설정파일이 없거나 잘못되었습니다.", JOptionPane.ERROR_MESSAGE);
-		}
-	}
 	
 	/**
 	 * 환경설정 로드 (로컬)
@@ -369,6 +362,24 @@ public class PropertiesInfo extends Thread implements Serializable {
 	public void setThemeName(String themeName) {
 		this.themeName = themeName;
 	}
+	
+	/**
+	 * 배경 이미지 확장자 반환
+	 * 
+	 * @return 확장자 명
+	 */
+	public String getThemeExtension() {
+		return themeExtension;
+	}
+	
+	/**
+	 * 배경 이미지 확장자 저장
+	 * 
+	 * @param themeName 배경 이미지 확장자
+	 */
+	public void setThemeExtension(String themeExtension) {
+		this.themeExtension = themeExtension;
+	}
 
 	/**
 	 * 배경 이미지 경로 반환
@@ -407,47 +418,91 @@ public class PropertiesInfo extends Thread implements Serializable {
 	}
 
 	/** 
-	 * 폰트 기타 저장
+	 * 폰트 스타일 반환
 	 * 
-	 * @return 폰트 기타
+	 * @return 폰트 스타일
 	 */
 	public int getFontStyle() {
 		return fontStyle;
 	}
 
-	
+	/**
+	 * 폰트 스타일 저장
+	 * 
+	 * @param fontStyle 폰트 스타일
+	 */
 	public void setFontStyle(int fontStyle) {
 		this.fontStyle = fontStyle;
 	}
 
+	/**
+	 * 폰트 크기 반환
+	 * 
+	 * @return 폰트 크기
+	 */
 	public int getFontSize() {
 		return fontSize;
 	}
 
+	/**
+	 * 폰트 크기 저장
+	 * 
+	 * @param fontSize 폰트 크기
+	 */
 	public void setFontSize(int fontSize) {
 		this.fontSize = fontSize;
 	}
 
+	/**
+	 * 채팅 폰트 반환
+	 *  
+	 * @return 채팅 폰트 
+	 */
 	public String getChatFont() {
 		return chatFont;
 	}
 
+	/**
+	 * 채팅 폰트 저장
+	 * 
+	 * @param chatFont 채팅 폰트 
+	 */
 	public void setChatFont(String chatFont) {
 		this.chatFont = chatFont;
 	}
 
+	/**
+	 * 채팅 폰트 스타일 반환
+	 * 
+	 * @return 채팅 폰트 스타일
+	 */
 	public int getChatFontStyle() {
 		return chatFontStyle;
 	}
 
+	/**
+	 * 채팅 폰트 스타일 저장
+	 * 
+	 * @param chatFontStyle 채팅 폰트 스타일
+	 */
 	public void setChatFontStyle(int chatFontStyle) {
 		this.chatFontStyle = chatFontStyle;
 	}
 
+	/**
+	 * 채팅 폰트 크기 반환
+	 *  
+	 * @return 채팅 폰트 크기 
+	 */
 	public int getChatFontSize() {
 		return chatFontSize;
 	}
 
+	/**
+	 * 채팅 폰트 크기 저장
+	 * 
+	 * @param chatFontSize 채팅 폰트 크기 
+	 */
 	public void setChatFontSize(int chatFontSize) {
 		this.chatFontSize = chatFontSize;
 	}
@@ -525,58 +580,76 @@ public class PropertiesInfo extends Thread implements Serializable {
 	}
 
 	/**
-	 * 채팅, 쪽지 배경 설정 (기본배경, 사용자설정) 반환 <br>
+	 * 채팅배경 설정 (기본배경, 사용자설정) 반환 <br>
 	 * true  : 기본배경 <br>
 	 * false : 사용자설정 <br>
 	 * 
-	 * @return 채팅, 쪽지 배경 설정 (기본배경, 사용자설정)
+	 * @return 채팅배경 설정 (기본배경, 사용자설정)
 	 */
 	public boolean isChatBackgroundFlag() {
 		return chatBackgroundFlag;
 	}
 
 	/**
-	 * 채팅, 쪽지 배경 설정 (기본배경, 사용자설정) 저장 <br>
+	 * 채팅배경 설정 (기본배경, 사용자설정) 저장 <br>
 	 * true  : 기본배경 <br>
 	 * false : 사용자설정 <br>
 	 * 
-	 * @param chatBackgroundFlag 채팅, 쪽지 배경 설정 (기본배경, 사용자설정)
+	 * @param chatBackgroundFlag 채팅배경 설정 (기본배경, 사용자설정)
 	 */
 	public void setChatBackgroundFlag(boolean chatBackgroundFlag) {
 		this.chatBackgroundFlag = chatBackgroundFlag;
 	}
 
 	/**
-	 * 채팅, 쪽지 배경 이미지 이름 반환
+	 * 채팅배경 이미지 이름 반환
 	 * 
-	 * @return 채팅, 쪽지 배경 이미지 이름
+	 * @return 채팅배경 이미지 이름
 	 */
 	public String getChatBackgroundName() {
 		return chatBackgroundName;
 	}
 
 	/**
-	 * 채팅, 쪽지 배경 이미지 이름 저장
+	 * 채팅배경 이미지 이름 저장
 	 * 
-	 * @param chatBackgroundName 채팅, 쪽지 배경 이미지 이름
+	 * @param chatBackgroundName 채팅배경 이미지 이름
 	 */
 	public void setChatBackgroundName(String chatBackgroundName) {
 		this.chatBackgroundName = chatBackgroundName;
 	}
+	
+	/**
+	 * 채팅배경 이미지 확장자 반환
+	 * 
+	 * @return 확장자 명
+	 */
+	public String getChatBackgroundExtension() {
+		return chatBackgroundExtension;
+	}
+	
+	/**
+	 * 채팅배경 이미지 확장자 저장
+	 * 
+	 * @param chatBackgroundExtension 채팅배경 이미지 확장자
+	 */
+	public void setChatBackgroundExtension(String chatBackgroundExtension) {
+		this.chatBackgroundExtension = chatBackgroundExtension;
+	}
 
 	/**
-	 * 채팅, 쪽지 배경 이미지 경로 반환
+	 * 채팅배경 이미지 경로 반환
 	 * 
-	 * @return 채팅, 쪽지 배경 이미지 경로
+	 * @return 채팅배경 이미지 경로
 	 */
 	public String getChatBackgroundPath() {
 		return chatBackgroundPath;
 	}
 
 	/**
-	 * 채팅, 쪽지 배경 이미지 경로 저장
+	 * 채팅배경 이미지 경로 저장
 	 * 
-	 * @param chatBackgroundPath 채팅, 쪽지 배경 이미지 경로
+	 * @param chatBackgroundPath 채팅배경 이미지 경로
 	 */
 	public void setChatBackgroundPath(String chatBackgroundPath) {
 		this.chatBackgroundPath = chatBackgroundPath;

@@ -68,6 +68,9 @@ public class CommMsg {
 	/** 이미지 설정 중 선택한 이미지가 없는 경우 */
 	public static final String NOT_EXSIST_IMG = "선택한 이미지가 없습니다.";
 	
+	/** 이미지 설정 중 선택한 이미지가 없는 경우 */
+	public static final String NOT_APPLY_IMG = "선택한 이미지를 적용할 수 없습니다.";
+	
 	/** 환경 설정 에러 */
 	public static final String PROPERTY_SAVE_ERROR = "환경 설정을 저장할 수 없습니다.";
 	

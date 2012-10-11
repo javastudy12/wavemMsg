@@ -10,12 +10,15 @@
 
 package com.wavem.msgp.component;
 
+
 public interface WaveMsgBackImgInterface {
 
 	/**
 	 * 설정에서 선택한 배경을 세팅한다. <br> 
 	 * 환경설정에 저장 기능을 동시에 수행한다. <br>
+	 * 
+	 * @throws WaveMsgException
 	 */
-	public void setBackGround();
+	public void setBackGround() throws WaveMsgException;
 	
 }

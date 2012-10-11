@@ -22,9 +22,9 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 
 import com.wavem.msgp.comm.CommMsg;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgPanel;
@@ -117,6 +117,7 @@ public class MessageFrame extends WaveMsgFrame{
 			this.title = CommMsg.RMSG_FRAME_TITLE;
 		}
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		/* ********************************************************************
 		 * TOP 패널

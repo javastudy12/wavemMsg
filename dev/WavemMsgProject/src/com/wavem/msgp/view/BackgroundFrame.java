@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -26,6 +27,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
@@ -35,10 +37,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.CommSet;
 import com.wavem.msgp.comm.PropertiesInfo;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgBackImgInterface;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgList;
 import com.wavem.msgp.component.WaveMsgPanel;
@@ -72,7 +74,7 @@ public class BackgroundFrame extends WaveMsgFrame {
 	
 	
 	/** 환경설정 인스턴스 */
-	private PropertiesInfo properties = PropertiesInfo.getInstance();
+	private PropertiesInfo property = PropertiesInfo.getInstance();
 	
 	/** 기본 설정 라디오 버튼 */
 	private WaveMsgRadioButton defaultRadioBtn = null;
@@ -100,6 +102,7 @@ public class BackgroundFrame extends WaveMsgFrame {
 	
 	/** 기본 설정에서 사용될 이미지 리스트 */
 	private Vector<String> defaultImgList = new Vector<String>();
+	private Vector<String> imgExtensionList = new Vector<String>();
 	
 	
 	/** 배경 이미지 경로를 위한 인스턴스 */
@@ -107,13 +110,16 @@ public class BackgroundFrame extends WaveMsgFrame {
 	
 	
 	
-	/** 채팅, 쪽지 배경 설정 (기본배경, 사용자설정) */
+	/** 채팅 배경 설정 (기본배경, 사용자설정) */
 	private boolean chatBackgroundFlag = false;
 	
-	/** 채팅, 쪽지 배경 이미지 이름 */
+	/** 채팅 배경 이미지 이름 */
 	private String chatBackgroundName = "";
 	
-	/** 채팅, 쪽지 배경 이미지 경로 */
+	/** 채팅 배경 이미지 이름 */
+	private String chatBackgroundExtension = "";
+	
+	/** 채팅 배경 이미지 경로 */
 	private String chatBackgroundPath = "";
 	
 	
@@ -157,8 +163,9 @@ public class BackgroundFrame extends WaveMsgFrame {
 
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
-		setBounds(100, 100, 376, 500);
+		setBounds(100, 100, 376, 390);
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		loadBackgroundProperty(); // 설정에서 필요한 데이터 로드
 		
@@ -174,7 +181,7 @@ public class BackgroundFrame extends WaveMsgFrame {
 		defaultRadioBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setDefaultImgEnable(defaultRadioBtn.isSelected());
+				setImgEnable(defaultRadioBtn.isSelected());
 			}
 		});
 		defaultRadioBtn.setBackground(Color.WHITE);
@@ -201,11 +208,10 @@ public class BackgroundFrame extends WaveMsgFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(! e.getValueIsAdjusting()) {
-					setPreviewImg(e);
+					setListImg(e);
 				}
 			}
 		});
-		
 		
 		// 이미지 목록 스크롤 패널
 		WaveMsgScrollPane defaultScrollPane = new WaveMsgScrollPane(defaultList);
@@ -214,13 +220,13 @@ public class BackgroundFrame extends WaveMsgFrame {
 		
 		// 사용자 배경 설정 라디오 버튼
 		userRadioBtn = new WaveMsgRadioButton("사용자 배경");
+		userRadioBtn.setSelected(!this.chatBackgroundFlag);
 		userRadioBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setDefaultImgEnable(!userRadioBtn.isSelected());
+				setImgEnable(!userRadioBtn.isSelected());
 			}
 		});
-		userRadioBtn.setSelected(false);
 		userRadioBtn.setBackground(Color.WHITE);
 		userRadioBtn.setBounds(8, 235, 121, 23);
 		defaultPane.add(userRadioBtn);
@@ -255,9 +261,31 @@ public class BackgroundFrame extends WaveMsgFrame {
 		previewImg.setBounds(176, 10, 154, 232);
 		defaultPane.add(previewImg);
 		
+		WaveMsgButton okBtn = new WaveMsgButton("OK");
+		okBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				saveBackground();
+			}
+		});
+		okBtn.setBounds(198, 319, 60, 23);
+		defaultPane.add(okBtn);
+		
+		WaveMsgButton closeBtn = new WaveMsgButton("CLOSE");
+		closeBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				close();
+			}
+		});
+		closeBtn.setBounds(270, 319, 60, 23);
+		defaultPane.add(closeBtn);
 		
 		
-		setDefaultImgEnable(defaultRadioBtn.isSelected()); // 최초 세팅을 위해 호출
+		// 데이터 세팅
+		setLoadedDataToFrame();
+//		setDefaultImgEnable(defaultRadioBtn.isSelected()); // 최초 세팅을 위해 호출
+		
 	}
 
 	@Override
@@ -271,49 +299,123 @@ public class BackgroundFrame extends WaveMsgFrame {
 	 * 환경설정으로부터 현재의 배경화면 설정 로드
 	 */
 	public void loadBackgroundProperty() {
-		this.chatBackgroundFlag = properties.isChatBackgroundFlag();
-		this.chatBackgroundName = properties.getChatBackgroundName();
-		this.chatBackgroundPath = properties.getChatBackgroundPath();
+		
+		this.chatBackgroundFlag = property.isChatBackgroundFlag(); 
+		this.chatBackgroundName = property.getChatBackgroundName();
+		this.chatBackgroundExtension = property.getChatBackgroundExtension();
+		this.chatBackgroundPath = property.getChatBackgroundPath();
+		
+		loadDefaultImgList(); // 기본 설정 이미지 로딩
+		
+	}
+	
+	/**
+	 * 기본 설정용 이미지를 로딩한다.
+	 */
+	public void loadDefaultImgList() {
+		
+		imgPath = new File(CommSet.getOriChatBackImgPath()); // 기본 배경 이미지의 실제 경로
+		
+		String[] fileList = imgPath.list(); // 이미지 리스트 반환
+		
+		// 이미지 리스트 생성 작업
+		for (String fileNameList : fileList) {
+			
+			String fileName = fileNameList;
+			String extension = ""; // 이미지 확장자
+			
+			// 확장자가 있는 경우 확장자를 제거한다.
+			int index = fileNameList.indexOf(".");
+			if (index > 0) {
+				fileName = fileNameList.substring(0, index);
+				extension = fileNameList.substring(index+1); //확장자의 '.'을 제외하고 확장자 명만 저장
+			}
+			
+			defaultImgList.add(fileName); // 파일 이름 저장
+			imgExtensionList.add(extension); // 파일 확장자 저장
+		}
+	}
+	
+	/**
+	 * 로딩된 데이터를 적용한다.
+	 */
+	public void setLoadedDataToFrame() {
+		
+		// 저장된 플래그에 따라서 기본 설정인지 사용자 설정인지 파악
+		// 파악 후 해당하는 정보 세팅
+		if (this.chatBackgroundFlag) {
+			setDefaultListItem(); // 설정에 저장되어있는 이미지를 미리 선택
+		} else {
+			userSetPath.setText(this.chatBackgroundPath);
+		}
+		
+		setPreviewImg(this.chatBackgroundPath);
+		setImgEnable(this.chatBackgroundFlag);
 	}
 	
 	/**
 	 * 현재 설정된 정보 환경설정에 저장
 	 */
-	public void saveBackgroundProperty() {
-		frame.setBackGround(); // 프레임에 배경 이미지 설정
+	public void saveBackground() {
+		
+		// 저장 할 것인지 질문 메시지
+		WaveMsgDialogBox confirm = new WaveMsgDialogBox(this, this.title, CommMsg.SAVE_Q_MSG, JOptionPane.OK_CANCEL_OPTION);
+		
+		// 저장 취소시 메서드 종료
+		if (confirm.getResult() > 0) {
+			return;
+		}
+		
+		property.setChatBackgroundFlag(this.chatBackgroundFlag); // 설정
+		property.setChatBackgroundName(this.chatBackgroundName); // 이미지 이름
+		property.setChatBackgroundExtension(this.chatBackgroundExtension); // 이미지 확장자
+		property.setChatBackgroundPath(this.chatBackgroundPath); // 이미지 경로
+		
+		// 변경된 설정 저장
+		// 설정 저장 실패 시 이미지를 적용하지 않는다.
+		try {
+			property.savePropertiesFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			new WaveMsgDialogBox(this.title, CommMsg.PROPERTY_SAVE_ERROR, JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		// 프레임에 배경 이미지 설정
+		try {
+			frame.setBackGround();
+			new WaveMsgDialogBox(this.title, CommMsg.SAVE_MSG, JOptionPane.INFORMATION_MESSAGE); // 저장 완료 메시지
+			
+		} catch (WaveMsgException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, CommMsg.NOT_APPLY_IMG, JOptionPane.ERROR_MESSAGE);
+		} finally{
+			close(); // 화면 종료
+		}
 	}
 	
 	/**
 	 * 리스트에서 선택하면 미리보기에 보여준다.
 	 * @param e 리스트 아이템 이벤트
 	 */
-	public void setPreviewImg(ListSelectionEvent e) {
+	public void setListImg(ListSelectionEvent e) {
 		
 		// 선택할 때 두개의 인덱스를 반환
 		// FirstIndex -> 기존에 선택한 아이템과 현재 선택한 아이템중 인덱스가 작은 값 
 		// ListIndex -> 기존에 선택한 아이템과 현재 선택한 아이템중 인덱스가 큰 값
 		// 위의 두 인덱스 중 변화가 생긴 인덱스를 통해서 현재 선택한 인덱스를 구할 수 있다.
-		
-		if (selectedImgListIndex != e.getFirstIndex()) { 
-			selectedImgListIndex = e.getFirstIndex();
-		} else if (selectedImgListIndex != e.getLastIndex()) {
-			selectedImgListIndex = e.getLastIndex();
+		if (this.selectedImgListIndex != e.getFirstIndex()) { 
+			this.selectedImgListIndex = e.getFirstIndex();
+		} else if (this.selectedImgListIndex != e.getLastIndex()) {
+			this.selectedImgListIndex = e.getLastIndex();
 		}
 		
-		String path = CommSet.getOriChatBackImgPath(defaultImgList.get(selectedImgListIndex)); // 선택한 이미지의 절대 경로를 얻는다.
+		this.chatBackgroundName = defaultImgList.get(this.selectedImgListIndex); // 선택한 이미지 이름 
+		this.chatBackgroundExtension = imgExtensionList.get(this.selectedImgListIndex); // 선택한 이미지 확장자
+		this.chatBackgroundPath = CommSet.getOriChatBackImgPath(this.chatBackgroundName); // 선택한 이미지 절대경로
 		
-		try {
-			//previewImg.setImage(new File(path));
-			
-			BufferedImage bufImg = ImageIO.read(new BufferedInputStream(new FileInputStream(path)));
-			Image atemp = bufImg.getScaledInstance(154, 232, Image.SCALE_AREA_AVERAGING);
-			previewImg.setImage(atemp);
-			
-		} catch (IOException ie) {
-			ie.printStackTrace();
-			new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
-		}
-		
+		// 이미지 미리보기 세팅
+		setPreviewImg(this.chatBackgroundPath);
 	}
 	
 	/**
@@ -326,39 +428,41 @@ public class BackgroundFrame extends WaveMsgFrame {
 	 * 
 	 * @param radioChk 선택 여부
 	 */
-	public void setDefaultImgEnable(boolean radioChk) {
+	public void setImgEnable(boolean radioChk) {
+
+		this.chatBackgroundFlag = radioChk; // 선택 플러그 저장
 
 		if (radioChk) {
 			defaultList.setEnabled(true); // 기본 이미지 목록 활성화
 			userSetPath.setEnabled(false); // 선택한 경로 필드 비활성화
 			findBtn.setEnabled(false); // 찾기 버튼 비활성화
-			
-			if (defaultImgList.size() == 0) { // 리스트 목록이 없는 경우
-				
-				imgPath = new File(CommSet.getOriChatBackImgPath()); // 기본 배경 이미지의 실제 경로
-				
-				String[] fileList = imgPath.list(); // 이미지 리스트 반환
-				
-				// 이미지 리스트 생성 작업
-				for (String fileName : fileList) {
-					
-					// 확장자가 있는 경우 확장자를 제거한다.
-					int index = fileName.indexOf(".");
-					if (index > 0) {
-						fileName = fileName.substring(0, index);
-					}
-					
-					defaultImgList.add(fileName);
-				}
-			}
 		} else {
 			defaultList.setEnabled(false); // 기본 이미지 목록 비활성화
 			userSetPath.setEnabled(true); // 선택한 경로 필드 활성화
 			findBtn.setEnabled(true); // 찾기 버튼 활성화
 		}
-		
 	}
-
+	
+	/** 
+	 * 환경설정에 설정된 기본 설정 이미지를 미리 선택되어지도록 설정 
+	 */
+	public void setDefaultListItem() {
+		
+		int imgListSize = defaultImgList.size();
+		int index = 0;
+		
+		for (index=0; index<imgListSize; index++) {
+			
+			// 리스트에서 저장되어있는 이미지 이름을 검색
+			// 같은 이름일 때의 index를 구한다.
+			if (this.chatBackgroundName.equals(defaultImgList.get(index))) {
+				break;
+			}
+		}
+		
+		defaultList.setSelectedIndex(index); // 목록에서 선택
+	}
+	
 	/**
 	 * 사용자 이미지 선택
 	 */
@@ -371,6 +475,10 @@ public class BackgroundFrame extends WaveMsgFrame {
 		FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("JPG & PNG", "png", "jpg");
 		fileChooser.setFileFilter(imgFilter);
 		
+		if (userSetPath.getText().trim().length() > 0) { // 선택된 경로가 있는 경우
+			fileChooser.setCurrentDirectory(new File(userSetPath.getText()));
+		}
+		
 		// 파일 선택
 		int returnVal = fileChooser.showOpenDialog(null);
 
@@ -379,26 +487,101 @@ public class BackgroundFrame extends WaveMsgFrame {
 			
 			// 파일 경로 출력
 			userSetPath.setText(fileChooser.getSelectedFile().getAbsolutePath());
-		
-			try {
-				String imgPath = fileChooser.getSelectedFile().getAbsolutePath();
 				
-				BufferedImage bufImg = ImageIO.read(new BufferedInputStream(new FileInputStream(imgPath)));
-				Image atemp = bufImg.getScaledInstance(154, 232, Image.SCALE_AREA_AVERAGING);
-				
-				previewImg.setImage(atemp);// 이미지 적용한다. // 이미지 변환
-				
-			} catch (IOException e) {
+			this.chatBackgroundPath = fileChooser.getSelectedFile().getAbsolutePath(); // 파일의 절대경로
+			
+			imgPath = new File(chatBackgroundPath); // 파일 인스턴스 생성
+			
+			// 선택한 파일이 없는 경우 메시지를 띄우고 메서드를 종료한다.
+			if (!imgPath.exists()) { 
 				new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
+				return;
 			}
+			
+			this.chatBackgroundName = imgPath.getName(); // 파일 이름
+			this.chatBackgroundExtension = ""; // 확장자 초기화
+			
+			// 파일 이름에 확장자가 존재 할 경우 파일 이름과 확장자를 적용한다.
+			int index = this.chatBackgroundName.indexOf(".");
+			if (index > 0) {
+				this.chatBackgroundName = imgPath.getName().substring(0, index);
+				this.chatBackgroundExtension = imgPath.getName().substring(index+1);
+			}
+			
+			userSetPath.setText(this.chatBackgroundPath);
+			setPreviewImg(this.chatBackgroundPath); // 이미지를 미리보기 화면에 보인다.
 		}
 	}
 	
+	/**
+	 * 
+	 * @param imgPath
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 */
+	public void setPreviewImg(String imgPath){
+		
+		// 이미지를 읽어 미리보기 화면에 보여준다.
+		try {
+			
+			BufferedImage bufImg = ImageIO.read(new BufferedInputStream(new FileInputStream(imgPath)));
+			Image atemp = bufImg.getScaledInstance(154, 232, Image.SCALE_AREA_AVERAGING);
+			previewImg.setImage(atemp);// 이미지 적용한다. // 이미지 변환
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, CommMsg.NOT_APPLY_IMG, JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	/**
+	 * 현재 선택한 설정 방법 <br>
+	 * 
+	 * <pre>
+	 * true  : 기본 설정 선택
+	 * false : 사용자 설정 선택
+	 * </pre>
+	 * 
+	 * @return 설정 방법
+	 */
+	public boolean isChatBackgroundFlag() {
+		return this.chatBackgroundFlag;
+	}
+	
+	/**
+	 * 배경 이미지 이름 반환 <br>
+	 * 
+	 * @return 이미지 이름
+	 */
+	public String getChatBackgroundName() {
+		return this.chatBackgroundName;
+	}
+	
+	/**
+	 * 배경 이미지 확장자 반환 
+	 * 
+	 * @return 확장자 명
+	 */
+	public String getChatBackgroundExtension() {
+		return this.chatBackgroundExtension;
+	}
+	
+	/**
+	 * 배경 이미지 경로 반환
+	 * 
+	 * @return 이미지 경로
+	 */
+	public String getChatBackgroundPath() {
+		return this.chatBackgroundPath;
+	}
 	
 	
 	@Override
 	public void callBackData() throws WaveMsgException {
-		// TODO Auto-generated method stub
+		// 서버와 직접 통신하지 않음
 	}
 	
 	

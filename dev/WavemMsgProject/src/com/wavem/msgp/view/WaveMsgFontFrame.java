@@ -31,9 +31,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.wavem.msgp.comm.CommMsg;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgComboBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFontInterface;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
@@ -126,6 +126,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 238, 524);
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		/* *************************************************************
 		 * 폰트 검색 시작

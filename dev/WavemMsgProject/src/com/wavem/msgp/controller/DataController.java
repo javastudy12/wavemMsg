@@ -12,7 +12,7 @@ package com.wavem.msgp.controller;
 
 import com.wavem.msgp.comm.DataParser;
 import com.wavem.msgp.comm.SocketMgr;
-import com.wavem.msgp.comm.WaveMsgException;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.DataInfoDto;
 import com.wavem.msgp.dto.LoginParamInfo;

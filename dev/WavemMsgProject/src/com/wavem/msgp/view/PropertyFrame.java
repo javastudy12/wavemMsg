@@ -34,11 +34,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.CommSet;
 import com.wavem.msgp.comm.PropertiesInfo;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgCheckBox;
 import com.wavem.msgp.component.WaveMsgComboBox;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFontInterface;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
@@ -110,13 +110,6 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	/** 기본 이미지 선택 콤보 */
 	private WaveMsgComboBox defaultThemeList = null;
 	
-	/** 폰트 데이터 */
-	private WaveMsgLabel fontDataLbl = null;
-	
-	/** 색상 데이터 */
-	private WaveMsgLabel colorDataLbl = null;
-	private JPanel colorPreviewBox = null;
-	
 	/** 폰트 미리보기 */
 	private JEditorPane dtrpnHello = null;
 	
@@ -130,7 +123,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	private WaveMsgButton alarmFindBtn = null;
 	
 	//private File themeImgFile = new File(PropertyFrame.class.getResource("/com/wavem/resource/img/profile/").getPath());
-	private File themeImgFile = new File(CommSet.getProfileImgPath());
+	private File themeImgFile = new File(CommSet.getOriBackImgPath());
 	
 	//******************************************************
 	// 환경설정 데이터 저장 변수
@@ -161,6 +154,9 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	
 	/** 배경 이미지 이름 */
 	private String themeName = "";
+	
+	/** 배경 이미지 확장자 */
+	private String themeExtension = "";
 	
 	/** 배경 이미지 경로 */
 	private String themePath = "";
@@ -234,7 +230,8 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 416, 760);
-		setTitle(CommMsg.PROPERTY_FRAME_TITLE);
+		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		/* *********************************************************
 		 * 기본 설정 시작
@@ -638,6 +635,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 		this.chatSavePath = properties.getChatSavePath(); // 대화 저장 경로
 		this.themeFlag = properties.isThemeFlag(); // 테마 설정
 		this.themeName = properties.getThemeName(); // 배경 이미지 이름
+		this.themeExtension = properties.getThemeExtension(); // 배경 이미지 확장자
 		this.themePath = properties.getThemePath(); // 배경 이미지 경로
 		this.font = properties.getFont(); // 폰트
 		this.fontStyle = properties.getFontStyle(); // 폰트 스타일
@@ -658,42 +656,45 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	public void savePropertyInfo() {
 		
 		// 저장 할 것인지 질문 메시지
-		WaveMsgDialogBox box = new WaveMsgDialogBox(this, this.title, CommMsg.SAVE_Q_MSG, JOptionPane.OK_CANCEL_OPTION);
+		WaveMsgDialogBox confirm = new WaveMsgDialogBox(this, this.title, CommMsg.SAVE_Q_MSG, JOptionPane.OK_CANCEL_OPTION);
 		
-		if (box.getResult() == 0) {
-			
-			/* **********************************************
-			 * 환경설정 데이터 저장 시작
-			 * **********************************************/
-			properties.setMsgAutoPopUpFlag(this.msgAutoPopUpFlag); // 쪽지 자동 팝업 설정
-			properties.setAutoStatusChangeFlag(this.autoStatusChangeFlag); // 자동 부재중 설정
-			properties.setAutoStatusChangeLimite(this.autoStatusChangeLimite); // 자동 부재중 설정시 동작 시간
-			properties.setDoubleClickOperate(this.doubleClickOperate); // 더블 클릭 시 설정 (쪽지, 채팅)
-			properties.setFileDownPath(this.fileDownPath); // 파일 다운로드 기본 경로
-			properties.setChatSaveFlag(this.chatSaveFlag); // 채팅 대화 내역 저장 설정
-			properties.setChatSavePath(this.chatSavePath); // 대화 저장 경로
-			properties.setThemeFlag(this.themeFlag); // 테마 설정
-			properties.setThemeName(this.themeName); // 배경 이미지 이름
-			properties.setThemePath(this.themePath); // 배경 이미지 경로
-			properties.setFont(this.font); // 폰트
-			properties.setFontStyle(this.fontStyle); // 폰트 스타일
-			properties.setFontSize(this.fontSize); // 폰트 사이즈
-			properties.setColor(this.color); //  폰트 색상
-			properties.setAlarmFlag(this.alarmFlag); // 알림음 설정
-			properties.setAlarmPath(this.alarmPath); // 알림음 경로
-			properties.setHost(this.host); // 서버 주소
-			properties.setPort(this.port); // 서버 포트
-			/* **********************************************
-			 * 환경설정 데이터 저장 끝
-			 * **********************************************/
-			System.out.println(properties.getAutoStatusChangeLimite());
-			try {
-				properties.savePropertiesFile();
-				new WaveMsgDialogBox(this.title, CommMsg.SAVE_MSG, JOptionPane.INFORMATION_MESSAGE);
-			} catch (IOException e) {
-				e.printStackTrace();
-				new WaveMsgDialogBox(this.title, CommMsg.NOT_SAVE_MSG, JOptionPane.ERROR_MESSAGE);
-			}
+		if (confirm.getResult() > 0) { // 저장 취소
+			return;
+		}
+		
+		/* **********************************************
+		 * 환경설정 데이터 저장 시작
+		 * **********************************************/
+		properties.setMsgAutoPopUpFlag(this.msgAutoPopUpFlag); // 쪽지 자동 팝업 설정
+		properties.setAutoStatusChangeFlag(this.autoStatusChangeFlag); // 자동 부재중 설정
+		properties.setAutoStatusChangeLimite(this.autoStatusChangeLimite); // 자동 부재중 설정시 동작 시간
+		properties.setDoubleClickOperate(this.doubleClickOperate); // 더블 클릭 시 설정 (쪽지, 채팅)
+		properties.setFileDownPath(this.fileDownPath); // 파일 다운로드 기본 경로
+		properties.setChatSaveFlag(this.chatSaveFlag); // 채팅 대화 내역 저장 설정
+		properties.setChatSavePath(this.chatSavePath); // 대화 저장 경로
+		properties.setThemeFlag(this.themeFlag); // 테마 설정
+		properties.setThemeName(this.themeName); // 배경 이미지 이름
+		properties.setThemeExtension(this.themeExtension); // 배경 이미지 확장자
+		properties.setThemePath(this.themePath); // 배경 이미지 경로
+		properties.setFont(this.font); // 폰트
+		properties.setFontStyle(this.fontStyle); // 폰트 스타일
+		properties.setFontSize(this.fontSize); // 폰트 사이즈
+		properties.setColor(this.color); //  폰트 색상
+		properties.setAlarmFlag(this.alarmFlag); // 알림음 설정
+		properties.setAlarmPath(this.alarmPath); // 알림음 경로
+		properties.setHost(this.host); // 서버 주소
+		properties.setPort(this.port); // 서버 포트
+		/* **********************************************
+		 * 환경설정 데이터 저장 끝
+		 * **********************************************/
+		System.out.println(properties.getAutoStatusChangeLimite());
+		
+		try {
+			properties.savePropertiesFile();
+			new WaveMsgDialogBox(this.title, CommMsg.SAVE_MSG, JOptionPane.INFORMATION_MESSAGE);
+		} catch (IOException e) {
+			e.printStackTrace();
+			new WaveMsgDialogBox(this.title, CommMsg.NOT_SAVE_MSG, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -794,15 +795,30 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 			// 파일 경로 선택
 			int returnVal = fileChooser.showSaveDialog(this);
 
-			// 파일선택 후 이미지를 프로필 사진으로 세팅
+			// 파일선택 후 이미지 세팅
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				path = fileChooser.getSelectedFile().getAbsolutePath();
-				themeUserSetPathTxt.setText(path);
 				
-				String name = path.substring(path.lastIndexOf("\\")+1, path.lastIndexOf("."));
+				path = fileChooser.getSelectedFile().getAbsolutePath(); // 선택한 이미지의 절대경로
+				themeUserSetPathTxt.setText(path); // 경로 세팅
 				
-				this.themeName = name; // 배경 이미지 이름 수정
-				this.themePath = path; // 배경 이미지 경로 수정
+				File imgFile = new File(path);
+				
+				if (!imgFile.exists()) { // 선택한 파일이 없는경우..
+					new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
+				this.themeName = imgFile.getName(); // 이미지 이름
+				this.themeExtension = ""; // 이미지 확장자
+				
+				// 이미지 이름에 확장자가 있는 경우 확장자 분리하여 세팅
+				int index = this.themeName.indexOf(".");
+				if (index > 0) {
+					this.themeName = imgFile.getName().substring(0, index);
+					this.themeExtension = imgFile.getName().substring(index+1);
+				}
+				
+				this.themePath = path; // 이미지 경로 
 			}
 			
 		} else if (ch.equals("alarm")) { // 알림음 선택
@@ -903,14 +919,35 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 			themeUserBtn.setEnabled(true); // 사용자 경로 찾기 버튼 활성화
 			
 			String path = themeUserSetPathTxt.getText();
-			String name = "";
 			
+			File imgFile = new File(path);
+			
+			if (!imgFile.exists()) { // 선택한 파일이 없는경우..
+				new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			this.themeName = imgFile.getName(); // 이미지 이름
+			this.themeExtension = ""; // 이미지 확장자
+			
+			// 이미지 이름에 확장자가 있는 경우 확장자 분리하여 세팅
+			int index = this.themeName.indexOf(".");
+			if (index > 0) {
+				this.themeName = imgFile.getName().substring(0, index);
+				this.themeExtension = imgFile.getName().substring(index+1);
+			}
+			
+			this.themePath = path; // 이미지 경로 
+			
+			
+			/*
 			if (path.length() > 0) { // 설정된 경로가 있는 경우 세팅
 				name = path.substring(path.lastIndexOf("\\")+1, path.lastIndexOf("."));
 			}
 			
 			this.themeName = name;
 			this.themePath = path;
+			*/
 		}
 		
 		System.out.println("테마 이미지 이름 : " + this.themeName);

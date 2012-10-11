@@ -37,10 +37,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.CommSet;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgComboBox;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgPanel;
@@ -169,9 +169,11 @@ public class ProfileFrame extends WaveMsgFrame {
 	
 	@Override
 	public void makeInitFrame() throws WaveMsgException {
+		
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 416, 510);
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		/* ****************************************************
 		 * 프로필 사진 설정 패널 시작

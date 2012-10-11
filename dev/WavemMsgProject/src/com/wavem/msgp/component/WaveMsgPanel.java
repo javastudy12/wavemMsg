@@ -10,9 +10,11 @@
 
 package com.wavem.msgp.component;
 
+import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.image.BufferedImage;
@@ -44,6 +46,9 @@ public class WaveMsgPanel extends JPanel {
 
 	/** 배경 등록 Image 인스턴스 변수 */
 	private Image img = null;
+	
+	/** 투명도 */
+	private float alpaValue = 1;
 	
 	/**
 	 * 패널 기본 생성자
@@ -103,12 +108,28 @@ public class WaveMsgPanel extends JPanel {
 	}
 	
 	/**
+	 * 이미지 설정
+	 * 
+	 * @param img 이미지
+	 * @param alpaValue 투명도
+	 */
+	public final void setImage(Image img, float alpaValue) {
+		this.img = img;
+		this.alpaValue = alpaValue;
+		repaint(); // 새로운 이미지로 화면을 새로그림
+	}
+	
+	
+	/**
 	 * file 파일 경로에 있는 이미지 로드하여 설정
 	 * 
-	 * @param file 이미지 파일 
+	 * @param file 이미지 파일
+	 * @param alpaValue 투명도
 	 * @throws IOException
 	 */
-	public final void setImage(File file) throws IOException{
+	public final void setImage(File file, float alpaValue) throws IOException{
+		
+		this.alpaValue = alpaValue;
 		
 		if (file == null) {
 			throw new IOException("File instance is null");
@@ -120,6 +141,16 @@ public class WaveMsgPanel extends JPanel {
 		
 		BufferedImage bufImg = ImageIO.read(file);
 		setImage(bufImg);
+	}
+	
+	/**
+	 * file 파일 경로에 있는 이미지 로드하여 설정
+	 * 
+	 * @param file 이미지 파일 
+	 * @throws IOException
+	 */
+	public final void setImage(File file) throws IOException{
+		setImage(file, this.alpaValue);
 	}
 	
 	/**
@@ -137,9 +168,15 @@ public class WaveMsgPanel extends JPanel {
 
 		// draw image
 		Image image = getImage();
+		AlphaComposite alphaComposite = null; // 투명도를 주기 위한
+		 
 
 		if (image != null) {
-			g.drawImage(image, 0, 0, this);
+			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpaValue);
+			
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setComposite(alphaComposite);
+			g2d.drawImage(image, 0, 0, this);
 		}
 	}
 

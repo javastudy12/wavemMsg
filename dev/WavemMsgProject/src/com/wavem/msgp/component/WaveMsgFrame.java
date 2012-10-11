@@ -12,7 +12,6 @@ package com.wavem.msgp.component;
 
 import javax.swing.JFrame;
 
-import com.wavem.msgp.comm.WaveMsgException;
 
 /**
  * 프레임(화면) 구성 추상클래스

@@ -34,7 +34,10 @@ public class CommSet {
 	/** 패널 적용 이미지 경로 */
 	private static String paneImgPath = "/com/wavem/resource/img/pane/";
 	
+	/** 메인 이미지 설정 경로 */
+	private static String backImgPath = "/com/wavem/resource/img/back/";
 	
+	/** 채팅 배경 이미지 경로 */
 	private static String chatBackImgPath = "/com/wavem/resource/img/chatback/";
 	
 	/**
@@ -207,6 +210,46 @@ public class CommSet {
 		}
 		
 		return CommSet.class.getResource(chatBackImgPath + imgNm + ".png").getPath();
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 배경 이미지 경로 반환
+	 * 
+	 * @return 채팅 배경 이미지 경로
+	 */
+	public static String getBackImgPath() {
+		return backImgPath;
+	}
+	
+	/**
+	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환
+	 * 
+	 * @return 실제 경로
+	 */
+	public static String getOriBackImgPath() {
+		return CommSet.class.getResource(backImgPath).getPath();
+	}
+	
+	/**
+	 * 클래스 패스 내에 있는 이미지의 실제 경로 반환 <br>
+	 * 이미지 이름에 확장자를 입력하지 않을 경우 자동을 png확장자를 찾는다. <br>
+	 * 
+	 * @param imgNm 존재하는 이미지의 이름
+	 * @return 실제 경로
+	 */
+	public static String getOriBackImgPath(String imgNm) {
+		
+		int ex = imgNm.indexOf(".");
+		
+		if (ex > 0) {
+			return CommSet.class.getResource(backImgPath + imgNm).getPath();
+		}
+		
+		return CommSet.class.getResource(backImgPath + imgNm + ".png").getPath();
 	}
 	
 }

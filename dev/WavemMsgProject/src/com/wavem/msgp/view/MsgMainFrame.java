@@ -22,9 +22,9 @@ import javax.swing.JOptionPane;
 
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.CommSet;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgPanel;
@@ -335,7 +335,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -352,7 +352,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -369,7 +369,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -386,7 +386,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -403,7 +403,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -420,7 +420,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -437,7 +437,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -454,7 +454,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -471,7 +471,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -488,7 +488,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -505,7 +505,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -522,7 +522,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-					new WaveMsgDialogBox(title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+					new WaveMsgDialogBox(title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

@@ -10,6 +10,7 @@
 
 package com.wavem.msgp.comm;
 
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.dto.DataInfoDto;
 import com.wavem.msgp.dto.LoginParamInfo;
 

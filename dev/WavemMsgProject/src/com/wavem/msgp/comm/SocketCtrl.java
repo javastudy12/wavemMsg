@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 
 /**
  * 소켓 통신 <br>

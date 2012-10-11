@@ -12,14 +12,22 @@ package com.wavem.msgp.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
@@ -32,10 +40,10 @@ import javax.swing.text.StyledDocument;
 
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgBackImgInterface;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFontInterface;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgList;
@@ -137,6 +145,9 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	private StyledDocument doc = new DefaultStyledDocument(context);
 	private Style style = context.getStyle(StyleContext.DEFAULT_STYLE);
 	
+	
+	
+	
 	/**
 	 * 채팅창 생성자 <br>
 	 * 생성자를 통해 서비스ID와 사용자 리스트 생성<br>
@@ -156,18 +167,14 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 500, 598); //598
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		/* *********************************************************
 		 * 대화 내역 창 시작
 		 * *********************************************************/
-//		textArea = new WaveMsgTextArea();
-//		textArea.setEditable(false);
-//		textArea.setLineWrap(true);
-		//getContentPane().add(textArea);
 		
 		textPane = new WaveMsgTextPane(doc);
 		textPane.setEditable(false);
-		//getContentPane().add(textPane);
 		
 		scrollPane = new WaveMsgScrollPane(textPane);
 		scrollPane.setBounds(0, 0, 350, 400);
@@ -175,7 +182,11 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		getContentPane().add(scrollPane);
 		
-		
+		try {
+			setBackGround(); // 배경설정
+		} catch (WaveMsgException e) {
+			throw e;
+		}
 		/* *********************************************************
 		 * 대화 내역 창 끝
 		 * *********************************************************/
@@ -270,6 +281,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		chatOutBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				outChat();
 			}
 		});
 		chatOutBtn.setBounds(384, 10, 50, 40);
@@ -297,7 +309,6 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) { //엔터키 입력 시
-					//e.setKeyCode(KeyEvent.s)
 					sendMsg();
 				}
 			}
@@ -384,6 +395,18 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		// TODO : 추 후 서버에서 받은 데이터를 이용하여 메시지를 보내는 로직으로 대체
 		//        현재는 임시로 설정이 변경되는 것을 확인하기 위한 로직이다.
 		
+		/*
+		style = doc.addStyle("addImg", null);
+		StyleConstants.setIcon(style, new ImageIcon(property.getChatBackgroundPath()));
+		
+		try {
+			doc.insertString(doc.getLength(), "아 머냐", style);
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
 		// 구간별 별도로 텍스트 변경하기 위한 설정 
 		SimpleAttributeSet attr = new SimpleAttributeSet();
 		
@@ -425,13 +448,13 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	}
 
 	/**
-	 * 폰트 및 생상 설정창 생성
+	 * 폰트 및 색상 설정창 생성
 	 */
 	public void makeFontFrame() {
 		
 		try {
 			
-			if (chatFontFrame == null) { // 설정창이 이미 생성된 경우 새로 생성하지 않는다.
+			if (chatFontFrame == null || !chatFontFrame.isShowing()) { // 설정창이 이미 생성된 경우 새로 생성하지 않는다.
 				chatFontFrame = new ChatFontFrame(this);
 				chatFontFrame.setVisible(true);
 			} else {
@@ -440,7 +463,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 			
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -451,7 +474,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		
 		try {
 			
-			if (backGFrame == null) { // 설정창이 이미 생성된 경우 새로 생성하지 않는다.
+			if (backGFrame == null || !backGFrame.isShowing()) { // 설정창이 이미 생성된 경우 새로 생성하지 않는다.
 				backGFrame = new BackgroundFrame(this);
 				backGFrame.setVisible(true);
 			} else {
@@ -460,14 +483,29 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 			
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
 
 	@Override
-	public void setBackGround() {
-		// TODO 배경 설정
+	public void setBackGround() throws WaveMsgException {
+		
+		// 환경설정에 저장되어있는 이미지의 경로를 구해온다.
+		File imgFile = new File(property.getChatBackgroundPath());
+		
+		// 이미지를 텍스트 화면에 적용한다.
+		try {
+			BufferedImage bufImg = ImageIO.read(new BufferedInputStream(new FileInputStream(imgFile)));
+			Image atemp = bufImg.getScaledInstance(scrollPane.getWidth(), scrollPane.getHeight(), Image.SCALE_AREA_AVERAGING);
+			textPane.setImage(atemp, 0.4f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new WaveMsgException(CommMsg.NOT_EXSIST_IMG);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new WaveMsgException(CommMsg.NOT_APPLY_IMG);
+		}
 		
 	}
 	
@@ -480,7 +518,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		
 		try {
 			
-			if (inviteFrame == null) {
+			if (inviteFrame == null || !inviteFrame.isShowing()) {
 				inviteFrame = new InviteFrame(new ArrayList<UserInfo>(), this.userList);
 				inviteFrame.setVisible(true);
 			} else {
@@ -489,7 +527,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 			
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		} 
 	}
 
@@ -502,7 +540,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		
 		try {
 			
-			if (fupFrame == null) {
+			if (fupFrame == null || !fupFrame.isShowing()) {
 				fupFrame = new FileUploadFrame();
 				fupFrame.setVisible(true);
 			} else {
@@ -511,7 +549,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 			
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

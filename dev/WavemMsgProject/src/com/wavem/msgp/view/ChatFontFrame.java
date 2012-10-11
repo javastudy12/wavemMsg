@@ -23,9 +23,9 @@ import javax.swing.border.LineBorder;
 
 import com.wavem.msgp.comm.CommMsg;
 import com.wavem.msgp.comm.PropertiesInfo;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFontInterface;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.component.WaveMsgLabel;
@@ -116,6 +116,7 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 		getContentPane().setLayout(null);
 		setBounds(10, 10, 416, 200);
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		WaveMsgLabel fontSetLbl = new WaveMsgLabel("폰트 설정");
 		fontSetLbl.setBounds(12, 22, 72, 15);
@@ -220,7 +221,7 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 			fontFrame.setVisible(true);
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -234,7 +235,7 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 			colorFrame.setVisible(true);
 		} catch (WaveMsgException e) {
 			e.printStackTrace();
-			new WaveMsgDialogBox(this.title, CommMsg.LOAD_FRAME_ERROR, JOptionPane.ERROR_MESSAGE);
+			new WaveMsgDialogBox(this.title, e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -279,6 +280,13 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 	 */
 	public void saveFontNColor() {
 		
+		// 저장 할 것인지 질문 메시지
+		WaveMsgDialogBox confirm = new WaveMsgDialogBox(this, this.title, CommMsg.SAVE_Q_MSG, JOptionPane.OK_CANCEL_OPTION);
+		
+		if (confirm.getResult() > 0) { // 승인거부
+			return;
+		}
+		
 		// 프로퍼티에 설정 저장
 		properties.setChatFont(this.chatFont);
 		properties.setChatFontStyle(this.chatFontStyle);
@@ -291,13 +299,14 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 			chatFrame.setFrameFont();
 			chatFrame.setFrameColor();
 			
+			new WaveMsgDialogBox(this.title, CommMsg.SAVE_MSG, JOptionPane.INFORMATION_MESSAGE); // 저장 완료 메시지
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			new WaveMsgDialogBox(this.title, CommMsg.PROPERTY_SAVE_ERROR, JOptionPane.ERROR_MESSAGE);
 		} finally {
 			close();
 		}
-		
 	}
 	
 	@Override

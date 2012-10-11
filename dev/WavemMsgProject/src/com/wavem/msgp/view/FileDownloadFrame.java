@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wavem.msgp.comm.CommMsg;
-import com.wavem.msgp.comm.WaveMsgException;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 import com.wavem.msgp.dto.FileInfo;
 
@@ -56,6 +56,7 @@ public class FileDownloadFrame extends WaveMsgFrame {
 	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 	}
 
 	@Override

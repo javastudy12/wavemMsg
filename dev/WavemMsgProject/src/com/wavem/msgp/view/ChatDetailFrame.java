@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 import com.wavem.msgp.comm.CommMsg;
-import com.wavem.msgp.comm.WaveMsgException;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
 
 /**
@@ -65,6 +65,7 @@ public class ChatDetailFrame extends WaveMsgFrame {
 	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 	}
 
 	@Override

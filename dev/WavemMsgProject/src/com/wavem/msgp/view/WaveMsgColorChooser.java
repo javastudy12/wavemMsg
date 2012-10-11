@@ -18,9 +18,9 @@ import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
 import com.wavem.msgp.comm.CommMsg;
-import com.wavem.msgp.comm.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgDialogBox;
+import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFontInterface;
 import com.wavem.msgp.component.WaveMsgFrame;
 
@@ -66,6 +66,7 @@ public class WaveMsgColorChooser extends WaveMsgFrame {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 624, 435);
 		setTitle(this.title);
+		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
 		
 		/* *************************************************************
 		 * 색상 선택 컴포넌트 시작
