@@ -436,10 +436,17 @@ public class BackgroundFrame extends WaveMsgFrame {
 			defaultList.setEnabled(true); // 기본 이미지 목록 활성화
 			userSetPath.setEnabled(false); // 선택한 경로 필드 비활성화
 			findBtn.setEnabled(false); // 찾기 버튼 비활성화
+			
+			File file = new File(CommSet.getOriChatBackImgPath( defaultImgList.get(this.selectedImgListIndex)+"."+imgExtensionList.get(this.selectedImgListIndex)));
+			setFileInfo(file);
+			
 		} else {
 			defaultList.setEnabled(false); // 기본 이미지 목록 비활성화
 			userSetPath.setEnabled(true); // 선택한 경로 필드 활성화
 			findBtn.setEnabled(true); // 찾기 버튼 활성화
+			
+			File file = new File(userSetPath.getText());
+			setFileInfo(file);
 		}
 	}
 	
@@ -456,11 +463,12 @@ public class BackgroundFrame extends WaveMsgFrame {
 			// 리스트에서 저장되어있는 이미지 이름을 검색
 			// 같은 이름일 때의 index를 구한다.
 			if (this.chatBackgroundName.equals(defaultImgList.get(index))) {
+				this.selectedImgListIndex = index;
 				break;
 			}
 		}
 		
-		defaultList.setSelectedIndex(index); // 목록에서 선택
+		defaultList.setSelectedIndex(this.selectedImgListIndex); // 목록에서 선택
 	}
 	
 	/**
@@ -488,28 +496,39 @@ public class BackgroundFrame extends WaveMsgFrame {
 			// 파일 경로 출력
 			userSetPath.setText(fileChooser.getSelectedFile().getAbsolutePath());
 				
-			this.chatBackgroundPath = fileChooser.getSelectedFile().getAbsolutePath(); // 파일의 절대경로
+			String path = fileChooser.getSelectedFile().getAbsolutePath(); // 파일의 절대경로
 			
-			imgPath = new File(chatBackgroundPath); // 파일 인스턴스 생성
+			File imgPath = new File(path); // 파일 인스턴스 생성
 			
-			// 선택한 파일이 없는 경우 메시지를 띄우고 메서드를 종료한다.
-			if (!imgPath.exists()) { 
-				new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			
-			this.chatBackgroundName = imgPath.getName(); // 파일 이름
-			this.chatBackgroundExtension = ""; // 확장자 초기화
-			
-			// 파일 이름에 확장자가 존재 할 경우 파일 이름과 확장자를 적용한다.
-			int index = this.chatBackgroundName.indexOf(".");
-			if (index > 0) {
-				this.chatBackgroundName = imgPath.getName().substring(0, index);
-				this.chatBackgroundExtension = imgPath.getName().substring(index+1);
-			}
+			setFileInfo(imgPath); // 추출
 			
 			userSetPath.setText(this.chatBackgroundPath);
 			setPreviewImg(this.chatBackgroundPath); // 이미지를 미리보기 화면에 보인다.
+		}
+	}
+	
+	/**
+	 * 선택된 파일에서 파일 정보 추출
+	 * 
+	 * @param file 파일 이미지
+	 */
+	public void setFileInfo(File file) {
+		
+		// 선택한 파일이 없는 경우 메시지를 띄우고 메서드를 종료한다.
+		if (!imgPath.exists()) { 
+			new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		this.chatBackgroundName = imgPath.getName(); // 파일 이름
+		this.chatBackgroundExtension = ""; // 확장자 초기화
+		this.chatBackgroundPath = file.getAbsolutePath(); // 파일 경로
+		
+		// 파일 이름에 확장자가 존재 할 경우 파일 이름과 확장자를 적용한다.
+		int index = this.chatBackgroundName.indexOf(".");
+		if (index > 0) {
+			this.chatBackgroundName = imgPath.getName().substring(0, index);
+			this.chatBackgroundExtension = imgPath.getName().substring(index+1);
 		}
 	}
 	

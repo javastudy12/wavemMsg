@@ -10,11 +10,18 @@
 
 package com.wavem.msgp.view;
 
+import java.awt.Color;
 import java.util.List;
 
+import javax.swing.JButton;
+
 import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.component.WaveMsgButton;
 import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFrame;
+import com.wavem.msgp.component.WaveMsgLabel;
+import com.wavem.msgp.component.WaveMsgList;
+import com.wavem.msgp.component.WaveMsgScrollPane;
 import com.wavem.msgp.dto.UserInfo;
 
 /**
@@ -46,6 +53,14 @@ public class InviteFrame extends WaveMsgFrame{
 	/** 채팅창에 접속중인 사용자 리스트 */
 	private List<UserInfo> chatUserList = null;
 	
+	
+	/** 전체 사용자 */
+	private WaveMsgList allUserListPane = null;
+	/** 참여중인 사용자 */
+	private WaveMsgList chatUserListPane = null;
+	
+	
+	
 	/**
 	 * 초대화면 생성자 <br>
 	 * 최초에 makeInitFrame()호출 <br>
@@ -55,35 +70,74 @@ public class InviteFrame extends WaveMsgFrame{
 	 * @throws WaveMsgException 
 	 */
 	public InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
+		
 		this.allUserList = allUserList;
 		this.chatUserList = chatUserList;
 		makeInitFrame();
 	}
 	
-	/**
-	 * 초대 화면을 위한 인스턴스 반환
-	 * 
-	 * @return 초대 화면을 위한 화면 인스턴스
-	 * @throws WaveMsgException 
-	 */
-//	public static InviteFrame getInstance(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
-//		
-//		if (frame == null) {
-//			synchronized (InviteFrame.class) {
-//				if (frame == null) {
-//					frame = new InviteFrame(allUserList, chatUserList);
-//				}
-//			}
-//		}
-//		
-//		return frame;
-//	}
-	
 	@Override
 	public void makeInitFrame() throws WaveMsgException {
 		getContentPane().setLayout(null);
+		getContentPane().setBackground(Color.WHITE);
 		setTitle(this.title);
 		setDefaultCloseOperation(WaveMsgFrame.DISPOSE_ON_CLOSE);
+
+		
+		
+		WaveMsgLabel allUserLbl = new WaveMsgLabel("전체 사용자");
+		allUserLbl.setBounds(12, 20, 118, 15);
+		getContentPane().add(allUserLbl);
+		
+		WaveMsgLabel chatUserLbl = new WaveMsgLabel("참여중인 사용자");
+		chatUserLbl.setBounds(305, 20, 118, 15);
+		getContentPane().add(chatUserLbl);
+		
+		
+		// 전체 사용자 리스트
+		allUserListPane = new WaveMsgList();
+		
+		WaveMsgScrollPane allScroll = new WaveMsgScrollPane(allUserListPane);
+		allScroll.setBounds(12, 52, 232, 433);
+		getContentPane().add(allScroll);
+		
+		
+		// 참여중인 사용자 리스트
+		chatUserListPane = new WaveMsgList();
+		
+		WaveMsgScrollPane chatScroll = new WaveMsgScrollPane(chatUserListPane);
+		chatScroll.setBounds(305, 52, 232, 433);
+		getContentPane().add(chatScroll);
+		
+		
+		
+		
+		
+		WaveMsgButton okBtn = new WaveMsgButton("OK");
+		okBtn.setBounds(405, 511, 60, 23);
+		getContentPane().add(okBtn);
+		
+		WaveMsgButton closeBtn = new WaveMsgButton("CLOSE");
+		closeBtn.setBounds(477, 511, 60, 23);
+		getContentPane().add(closeBtn);
+		
+		
+		
+		
+		
+		
+		WaveMsgButton inviteBtn = new WaveMsgButton();
+		inviteBtn.setBounds(256, 175, 38, 54);
+		getContentPane().add(inviteBtn);
+		
+		WaveMsgButton deleteBtn = new WaveMsgButton();
+		deleteBtn.setBounds(256, 257, 38, 54);
+		getContentPane().add(deleteBtn);
+		
+		
+		
+		
+		
 	}
 	
 	@Override
@@ -131,5 +185,4 @@ public class InviteFrame extends WaveMsgFrame{
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

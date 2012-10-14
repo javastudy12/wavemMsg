@@ -126,8 +126,8 @@ public class MsgMainFrame extends WaveMsgFrame {
 		topPanel = new WaveMsgPanel();
 		topPanel.setImage(CommSet.getPaneImage("TOP")); 
 		topPanel.setBounds(0, 0, 450, 100); // 상단 TOP 패널 부분의 위치 및 크기 지정
-		getContentPane().add(topPanel); // 메인 패널에 추가
 		topPanel.setLayout(null);
+		getContentPane().add(topPanel); // 메인 패널에 추가
 		
 		// 프로필 설정 버튼
 		WaveMsgButton profileBtn = new WaveMsgButton();

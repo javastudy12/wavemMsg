@@ -84,7 +84,8 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	private List<UserInfo> userList = null;
 	
 	
-	private WaveMsgTextPane textPane = null;
+	private WaveMsgTextPane chatHistoryPane = null;
+	private WaveMsgPanel chatBackPane = null;
 	private WaveMsgScrollPane scrollPane = null;
 	
 	private WaveMsgList withUserList = null;
@@ -173,14 +174,19 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		 * 대화 내역 창 시작
 		 * *********************************************************/
 		
-		textPane = new WaveMsgTextPane(doc);
-		textPane.setEditable(false);
+		chatHistoryPane = new WaveMsgTextPane(doc);
+		chatHistoryPane.setEditable(false);
+		chatHistoryPane.setOpaque(false);//투명?
 		
-		scrollPane = new WaveMsgScrollPane(textPane);
+		scrollPane = new WaveMsgScrollPane(chatHistoryPane);
 		scrollPane.setBounds(0, 0, 350, 400);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		getContentPane().add(scrollPane);
+		
+		chatBackPane = new WaveMsgPanel();
+		chatBackPane.setBounds(0, 0, 350, 400);
+		getContentPane().add(chatBackPane);
 		
 		try {
 			setBackGround(); // 배경설정
@@ -498,13 +504,15 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		try {
 			BufferedImage bufImg = ImageIO.read(new BufferedInputStream(new FileInputStream(imgFile)));
 			Image atemp = bufImg.getScaledInstance(scrollPane.getWidth(), scrollPane.getHeight(), Image.SCALE_AREA_AVERAGING);
-			textPane.setImage(atemp, 0.4f);
+			chatBackPane.setImage(atemp, 0.4f);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			throw new WaveMsgException(CommMsg.NOT_EXSIST_IMG);
+			//throw new WaveMsgException(CommMsg.NOT_EXSIST_IMG);
+			new WaveMsgDialogBox(this.title, CommMsg.NOT_EXSIST_IMG, JOptionPane.ERROR_MESSAGE);
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new WaveMsgException(CommMsg.NOT_APPLY_IMG);
+			//throw new WaveMsgException(CommMsg.NOT_APPLY_IMG);
+			new WaveMsgDialogBox(this.title, CommMsg.NOT_APPLY_IMG, JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
