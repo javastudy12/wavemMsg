@@ -37,8 +37,12 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 
 import com.wavem.msgp.comm.CommMsg;
+import com.wavem.msgp.comm.CommSet;
 import com.wavem.msgp.comm.PropertiesInfo;
 import com.wavem.msgp.component.WaveMsgBackImgInterface;
 import com.wavem.msgp.component.WaveMsgButton;
@@ -146,7 +150,9 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	private StyledDocument doc = new DefaultStyledDocument(context);
 	private Style style = context.getStyle(StyleContext.DEFAULT_STYLE);
 	
-	
+	/** HTML 양식으로 적용 */
+	private HTMLEditorKit htmlEditor = new HTMLEditorKit();
+	private HTMLDocument htmlDoc = (HTMLDocument) htmlEditor.createDefaultDocument();
 	
 	
 	/**
@@ -174,9 +180,25 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		 * 대화 내역 창 시작
 		 * *********************************************************/
 		
+		// 텍스트 패널 일반 형식
 		chatHistoryPane = new WaveMsgTextPane(doc);
 		chatHistoryPane.setEditable(false);
-		chatHistoryPane.setOpaque(false);//투명?
+		////chatHistoryPane.setOpaque(false);//투명?
+		
+		// 텍스트 패널 HTML 형식
+		chatHistoryPane = new WaveMsgTextPane();
+		chatHistoryPane.setContentType("text/html");
+		chatHistoryPane.setEditorKit(htmlEditor);
+		chatHistoryPane.setDocument(htmlDoc); //"+CommSet.getOriChatBackImgPath("Chrysanthemum"
+		
+		try {
+			htmlEditor.insertHTML(htmlDoc, 0, "<body background='com/wavem/resource/img/chatback/Dsert.png' style='height: 232px; '></body>", 0, 0, HTML.Tag.HTML);
+		} catch (BadLocationException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		
 		scrollPane = new WaveMsgScrollPane(chatHistoryPane);
 		scrollPane.setBounds(0, 0, 350, 400);
@@ -368,14 +390,24 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	public void sendMsg() {
 		
 		// TODO : 임시로직 -> 추후 서버에 전송하여 받은 데이터를 화면에 그려주도록 한다.
-		
+		/*
 		try {
 			doc.insertString(doc.getLength(), "\n guest - "+msgWriteArea.getText().trim()
 					, getChatAttr(property.getChatFont(), property.getChatFontStyle(), property.getChatFontSize(), property.getChatColor()));
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
+		*/
 		
+		
+		// HTML 적용
+		try {
+			htmlEditor.insertHTML(htmlDoc, 0, "<BODY><img src='../../resource/img/chatback/Desert.png'><B><I>1111111111 22222222 33333333333 44</I></B></BODY>", 0, 0, HTML.Tag.HTML);
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		msgWriteArea.setText(null);
 	}
