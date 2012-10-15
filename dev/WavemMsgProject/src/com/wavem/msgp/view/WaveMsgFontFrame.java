@@ -105,6 +105,7 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	public WaveMsgFontFrame(WaveMsgFontInterface frame, String font, int fontEtc, int fontSize) throws WaveMsgException {
+		super();
 		
 		/* *************************************************************
 		 * 환경변수 및 채팅 설정 구분 시작
@@ -302,10 +303,12 @@ public class WaveMsgFontFrame extends WaveMsgFrame {
 		for (int i=0; i<size; i++) {
 			if (fontPreview.equals(fontViewName.get(i))) {
 				fontListIndex = i;
+				
 				break;
 			}
 		}
 		fontList.setSelectedIndex(fontListIndex);
+		
 		//fontList. // TODO : 스크롤 이동 로직 필요
 		
 		// 저장된 형식

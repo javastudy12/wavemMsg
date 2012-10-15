@@ -28,6 +28,8 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.GrayFilter;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
@@ -50,6 +52,7 @@ import com.wavem.msgp.component.WaveMsgDialogBox;
 import com.wavem.msgp.component.WaveMsgException;
 import com.wavem.msgp.component.WaveMsgFontInterface;
 import com.wavem.msgp.component.WaveMsgFrame;
+import com.wavem.msgp.component.WaveMsgLabel;
 import com.wavem.msgp.component.WaveMsgList;
 import com.wavem.msgp.component.WaveMsgPanel;
 import com.wavem.msgp.component.WaveMsgScrollPane;
@@ -88,8 +91,10 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	private List<UserInfo> userList = null;
 	
 	
+	private WaveMsgPanel basePanel = null;
+	
 	private WaveMsgTextPane chatHistoryPane = null;
-	private WaveMsgPanel chatBackPane = null;
+	private WaveMsgLabel chatBackPane = null;
 	private WaveMsgScrollPane scrollPane = null;
 	
 	private WaveMsgList withUserList = null;
@@ -163,6 +168,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	 * @throws WaveMsgException 
 	 */
 	public ChatFrame(String chatServiceId) throws WaveMsgException {
+		super();
 		this.chatServiceId = chatServiceId;
 		this.userList = Collections.synchronizedList(new ArrayList<UserInfo>());
 		makeInitFrame();
@@ -180,24 +186,36 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		 * 대화 내역 창 시작
 		 * *********************************************************/
 		
+		//basePanel = new WaveMsgPanel();
+		//basePanel.setBounds(0, 0, 350, 400);
+		//basePanel.setOpaque(false);
+		//getContentPane().add(basePanel);
+		
 		// 텍스트 패널 일반 형식
 		chatHistoryPane = new WaveMsgTextPane(doc);
 		chatHistoryPane.setEditable(false);
-		////chatHistoryPane.setOpaque(false);//투명?
-		
+		//chatHistoryPane.setOpaque(false);//투명?
+		 
 		// 텍스트 패널 HTML 형식
-		chatHistoryPane = new WaveMsgTextPane();
+		//chatHistoryPane = new WaveMsgTextPane();
+		/*
 		chatHistoryPane.setContentType("text/html");
 		chatHistoryPane.setEditorKit(htmlEditor);
 		chatHistoryPane.setDocument(htmlDoc); //"+CommSet.getOriChatBackImgPath("Chrysanthemum"
 		
 		try {
-			htmlEditor.insertHTML(htmlDoc, 0, "<body background='com/wavem/resource/img/chatback/Dsert.png' style='height: 232px; '></body>", 0, 0, HTML.Tag.HTML);
+			htmlEditor.insertHTML(htmlDoc, 0, "<body background='com/wavem/resource/img/chatback/Dsert.png' style='height: 232px; '></body>", 0, 0, HTML.Tag.BODY);
 		} catch (BadLocationException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		*/
+		
+		// 배경 지정
+		chatBackPane = new WaveMsgLabel("미ㅣ낭러");
+		chatBackPane.setBounds(0, 0, 350, 400);
+		chatHistoryPane.add(chatBackPane, -1);
 		
 		
 		scrollPane = new WaveMsgScrollPane(chatHistoryPane);
@@ -206,9 +224,6 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		getContentPane().add(scrollPane);
 		
-		chatBackPane = new WaveMsgPanel();
-		chatBackPane.setBounds(0, 0, 350, 400);
-		getContentPane().add(chatBackPane);
 		
 		try {
 			setBackGround(); // 배경설정
@@ -390,17 +405,17 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	public void sendMsg() {
 		
 		// TODO : 임시로직 -> 추후 서버에 전송하여 받은 데이터를 화면에 그려주도록 한다.
-		/*
+		//*
 		try {
 			doc.insertString(doc.getLength(), "\n guest - "+msgWriteArea.getText().trim()
 					, getChatAttr(property.getChatFont(), property.getChatFontStyle(), property.getChatFontSize(), property.getChatColor()));
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
-		*/
-		
+		//*/
 		
 		// HTML 적용
+		/*
 		try {
 			htmlEditor.insertHTML(htmlDoc, 0, "<BODY><img src='../../resource/img/chatback/Desert.png'><B><I>1111111111 22222222 33333333333 44</I></B></BODY>", 0, 0, HTML.Tag.HTML);
 		} catch (BadLocationException e) {
@@ -408,7 +423,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		msgWriteArea.setText(null);
 	}
 
@@ -535,8 +550,18 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		// 이미지를 텍스트 화면에 적용한다.
 		try {
 			BufferedImage bufImg = ImageIO.read(new BufferedInputStream(new FileInputStream(imgFile)));
-			Image atemp = bufImg.getScaledInstance(scrollPane.getWidth(), scrollPane.getHeight(), Image.SCALE_AREA_AVERAGING);
-			chatBackPane.setImage(atemp, 0.4f);
+			Image img = bufImg.getScaledInstance(scrollPane.getWidth(), scrollPane.getHeight(), Image.SCALE_AREA_AVERAGING);
+			
+			Image grayImage = GrayFilter.createDisabledImage(img);
+			chatHistoryPane.setImage(grayImage, 0.4f);
+			//chatHistoryPane.setImage(img, 0.4f);
+			//chatBackPane.setImage(img, 0.4f);
+			//basePanel.setImage(img, 0.4f); 
+			//scrollPane.getViewport().set.setImage(img, 0.4f);
+			
+			//ImageIcon imgIcon = new ImageIcon(img);
+			//chatBackPane.setIcon(imgIcon);
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			//throw new WaveMsgException(CommMsg.NOT_EXSIST_IMG);

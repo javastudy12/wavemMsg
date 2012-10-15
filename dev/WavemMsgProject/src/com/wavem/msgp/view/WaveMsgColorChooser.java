@@ -53,7 +53,7 @@ public class WaveMsgColorChooser extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	public WaveMsgColorChooser(WaveMsgFontInterface frame, Color color) throws WaveMsgException {
-		
+		super();
 		this.frame = frame; // 컬러 요청한 인스턴스
 		this.color = color; // 기존에 지정된 컬러
 		

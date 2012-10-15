@@ -71,7 +71,7 @@ public class LoginFrame extends WaveMsgFrame{
 	 * @throws WaveMsgException 
 	 */
 	public LoginFrame() throws WaveMsgException {
-
+		super();
 		properties = PropertiesInfo.getInstance();
 		MsgMainFrame.getInstance().close(); // 실패한 메인 화면 종료
 		makeInitFrame();

@@ -46,6 +46,7 @@ public class NoticeFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	private NoticeFrame() throws WaveMsgException {
+		super();
 		makeInitFrame();
 	}
 	

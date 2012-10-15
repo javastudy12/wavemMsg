@@ -48,6 +48,7 @@ public class FileDownloadFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	public FileDownloadFrame() throws WaveMsgException {
+		super();
 		fileList = new ArrayList<FileInfo>();
 		makeInitFrame();
 	}

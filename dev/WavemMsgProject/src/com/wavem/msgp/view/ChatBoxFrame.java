@@ -52,6 +52,8 @@ public class ChatBoxFrame extends WaveMsgFrame {
 	 * @see ChatBoxFrame#makeInitFrame()
 	 */
 	private ChatBoxFrame() throws WaveMsgException {
+		super();
+		
 		PropertiesInfo properties = PropertiesInfo.getInstance(); // 대화저장 경로를 가져오기 위한 설정 인스턴스 획득
 		String filePath = properties.getChatSavePath(); // 설정되어있는 파일 경로
 		

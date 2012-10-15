@@ -195,7 +195,7 @@ public class PropertyFrame extends WaveMsgFrame implements WaveMsgFontInterface 
 	 * @throws WaveMsgException 
 	 */
 	private PropertyFrame() throws WaveMsgException {
-		
+		super();
 		this.properties = PropertiesInfo.getInstance();
 		
 		makeInitFrame();

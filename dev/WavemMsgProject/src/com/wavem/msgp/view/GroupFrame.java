@@ -44,6 +44,7 @@ public class GroupFrame extends WaveMsgFrame{
 	 * @throws WaveMsgException 
 	 */
 	private GroupFrame() throws WaveMsgException {
+		super();
 		makeInitFrame();
 	}
 	

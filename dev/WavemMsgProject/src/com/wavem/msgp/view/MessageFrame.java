@@ -90,6 +90,7 @@ public class MessageFrame extends WaveMsgFrame{
 	 * @throws WaveMsgException 
 	 */
 	public MessageFrame() throws WaveMsgException{
+		super();
 		getContentPane().setBackground(Color.WHITE);
 		makeInitFrame();
 	}

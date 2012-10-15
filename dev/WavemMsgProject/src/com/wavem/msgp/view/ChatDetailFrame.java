@@ -49,6 +49,7 @@ public class ChatDetailFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	public ChatDetailFrame(String fileName) throws WaveMsgException {
+		super();
 		this.fileName = fileName;
 		
 		makeInitFrame();

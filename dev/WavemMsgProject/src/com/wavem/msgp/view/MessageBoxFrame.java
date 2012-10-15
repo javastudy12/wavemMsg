@@ -44,6 +44,7 @@ public class MessageBoxFrame extends WaveMsgFrame{
 	 * @throws WaveMsgException 
 	 */
 	private MessageBoxFrame() throws WaveMsgException {
+		super();
 		makeInitFrame();
 	}
 

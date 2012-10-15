@@ -141,6 +141,7 @@ public class ProfileFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	private ProfileFrame(UserInfo userInfo) throws WaveMsgException {
+		super();
 		getContentPane().setBackground(Color.WHITE);
 		this.userInfo = userInfo;
 		this.userUpdateInfo = userInfo;

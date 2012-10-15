@@ -42,6 +42,7 @@ public class FileBoxFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	private FileBoxFrame() throws WaveMsgException {
+		super();
 		makeInitFrame();
 	}
 	

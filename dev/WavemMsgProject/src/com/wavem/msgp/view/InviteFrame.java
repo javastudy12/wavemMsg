@@ -70,7 +70,7 @@ public class InviteFrame extends WaveMsgFrame{
 	 * @throws WaveMsgException 
 	 */
 	public InviteFrame(List<UserInfo> allUserList, List<UserInfo> chatUserList) throws WaveMsgException {
-		
+		super();
 		this.allUserList = allUserList;
 		this.chatUserList = chatUserList;
 		makeInitFrame();

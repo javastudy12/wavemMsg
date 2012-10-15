@@ -48,6 +48,7 @@ public class FileUploadFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	public FileUploadFrame() throws WaveMsgException {
+		super();
 		fileList = new ArrayList<FileInfo>();
 		makeInitFrame();
 	}

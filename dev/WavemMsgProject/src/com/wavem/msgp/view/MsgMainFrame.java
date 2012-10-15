@@ -78,6 +78,7 @@ public class MsgMainFrame extends WaveMsgFrame {
 	 * @throws WaveMsgException 
 	 */
 	private MsgMainFrame() throws WaveMsgException {
+		super();
 		makeInitFrame();
 	}
 

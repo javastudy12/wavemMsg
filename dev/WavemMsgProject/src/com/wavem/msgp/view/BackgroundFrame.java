@@ -134,6 +134,7 @@ public class BackgroundFrame extends WaveMsgFrame {
 	 * @see BackgroundFrame#makeInitFrame()
 	 */
 	public BackgroundFrame(WaveMsgBackImgInterface frame) throws WaveMsgException {
+		super();
 		this.frame = frame;
 		makeInitFrame();
 	}

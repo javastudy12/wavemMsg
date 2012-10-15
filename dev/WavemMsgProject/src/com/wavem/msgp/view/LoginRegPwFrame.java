@@ -57,6 +57,7 @@ public class LoginRegPwFrame extends WaveMsgFrame {
 	 * @param loginFrame 로그인 화면
 	 */
 	public LoginRegPwFrame(LoginFrame loginFrame) throws WaveMsgException {
+		super();
 		this.loginFrame = loginFrame;
 		makeInitFrame();
 	}

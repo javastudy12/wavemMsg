@@ -77,7 +77,7 @@ public class ChatFontFrame extends WaveMsgFrame implements WaveMsgFontInterface{
 	 * @throws WaveMsgException 
 	 */
 	public ChatFontFrame(WaveMsgFontInterface chatFrame) throws WaveMsgException {
-		
+		super();
 		this.chatFrame = chatFrame;
 		
 		getContentPane().setBackground(Color.WHITE);
