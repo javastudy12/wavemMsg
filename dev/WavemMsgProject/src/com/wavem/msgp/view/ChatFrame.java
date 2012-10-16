@@ -12,6 +12,7 @@ package com.wavem.msgp.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -31,7 +32,9 @@ import javax.imageio.ImageIO;
 import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.plaf.ScrollPaneUI;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
@@ -108,7 +111,6 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 	/** 스크롤 패널 */
 	private WaveMsgScrollPane writeScrollPane = null;
 	
-			
 	
 	/** 폰트 설정 버튼 */
 	private WaveMsgButton fontSetBtn = null;		
@@ -189,11 +191,12 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		//basePanel = new WaveMsgPanel();
 		//basePanel.setBounds(0, 0, 350, 400);
 		//basePanel.setOpaque(false);
-		//getContentPane().add(basePanel);
+		//getContentPane().add(basePanel, -1);
 		
 		// 텍스트 패널 일반 형식
 		chatHistoryPane = new WaveMsgTextPane(doc);
 		chatHistoryPane.setEditable(false);
+		//chatHistoryPane.setBackground(new Color(255, 255, 255, 0));
 		//chatHistoryPane.setOpaque(false);//투명?
 		 
 		// 텍스트 패널 HTML 형식
@@ -213,16 +216,20 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		*/
 		
 		// 배경 지정
-		chatBackPane = new WaveMsgLabel("미ㅣ낭러");
+		chatBackPane = new WaveMsgLabel();
 		chatBackPane.setBounds(0, 0, 350, 400);
-		chatHistoryPane.add(chatBackPane, -1);
+		//chatHistoryPane.add(chatBackPane, -1);
 		
 		
 		scrollPane = new WaveMsgScrollPane(chatHistoryPane);
 		scrollPane.setBounds(0, 0, 350, 400);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		//scrollPane.setBackground(new Color(255, 255, 255, 255));
+		//scrollPane.setOpaque(false);//투명?
 		getContentPane().add(scrollPane);
+		
+		
 		
 		
 		try {
@@ -409,6 +416,7 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 		try {
 			doc.insertString(doc.getLength(), "\n guest - "+msgWriteArea.getText().trim()
 					, getChatAttr(property.getChatFont(), property.getChatFontStyle(), property.getChatFontSize(), property.getChatColor()));
+			
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
@@ -552,15 +560,26 @@ public class ChatFrame extends WaveMsgFrame implements WaveMsgFontInterface, Wav
 			BufferedImage bufImg = ImageIO.read(new BufferedInputStream(new FileInputStream(imgFile)));
 			Image img = bufImg.getScaledInstance(scrollPane.getWidth(), scrollPane.getHeight(), Image.SCALE_AREA_AVERAGING);
 			
-			Image grayImage = GrayFilter.createDisabledImage(img);
-			chatHistoryPane.setImage(grayImage, 0.4f);
-			//chatHistoryPane.setImage(img, 0.4f);
+			//Image grayImage = GrayFilter.createDisabledImage(img);
+			//chatHistoryPane.setImage(grayImage, 0.4f);
+			//chatHistoryPane.setImage(img, 0.2f);
 			//chatBackPane.setImage(img, 0.4f);
 			//basePanel.setImage(img, 0.4f); 
 			//scrollPane.getViewport().set.setImage(img, 0.4f);
-			
+			chatBackPane.setIcon(new ImageIcon(img));
 			//ImageIcon imgIcon = new ImageIcon(img);
 			//chatBackPane.setIcon(imgIcon);
+			//JViewport viewport = new JViewport();
+			//viewport.setView(basePanel);
+			//scrollPane.setViewportView(basePanel);
+			//scrollPane.setViewport(viewport);
+			//scrollPane.getGraphics().drawImage(img, 0, 0, scrollPane.getWidth(), scrollPane.getHeight(), null);
+			//scrollPane.getg
+			//scrollPane.getGraphics().drawLine(0, 0, 100, 100);
+			
+			
+//			ScrollPaneUI ui = 
+			//scrollPane.setUI(ui);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
